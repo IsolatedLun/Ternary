@@ -1,0 +1,34 @@
+@use '../abstracts/' as *;
+
+:root {
+    @each $name, $color in $active-theme {
+        @each $clr-key, $clr-val in $color {
+            --clr-#{$name}-#{$clr-key}: #{$clr-val};
+        }
+    }
+
+    @each $font, $size in $font-sizes-desktop {
+        --fs-#{$font}: #{$size};
+    }
+
+    @each $name, $size in $sizes-desktop {
+        @each $size-key, $size-val in $size {
+            --size-#{$name}-#{$size-key}: #{$size-val};
+        }
+    }
+
+    // Vars
+    --grid-home: repeat(3, 1fr);
+    --grid-home-areas: '_tableOne _controls _tableTwo';
+    --max-table-width: 450px;
+}
+
+@media(prefers-color-scheme: dark) {
+    :root {
+        @each $name, $color in $colors-dark {
+            @each $clr-key, $clr-val in $color {
+                --clr-#{$name}-#{$clr-key}: #{$clr-val};
+            }
+        }
+    }
+}

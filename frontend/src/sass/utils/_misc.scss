@@ -1,0 +1,54 @@
+// Text
+.text-center {
+    text-align: center;
+}
+
+// Displays
+.display-block {
+    display: block;
+}
+
+// Widths & Heights
+.width-100 {
+    width: 100%;
+}
+
+.height-100 {
+    height: 100%;
+}
+
+// Cursors
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.select-none {
+    user-select: none;
+}
+
+// Directions
+.dir-ltr {
+    direction: ltr;
+}
+
+.dir-rtl {
+    direction: rtl;
+}
+
+// Misc
+.pos-relative {
+    position: relative;
+}
+
+.pos-absolute {
+    position: absolute;
+}
+
+.hidden {
+    display: none;
+}
+
+// Colors
+.clr-patreon-400 {
+    color: var(--clr-patreon-400);
+}

@@ -1,0 +1,1 @@
+cd .. && cd frontend && cd src && cd sass && sass styles.scss ../../static/sassy.css --watch

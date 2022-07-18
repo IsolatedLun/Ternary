@@ -1,0 +1,53 @@
+$base-fs-size: 1rem;
+$base-mobile-fs-size: 0.75rem;
+$base-medium-fs-size: 0.8rem;
+
+$font-sizes-desktop: (
+    '200': $base-fs-size * 0.5,
+    '300': $base-fs-size * 0.75,
+    '350': $base-fs-size * 0.85,
+    '400': $base-fs-size,
+    '450': $base-fs-size * 1.05,
+    '500': $base-fs-size * 1.25,
+    '600': $base-fs-size * 1.5,
+    '700': $base-fs-size * 1.75,
+    '800': $base-fs-size * 2 
+);
+
+$font-sizes-mobile: (
+    '200': $base-mobile-fs-size * 0.5,
+    '300': $base-mobile-fs-size * 0.75,
+    '350': $base-mobile-fs-size * 0.85,
+    '400': $base-mobile-fs-size,
+    '450': $base-mobile-fs-size * 1.05,
+    '500': $base-mobile-fs-size * 1.25,
+    '600': $base-mobile-fs-size * 1.5,
+    '700': $base-mobile-fs-size * 1.75,
+    '800': $base-mobile-fs-size * 2 
+);
+
+$font-sizes-medium: (
+    '200': $base-medium-fs-size * 0.5,
+    '300': $base-medium-fs-size * 0.75,
+    '350': $base-medium-fs-size * 0.85,
+    '400': $base-medium-fs-size,
+    '450': $base-medium-fs-size * 1.05,
+    '500': $base-medium-fs-size * 1.25,
+    '600': $base-medium-fs-size * 1.5,
+    '700': $base-medium-fs-size * 1.75,
+    '800': $base-medium-fs-size * 2 
+);
+
+$font-weights: 100, 200, 400, 500, 600, 700, 800, 900, bold, normal, bolder, lighter, light;
+
+@each $fs, $val in $font-sizes-desktop {
+    .fs-#{$fs} {
+        font-size: var(--fs-#{$fs});
+    }
+}
+
+@each $type in $font-weights {
+    .fw-#{$type} {
+        font-weight: #{$type};
+    }
+}
