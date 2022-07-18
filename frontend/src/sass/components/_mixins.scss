@@ -1,50 +1,18 @@
 @use '../abstracts/' as *;
 
-@mixin create-button (
-    $padding: $default-button-spacing, 
-    $bg: $clr-default-button, 
-    $clr-border: $clr-default-button-border
+@mixin createInput(
+	$padding: $def-input-padding,
+	$background-color: $def-input-background-color,
+	$border: $def-input-border,
+	$border-radius: $def-input-border-radius,
+	$border-color-on-hov: $def-input-border-color-on-hov
 ) {
+	padding: $padding;
+	background-color: $background-color;
+	border: $border;
+	border-radius: $border-radius;
 
-    font-size: var(--fs-400);
-    
-    padding: $padding;
-    background-color: $bg;
-
-    border: 2px solid;
-    border-color: $clr-border;
-
-    cursor: pointer;
-}
-
-@mixin create-input (
-    $padding: $default-input-spacing, 
-    $bg: $clr-default-input, 
-    $border-hover: $clr-default-input-border-hover,
-    $border-radius: $default-input-radius
-) {
-    font-size: var(--fs-450);
-    
-    padding: $padding;
-    background-color: $bg;
-
-    border: 2px solid;
-    border-color: $clr-default-button-border;
-    border-radius: $default-input-radius;
-
-    &:is(:hover, :focus) {
-        border-color: $clr-default-input-border-hover;
-    }
-}
-
-@mixin diagonal-border($dir) {
-    @if $dir == ltr {
-        border-top-left-radius: $table-thead-border-radius;
-        border-bottom-left-radius: $table-thead-border-radius;
-    }
-
-    @else if $dir == rtl {
-        border-top-right-radius: $table-thead-border-radius;
-        border-bottom-right-radius: $table-thead-border-radius;
-    }
+	&:is(:focus, :hover) {
+		border-color: $border-color-on-hov;
+	}
 }

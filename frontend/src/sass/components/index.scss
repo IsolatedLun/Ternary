@@ -2,4 +2,9 @@
 
 @forward './layouts/navbar';
 
+@forward './modules/profile';
+@forward './modules/card';
+
+@forward './interactibles/input';
+
 @forward './mixins';

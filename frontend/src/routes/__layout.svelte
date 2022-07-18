@@ -1,16 +1,8 @@
-<nav class="[ main-navbar ] [ column-split-2 ] [ padding-inline-2 padding-block-1 ]">
-    <h1>Ternary</h1>
+<script>
+    import Navbar from "../components/Layouts/Navbar.svelte";
+</script>
 
-    <input type="text" placeholder="Search" />
-
-    <div class="[ nav__user ] [ flex gap-2 ]">
-        <div>
-            <p>IsolatedLun</p>
-            <p>0 honor</p>
-        </div>
-        <img class="[ profile ]" src="" alt="" />
-    </div>
-</nav>
+<Navbar />
 
 <main class="[ main-container ] [ margin-block-2 gap-2 margin-inline-auto ]" data-grid-collapse>
     <slot></slot>

@@ -3,10 +3,28 @@
 // Root colors
 $clr-body: var(--clr-background-300);
 
-// Navbar
-
 // Containers
 $size-main-container: var(--size-container-main);
 
-// Border radiuses
+// =================
+// Utilities
+// =================
 $border-radius-cubed: 8px;
+
+// =================
+// Components
+// =================
+// Navbar
+$clr-navbar-background: var(--clr-background-500);
+
+// Input
+$def-input-padding: 0.5em 0.75em;
+$def-input-background-color: var(--clr-background-400);
+$def-input-border: 1px solid var(--clr-input-border);
+$def-input-border-radius: $border-radius-cubed;
+$def-input-border-color-on-hov: var(--clr-input-border-on-hov);
+
+// =================
+// Composition
+// =================
+$clr-column-split-border: var(--clr-hover-400);

@@ -1,0 +1,8 @@
+@use '../../abstracts/' as *;
+
+.card {
+	width: max-content;
+	background-color: var(--clr-background-600);
+
+	border-radius: $border-radius-cubed;
+}

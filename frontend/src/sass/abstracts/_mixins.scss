@@ -1,4 +1,4 @@
 @mixin pseudo-element($content: '') {
-    content: $content;
-    position: absolute;
+	content: $content;
+	position: absolute;
 }
