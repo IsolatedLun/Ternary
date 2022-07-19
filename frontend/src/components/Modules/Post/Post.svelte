@@ -1,4 +1,8 @@
 <script lang='ts'>
+    import { ICON_COMMENTS, ICON_DOWNVOTE, ICON_UPVOTE } from "../../../consts";
+    import FlexyCenter from "../../../components/Divs/FlexyCenter.svelte";
+    import Button from "../../../components/Interactibles/Button.svelte";
+    import Icon from "../Icon/Icon.svelte";
     import Profile from "../Profile/Profile.svelte";
 
     export let props: import("./types").Props_Post = {
@@ -16,8 +20,6 @@
         content_type: '',
         date_created: ''
     }
-
-    export let showFullText = props.content_type === 'text' && props.content.length > 621
 </script>
 
 <div class="[ post ] [ flex-direction-column justify-content-space-between card padding-1 ]"
@@ -42,10 +44,16 @@
     <article class="[ post__content ] [ margin-block-1 hyphens-auto overflow-hidden ]">
         { props.content }
     </article>
-    <footer class="[ margin-block-start-auto upper-border ]">
-        <button class="[ button ] [ fw-bold ]" data-variant='action'>View thread</button>
-        {#if showFullText}
-            <button class="[ button ] [ fw-bold ]" data-variant='action'>View Text</button>
-        {/if}
+    <footer class="[ flex gap-1 align-items-center justify-content-space-between ] [ margin-block-start-auto upper-border ]">
+        <FlexyCenter useJustify={false} props={{ gap: 1 }}>
+            <Button variant='action'>View thread</Button>
+            <Button variant='action'><Icon>{ ICON_COMMENTS }</Icon></Button>
+        </FlexyCenter>
+
+        <FlexyCenter useJustify={false} props={{ gap: 1 }}>
+            <Button variant='action'><Icon>{ ICON_UPVOTE }</Icon></Button>
+            <p>0</p>
+            <Button variant='action'><Icon>{ ICON_DOWNVOTE }</Icon></Button>
+        </FlexyCenter>
     </footer>
 </div>

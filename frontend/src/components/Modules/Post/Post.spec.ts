@@ -3,7 +3,7 @@ import 'jest';
 import { generateNChars } from '../../../utils/testFuncs';
 import Post from './Post.svelte';
 
-test('Render a post that has a long paragraph which toggles the view text button', () => {
+test('Render a post that has a long paragraph', () => {
 	const data = {
 		user: {
 			id: 0,
@@ -22,5 +22,5 @@ test('Render a post that has a long paragraph which toggles the view text button
 
 	const { getByText } = render(Post, { props: { props: data } });
 
-	expect(getByText('View Text')).toBeTruthy();
+	expect(getByText('Lol')).toBeTruthy();
 });

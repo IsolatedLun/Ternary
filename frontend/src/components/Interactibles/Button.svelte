@@ -1,19 +1,15 @@
 <script lang='ts'>
     import type { Props_CubeCSS } from "../../types";
     import { createCubeCSSClass, defCubeClass } from "../../utils/componentFuncs";
-    import type { Props_FlexyCenter } from "./types";
 
-    export let props: Props_FlexyCenter = {
-        gap: 2,
-    };
     export let cubeClass: Props_CubeCSS = defCubeClass();
-    export let useJustify = true
+    export let variant = 'default';
 
     const _class = createCubeCSSClass(cubeClass, {
-        compostClass: `flex gap-${props.gap} align-items-center ${useJustify ? 'justify-content-center' : ''}` 
+        compostClass: 'button fw-bold' 
     });
 </script>
 
-<div class={_class}>
+<button on:click class={_class} data-variant={variant}>
     <slot></slot>
-</div>
+</button>
