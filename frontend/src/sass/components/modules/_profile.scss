@@ -1,9 +1,12 @@
+@use '../../abstracts/' as *;
+
 .profile {
-	width: 2.25em;
+	width: $def-profile-clamp-width;
 	aspect-ratio: 1;
-	border-radius: 50%;
+	border-radius: $border-radius-cubed;
 
 	& img {
-		background-color: black;
+		font-size: 0;
+		background-color: $def-profile-img-background-color;
 	}
 }

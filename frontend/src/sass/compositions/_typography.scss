@@ -23,6 +23,26 @@
 	white-space: nowrap;
 }
 
+// Borders
+.upper-border {
+	border-top: 1px solid var(--clr-hover-400);
+	padding-block-start: 0.45em;
+}
+
+.under-border {
+	border-bottom: 1px solid var(--clr-hover-400);
+	padding-block-end: 0.45em;
+}
+
+// Fonts
+$ops: bold, bolder, light, lighter, normal, 100, 200, 300, 400, 500, 600, 700, 800, 900;
+
+@each $op in $ops {
+	.fw-#{$op} {
+		font-weight: $op;
+	}
+}
+
 // Misc
 *[data-sr='true'] {
 	font-size: 0px;

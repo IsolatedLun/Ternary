@@ -23,6 +23,14 @@
 			grid-template-columns: 1fr !important;
 		}
 
+		*[data-desktop] {
+			display: none !important;
+		}
+
+		*[data-mobile] {
+			display: block !important;
+		}
+
 		// Loops
 		@each $name, $size in $sizes-mobile {
 			@each $size-key, $size-val in $size {

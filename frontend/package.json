@@ -11,28 +11,54 @@
 		"check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "prettier --check --plugin-search-dir=. . && eslint .",
 		"format": "prettier --write --plugin-search-dir=. .",
-		"postcss-run": "postcss ./static/sassy.css -o ./static/posty.css --watch"
+		"postcss-run": "postcss ./static/sassy.css -o ./static/posty.css --watch",
+		"test": "jest --env=jsdom"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "next",
 		"@sveltejs/kit": "next",
+		"@testing-library/jest-dom": "^5.16.4",
+		"@testing-library/svelte": "^3.1.3",
+		"@testing-library/user-event": "^14.3.0",
+		"@types/jest": "^28.1.6",
 		"@typescript-eslint/eslint-plugin": "^5.27.0",
 		"@typescript-eslint/parser": "^5.27.0",
 		"autoprefixer": "^10.4.7",
+		"babel-jest": "^28.1.3",
 		"cssnano": "^5.1.12",
 		"eslint": "^8.16.0",
 		"eslint-config-prettier": "^8.3.0",
 		"eslint-plugin-svelte3": "^4.0.0",
+		"jest": "^28.1.3",
+		"jest-environment-jsdom": "^28.1.3",
 		"postcss": "^8.4.14",
 		"postcss-cli": "^10.0.0",
 		"prettier": "^2.6.2",
 		"prettier-plugin-svelte": "^2.7.0",
 		"svelte": "^3.44.0",
 		"svelte-check": "^2.7.1",
+		"svelte-jester": "^2.3.2",
 		"svelte-preprocess": "^4.10.6",
+		"ts-jest": "^28.0.7",
 		"tslib": "^2.3.1",
 		"typescript": "^4.7.4",
 		"vite": "^3.0.0"
+	},
+	"jest": {
+		"transform": {
+			"^.+\\.ts$": "ts-jest",
+			"^.+\\.svelte$": [
+				"svelte-jester",
+				{
+					"preprocess": true
+				}
+			]
+		},
+		"moduleFileExtensions": [
+			"js",
+			"ts",
+			"svelte"
+		]
 	},
 	"type": "module"
 }

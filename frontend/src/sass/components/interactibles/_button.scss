@@ -1,0 +1,10 @@
+@use '../../abstracts/' as *;
+@use '../mixins' as *;
+
+.button:where([data-variant='default']) {
+	@include createButton();
+}
+
+.button:where([data-variant='action']) {
+	@include createButton($color: $button-action-color, $color-on-hov: $button-action-color-on-hov);
+}

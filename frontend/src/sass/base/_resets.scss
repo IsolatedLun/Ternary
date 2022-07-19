@@ -34,12 +34,21 @@ h6 {
 }
 
 p {
-	line-height: 1.3;
+	line-height: 1.4;
 }
 
 a {
 	text-decoration: none;
 	color: var(--clr-text-400);
+}
+
+a:not([data-variant]) {
+	color: var(--clr-text-muted);
+	text-decoration: underline;
+
+	&:is(:hover, :focus) {
+		color: var(--clr-text-light-muted);
+	}
 }
 
 td[title] {

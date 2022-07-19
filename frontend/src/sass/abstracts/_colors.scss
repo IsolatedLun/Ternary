@@ -1,16 +1,20 @@
 $colors-dark: (
 	background: (
-		'300': hsl(210 6% 7%),
-		'400': hsl(210 6% 11%),
-		'500': hsl(210 6% 16%),
-		'600': hsl(210 6% 27%),
-		'700': hsl(210 6% 34%)
+		'300': hsl(210 6% 4%),
+		'400': hsl(210 6% 8%),
+		'500': hsl(210 6% 13%),
+		'600': hsl(210 6% 24%),
+		'700': hsl(210 6% 30%)
 	),
 	text: (
-		'400': white
+		'400': white,
+		'muted': hsl(0 0% 70%),
+		'light-muted': hsl(0 0% 85%)
 	),
 	hover: (
-		'400': hsl(0 0% 50% / 0.5)
+		'200': hsl(0 0% 50% / 0.26),
+		'400': hsl(0 0% 50% / 0.5),
+		'600': hsl(0 0% 50% / 0.76)
 	),
 	input: (
 		'border': hsl(210 6% 27%),
@@ -21,3 +25,11 @@ $colors-dark: (
 $colors-light: ();
 
 $active-theme: $colors-dark;
+
+@each $keyName, $key in $active-theme {
+	@each $valKey, $val in $key {
+		.clr-#{$keyName}-#{$valKey} {
+			color: $val;
+		}
+	}
+}

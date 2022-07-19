@@ -16,7 +16,7 @@
 
 <div class={_class}>
     <img 
-        class="[ border-radius-100vw ]"
+        class="[ ]"
         src={props.src} 
         alt={props.alt} />
 </div>

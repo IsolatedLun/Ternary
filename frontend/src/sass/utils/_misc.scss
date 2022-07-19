@@ -3,6 +3,10 @@
 	text-align: center;
 }
 
+.hyphens-auto {
+	hyphens: auto;
+}
+
 // Layouts
 .flex-grow {
 	flex-grow: 1;
@@ -53,7 +57,6 @@
 	display: none;
 }
 
-// Colors
-.clr-patreon-400 {
-	color: var(--clr-patreon-400);
+.overflow-hidden {
+	overflow: hidden;
 }

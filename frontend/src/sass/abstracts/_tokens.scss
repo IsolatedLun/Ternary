@@ -24,6 +24,30 @@ $def-input-border: 1px solid var(--clr-input-border);
 $def-input-border-radius: $border-radius-cubed;
 $def-input-border-color-on-hov: var(--clr-input-border-on-hov);
 
+// Button
+$def-button-padding: 0.25em 0.5em;
+$def-button-background-color: var(--clr-hover-200);
+$def-button-border-radius: $border-radius-cubed;
+$def-button-background-color-on-hov: var(--clr-hover-600);
+
+$button-action-color: var(--clr-text-muted);
+$button-action-color-on-hov: var(--clr-text-400);
+
+// Card
+$def-card-background-color: var(--clr-background-600);
+$def-card-border-radius: $border-radius-cubed;
+
+$card-difference-background-color: var(--clr-background-400);
+$card-difference-border: 1px solid var(--clr-background-600);
+
+// Profile
+$def-profile-clamp-width: clamp(1.95em, 2.75vw, 4.5em);
+$def-profile-img-background-color: var(--clr-background-700);
+
+// Home
+$feed-grid-column-template: 65% 45%;
+$posts-grid-row-auto: 300px;
+
 // =================
 // Composition
 // =================

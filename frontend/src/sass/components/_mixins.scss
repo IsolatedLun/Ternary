@@ -16,3 +16,43 @@
 		border-color: $border-color-on-hov;
 	}
 }
+
+@mixin createButton(
+	$padding: $def-button-padding,
+	$background-color: $def-button-background-color,
+	$color: var(--clr-text-400),
+	$border: none,
+	$border-radius: $def-button-border-radius,
+	$background-color-on-hov: $def-button-background-color-on-hov,
+	$color-on-hov: var(--clr-text-400)
+) {
+	padding: $padding;
+	background-color: $background-color;
+	color: $color;
+
+	border: $border;
+	border-radius: $border-radius;
+
+	cursor: pointer;
+	transition: background-color 95ms ease-in-out, color 95ms ease-in-out;
+
+	&:is(:focus, :hover) {
+		background-color: $background-color-on-hov;
+		color: $color-on-hov;
+	}
+}
+
+@mixin createCard(
+	$background-color: $def-card-background-color,
+	$border: none,
+	$border-radius: $def-card-border-radius,
+	$border-color-on-hov: none
+) {
+	background-color: $background-color;
+	border: $border;
+	border-radius: $border-radius;
+
+	&:is(:focus, :hover) {
+		border-color: $border-color-on-hov;
+	}
+}

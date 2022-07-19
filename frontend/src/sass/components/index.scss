@@ -1,10 +1,12 @@
 @forward './containers';
 
 @forward './layouts/navbar';
+@forward './layouts/feed';
 
 @forward './modules/profile';
 @forward './modules/card';
 
 @forward './interactibles/input';
+@forward './interactibles/button';
 
 @forward './mixins';

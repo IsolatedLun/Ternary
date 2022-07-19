@@ -1,0 +1,19 @@
+@use '../../abstracts/' as *;
+
+.feed {
+	grid-template-columns: $feed-grid-column-template;
+	gap: 2em;
+}
+
+.posts {
+	display: grid;
+	grid-auto-rows: $posts-grid-row-auto;
+
+	& .post:where([data-content-type='text']) {
+		max-width: 90ch;
+	}
+
+	& .post:where([data-content-type='media']) {
+		aspect-ratio: 16 / 9;
+	}
+}
