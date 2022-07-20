@@ -1,6 +1,7 @@
 <script lang='ts'>
     import type { Props_CubeCSS } from "../../../types";
     import { createCubeCSSClass, defCubeClass } from "../../../utils/componentFuncs";
+import Image from "../MediaElements/Image.svelte";
     import type { Props_Profile } from "./types";
 
     export let props: Props_Profile = {
@@ -15,8 +16,5 @@
 </script>
 
 <div class={_class}>
-    <img 
-        class="[ ]"
-        src={props.src} 
-        alt={props.alt} />
+    <Image props={{ src: props.src, alt: props.alt }} />
 </div>

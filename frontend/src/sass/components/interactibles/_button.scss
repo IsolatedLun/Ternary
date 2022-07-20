@@ -8,3 +8,12 @@
 .button:where([data-variant='action']) {
 	@include createButton($color: $button-action-color, $color-on-hov: $button-action-color-on-hov);
 }
+
+.button:where([data-variant='action-difference']) {
+	@include createButton(
+		$color: $button-action-color,
+		$color-on-hov: $button-action-color-on-hov,
+		$background-color: var(--clr-background-600),
+		$background-color-on-hov: var(--clr-background-700)
+	);
+}

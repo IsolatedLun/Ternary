@@ -9,6 +9,6 @@
     });
 </script>
 
-<p class={_class}>
+<p class={_class} aria-hidden="true">
     <slot></slot>
 </p>

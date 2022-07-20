@@ -4,6 +4,11 @@
     import Button from "../../../components/Interactibles/Button.svelte";
     import Icon from "../Icon/Icon.svelte";
     import Profile from "../Profile/Profile.svelte";
+    import Video from "../MediaElements/Video.svelte";
+    import PostImages from "./_Parts/PostImages.svelte";
+    import LinkButton from "../../../components/Interactibles/LinkButton.svelte";
+import UserRepr from "../User/UserRepr.svelte";
+import StatController from "../StatController/StatController.svelte";
 
     export let props: import("./types").Props_Post = {
         user: {
@@ -15,10 +20,12 @@
         },
 
         id: 0,
+        votes: 0,
+        comments: 0,
         title: '',
-        content: '',
-        content_type: '',
-        date_created: ''
+        content: { text: '' },
+        content_type: 'text',
+        date_created: 'Recently'
     }
 </script>
 
@@ -27,33 +34,25 @@
     data-content-type={props.content_type}
     >
     <header class="[ under-border ]">
-        <div class="[ post__user ] [ flex gap-1 margin-block-end-05 ]">
-            <Profile props={{ src: props.user.profile, alt: `${props.user.username}'s profile` }} />
-            <div class="[ user__info ] [ column-split-2 ]">
-                <div class="[ flex-direction-column align-items-center ]">
-                    <p class="[ fs-300 margin-block-end-05 ]">
-                        <a href={`/users/${props.user.id}`}>u/{props.user.username}</a>
-                    </p>
-                    <p class="[ fs-300 text-muted ]">{ props.user.honor } honor</p>
-                </div>
-                <p class="[ fs-300 ]">17 hours ago</p>
-            </div>
-        </div>
+        <UserRepr user={props.user} />
         <p class="[ fs-500 ]">{ props.title }</p>
     </header>
-    <article class="[ post__content ] [ margin-block-1 hyphens-auto overflow-hidden ]">
-        { props.content }
+    <article class="[ post__content ] [ margin-block-1 hyphens-auto overflow-hidden pos-relative ]">
+        {#if 'text' in props.content}
+            { props.content.text }
+        {:else if 'images' in props.content}
+            <PostImages props={{ title: props.title, images: props.content.images }} />
+        {:else}
+            <Video props={{ src: props.content.video }} />
+        {/if}
     </article>
     <footer class="[ flex gap-1 align-items-center justify-content-space-between ] [ margin-block-start-auto upper-border ]">
         <FlexyCenter useJustify={false} props={{ gap: 1 }}>
-            <Button variant='action'>View thread</Button>
-            <Button variant='action'><Icon>{ ICON_COMMENTS }</Icon></Button>
+            <LinkButton ariaLabel='Open thread' variant='action' to={`/threads/${props.id}`}>
+                View thread
+            </LinkButton>
         </FlexyCenter>
 
-        <FlexyCenter useJustify={false} props={{ gap: 1 }}>
-            <Button variant='action'><Icon>{ ICON_UPVOTE }</Icon></Button>
-            <p>0</p>
-            <Button variant='action'><Icon>{ ICON_DOWNVOTE }</Icon></Button>
-        </FlexyCenter>
+        <StatController props={{ votes: props.votes, comments: props.comments, action: 'neutral' }} />
     </footer>
 </div>

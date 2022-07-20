@@ -4,12 +4,13 @@
 $clr-body: var(--clr-background-300);
 
 // Containers
-$size-main-container: var(--size-container-main);
+$main-container-width: 1300px;
+$main-container-padding: 2rem;
 
 // =================
 // Utilities
 // =================
-$border-radius-cubed: 8px;
+$border-radius-cubed: 9px;
 
 // =================
 // Components
@@ -47,6 +48,7 @@ $def-profile-img-background-color: var(--clr-background-700);
 // Home
 $feed-grid-column-template: 65% 45%;
 $posts-grid-row-auto: 300px;
+$post-media-width: 1024px;
 
 // =================
 // Composition

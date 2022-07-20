@@ -7,14 +7,17 @@ import Post from "../Modules/Post/Post.svelte";
             username: 'EpicjjGGGamer',
             honor: 9083,
             profile: '',
-            date_created: ''
+            date_created: 'Recently'
         },
 
-        id: 0,
+        id: 123123,
+        votes: 0,
+        comments: 0,
+
         title: 'Im the first poster here eh',
-        content: 'MEOW',
-        content_type: 'text',
-        date_created: ''
+        content: { images: ['img1.png', 'img2.png'] },
+        content_type: 'media',
+        date_created: '23 seconds ago'
     }
 </script>
 

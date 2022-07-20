@@ -6,10 +6,6 @@
 			--fs-#{$font}: #{$size};
 		}
 	}
-
-	.main-container {
-		margin: 0.5em;
-	}
 }
 
 @media screen and (max-width: #{$breakpoint-small}) {

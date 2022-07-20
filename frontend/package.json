@@ -12,7 +12,7 @@
 		"lint": "prettier --check --plugin-search-dir=. . && eslint .",
 		"format": "prettier --write --plugin-search-dir=. .",
 		"postcss-run": "postcss ./static/sassy.css -o ./static/posty.css --watch",
-		"test": "jest --env=jsdom"
+		"test": "jest --env=jsdom --silent=false"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "next",

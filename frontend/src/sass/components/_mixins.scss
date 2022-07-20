@@ -36,7 +36,7 @@
 	cursor: pointer;
 	transition: background-color 95ms ease-in-out, color 95ms ease-in-out;
 
-	&:is(:focus, :hover) {
+	&:is(:focus-visible, :hover) {
 		background-color: $background-color-on-hov;
 		color: $color-on-hov;
 	}

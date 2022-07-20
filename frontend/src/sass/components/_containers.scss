@@ -1,6 +1,6 @@
 @use '../abstracts/' as *;
 
 .main-container {
-    max-width: 1300px;
-    margin-inline: auto;
+	width: min(#{$main-container-width}, calc(100% - #{$main-container-padding}));
+	margin-inline: auto;
 }

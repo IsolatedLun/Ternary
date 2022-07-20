@@ -5,12 +5,13 @@
     export let cubeClass: Props_CubeCSS = defCubeClass();
     export let variant = 'default';
     export let ariaLabel = 'button';
+    export let to = '/';
 
     const _class = createCubeCSSClass(cubeClass, {
         compostClass: 'button fw-bold' 
     });
 </script>
 
-<button on:click class={_class} data-variant={variant} aria-label={ariaLabel}>
+<a href={to} on:click class={_class} data-variant={variant} aria-label={ariaLabel}>
     <slot></slot>
-</button>
+</a>
