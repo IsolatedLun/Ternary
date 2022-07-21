@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { API_URL } from "../../../consts";
     import type { Props_User } from "../../../types";
     import Profile from "../Profile/Profile.svelte";
 
@@ -13,8 +14,10 @@
 </script>
 
 <div class="[ user-repr ] [ flex gap-1 margin-block-end-05 ]">
-    <Profile props={{ src: user.profile, alt: `${user.username}'s profile` }} />
-    <div class="[ user__info ] [ column-split-2 ]">
+    <Profile props={{ src: API_URL + user.profile, alt: `${user.username}'s profile` }} 
+        useRandFilter={user.profile.includes('def.png')} />
+
+    <div class="[ user__info ] [  ]">
         <div class="[ flex-direction-column align-items-center ]">
             <p class="[ fs-300 margin-block-end-05 ]">
                 <a href={`/users/${user.id}`}>u/{user.username}</a>

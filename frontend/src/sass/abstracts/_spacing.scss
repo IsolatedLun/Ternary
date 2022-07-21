@@ -11,12 +11,16 @@ $logical-ops: inline, block;
 $logical-ops-vals: start, end;
 
 .margin-block-end-05 {
-	margin-block-end: $base-spacing-size * ((1 * 0.5) / 2);
+	margin-block-end: $base-spacing-size * math.div(1 * 0.5, 2);
+}
+
+.padding-block-small {
+	padding-block: 0.25em;
 }
 
 @for $_ from 1 through $max-sizes {
 	$i: $i + 1;
-	$size: $base-spacing-size * math.div(1 * 0.5, 2);
+	$size: $base-spacing-size * ($i * 0.5);
 
 	.padding-#{$i} {
 		padding: #{$size};

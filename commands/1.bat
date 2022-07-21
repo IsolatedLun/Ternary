@@ -1,1 +1,1 @@
-cd .. && cd frontend && npm run dev --host
+cd .. && cd frontend && npm run dev

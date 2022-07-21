@@ -1,5 +1,7 @@
 export const POST_MAX_CHARS = 600;
 
+export const API_URL = 'http://localhost:8000';
+
 // =========
 // Icons
 // =========

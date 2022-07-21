@@ -37,7 +37,10 @@ import StatController from "../StatController/StatController.svelte";
     data-in-thread={isInThread}
     >
     <header class="[ under-border ]">
-        <UserRepr user={props.user} />
+        <FlexyCenter useJustify={false}>
+            <UserRepr user={props.user} />
+            <p class="[ fs-350 align-self-start text-muted ]">on { props.date_created }</p>
+        </FlexyCenter>
         <p class="[ fs-500 ]">{ props.title }</p>
     </header>
     <article class="[ post__content ] [ margin-block-1 hyphens-auto overflow-hidden pos-relative ]">

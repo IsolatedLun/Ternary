@@ -7,7 +7,7 @@
     import LinkButton from "../Interactibles/LinkButton.svelte";
 </script>
 
-<nav class="[ main-navbar ] [ flex align-items-center gap-2 padding-inline-2 padding-block-1 ]">
+<nav class="[ main-navbar ] [ flex align-items-center gap-2 padding-inline-2 padding-block-small ]">
     <FlexyCenter cubeClass={{ utilClass: 'flex-grow' }}>
         <h1 class="[ fs-600 fw-normal ]">Ternary</h1>
         <input type="text" placeholder="Search" class="[ fs-350 input width-100 ]" data-variant='text' />

@@ -9,6 +9,7 @@ import Image from "../MediaElements/Image.svelte";
         alt: 'An image'
     }
     export let cubeClass: Props_CubeCSS = defCubeClass();
+    export let useRandFilter = false;
 
     const _class = createCubeCSSClass(cubeClass, { 
         compostClass: 'profile',
@@ -16,5 +17,5 @@ import Image from "../MediaElements/Image.svelte";
 </script>
 
 <div class={_class}>
-    <Image props={{ src: props.src, alt: props.alt }} />
+    <Image props={{ src: props.src, alt: props.alt }} useRandFilter={useRandFilter} />
 </div>

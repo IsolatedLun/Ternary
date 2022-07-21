@@ -60,5 +60,8 @@
 			"svelte"
 		]
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"axios": "^0.27.2"
+	}
 }

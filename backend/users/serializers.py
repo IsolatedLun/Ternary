@@ -16,10 +16,10 @@ class cUserSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = models.cUser
-        fields = ['id', 'profile', 'username', 'honor', 'created_at', 'is_staff', 'is_superuser']
+        fields = ['id', 'profile', 'username', 'honor', 'date_created', 'is_staff', 'is_superuser']
         
 
 class cUserSerializerPreview(serializers.ModelSerializer):
     class Meta:
         model = models.cUser
-        fields = ['id', 'profile', 'username', 'honor', 'created_at', 'is_staff', 'is_superuser']
+        fields = ['id', 'profile', 'username', 'honor', 'date_created', 'is_staff', 'is_superuser']

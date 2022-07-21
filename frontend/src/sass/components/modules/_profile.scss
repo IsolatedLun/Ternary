@@ -2,6 +2,8 @@
 
 .profile {
 	width: $def-profile-clamp-width;
+	height: max-content;
+
 	aspect-ratio: 1;
 	border-radius: $border-radius-cubed;
 
