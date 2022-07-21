@@ -4,6 +4,7 @@
 
     export let cubeClass: Props_CubeCSS = defCubeClass();
     export let variant = 'default';
+    export let secondaryVariant = 'default';
     export let ariaLabel = 'button';
 
     const _class = createCubeCSSClass(cubeClass, {
@@ -11,6 +12,10 @@
     });
 </script>
 
-<button on:click class={_class} data-variant={variant} aria-label={ariaLabel}>
+<button 
+    on:click class={_class} 
+    data-variant={variant} 
+    data-secondary-variant={secondaryVariant}
+    aria-label={ariaLabel}>
     <slot></slot>
 </button>

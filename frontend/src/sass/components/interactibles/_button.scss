@@ -17,3 +17,21 @@
 		$background-color-on-hov: var(--clr-background-700)
 	);
 }
+
+.button:is([data-secondary-variant='upvote']) {
+	@include createButton(
+		$background-color: $button-upvote-background-color,
+		$color: $button-upvote-color,
+		$color-on-hov: $button-upvote-color,
+		$background-color-on-hov: $button-upvote-background-color-on-hov
+	);
+}
+
+.button:is([data-secondary-variant='downvote']) {
+	@include createButton(
+		$background-color: $button-downvote-background-color,
+		$color: $button-downvote-color,
+		$color-on-hov: $button-downvote-color,
+		$background-color-on-hov: $button-downvote-background-color-on-hov
+	);
+}

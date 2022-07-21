@@ -37,11 +37,23 @@
         <p>{ props.comments }</p>
     </FlexyCenter>
 
-    <Button on:click={() => handleUpvote(props.action)} ariaLabel='Upvote' variant='action'>
+    <Button on:click={() => handleUpvote(props.action)} 
+        ariaLabel='Upvote' 
+    variant='action'
+        secondaryVariant={props.action === 'upvote' ? 'upvote' : 'default'}
+        >
         <Icon>{ ICON_UPVOTE }</Icon>
     </Button>
-    <p>{ props.votes }</p>
-    <Button on:click={() => handleDownvote(props.action)} ariaLabel='Downvote' variant='action'>
+
+    <p class={props.votes > 0 ? "[ clr-upvote-400 ]" : props.votes < 0 ? "[ clr-downvote-400 ]": ''}>
+        { props.votes }
+    </p>
+
+    <Button on:click={() => handleDownvote(props.action)} 
+        ariaLabel='Downvote' 
+        variant='action'
+        secondaryVariant={props.action === 'downvote' ? 'downvote' : 'default'}
+        >
         <Icon>{ ICON_DOWNVOTE }</Icon>
     </Button>
 </FlexyCenter>

@@ -15,8 +15,8 @@ import Post from "../Modules/Post/Post.svelte";
         comments: 0,
 
         title: 'Im the first poster here eh',
-        content: { images: ['img1.png', 'img2.png'] },
-        content_type: 'media',
+        content: { text: '' },
+        content_type: 'text',
         date_created: '23 seconds ago'
     }
 </script>

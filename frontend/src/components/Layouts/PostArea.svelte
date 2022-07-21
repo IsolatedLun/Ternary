@@ -1,7 +1,6 @@
 <script lang='ts'>
     import Card from "../Modules/Card/Card.svelte";
     import Post from "../Modules/Post/Post.svelte";
-    import StatController from "../Modules/StatController/StatController.svelte";
     import UserRepr from "../Modules/User/UserRepr.svelte";
     
         const post = {
@@ -28,7 +27,7 @@
     
 <div class="[ feed ] [ grid ]" data-grid-collapse>
     <section class="[ posts ] [ width-100 ]">
-        <Post props={{ ...post }} />
+        <Post props={{ ...post }} isInThread={true} />
 
         <div class="[ comments ] [ margin-block-2 ]">
             <p class='[ fs-500 fw-normal ]'>0 Comments</p>

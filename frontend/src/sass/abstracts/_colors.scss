@@ -19,6 +19,16 @@ $colors-dark: (
 	input: (
 		'border': hsl(210 6% 27%),
 		'border-on-hov': hsl(210 6% 47%)
+	),
+	upvote: (
+		'400': hsl(220 97% 62%),
+		'background': hsl(220 97% 62% / 0.3),
+		'hover': hsl(220 97% 62% / 0.4)
+	),
+	downvote: (
+		'400': hsl(2 97% 62%),
+		'background': hsl(2 97% 62% / 0.3),
+		'hover': hsl(2 97% 62% / 0.4)
 	)
 );
 

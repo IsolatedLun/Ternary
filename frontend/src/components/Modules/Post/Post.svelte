@@ -27,11 +27,14 @@ import StatController from "../StatController/StatController.svelte";
         content_type: 'text',
         date_created: 'Recently'
     }
+
+    export let isInThread = false;
 </script>
 
 <div class="[ post ] [ flex-direction-column justify-content-space-between card padding-1 ]"
     data-variant='difference'
     data-content-type={props.content_type}
+    data-in-thread={isInThread}
     >
     <header class="[ under-border ]">
         <UserRepr user={props.user} />
@@ -48,9 +51,11 @@ import StatController from "../StatController/StatController.svelte";
     </article>
     <footer class="[ flex gap-1 align-items-center justify-content-space-between ] [ margin-block-start-auto upper-border ]">
         <FlexyCenter useJustify={false} props={{ gap: 1 }}>
-            <LinkButton ariaLabel='Open thread' variant='action' to={`/threads/${props.id}`}>
-                View thread
-            </LinkButton>
+            {#if !isInThread}
+                <LinkButton ariaLabel='Open thread' variant='action' to={`/threads/${props.id}`}>
+                    View thread
+                </LinkButton>
+            {/if}
         </FlexyCenter>
 
         <StatController props={{ votes: props.votes, comments: props.comments, action: 'neutral' }} />
