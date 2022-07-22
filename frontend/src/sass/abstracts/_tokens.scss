@@ -42,6 +42,10 @@ $button-downvote-color: var(--clr-downvote-400);
 $button-downvote-background-color: var(--clr-downvote-background);
 $button-downvote-background-color-on-hov: var(--clr-downvote-hover);
 
+$button-primary-padding: 0.65em 0.85em;
+$button-primary-background-color: var(--clr-upvote-400);
+$button-primary-background-color-on-hov: var(--clr-upvote-500);
+
 // Card
 $def-card-background-color: var(--clr-background-600);
 $def-card-border-radius: $border-radius-cubed;

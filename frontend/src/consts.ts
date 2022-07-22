@@ -11,3 +11,4 @@ export const ICON_DOWNVOTE = '\uf063';
 export const ICON_ARROW_LEFT = '\uf060';
 export const ICON_ARROW_RIGHT = '\uf061';
 export const ICON_HOME = '\uf015';
+export const ICON_ERROR = '\uf06a';

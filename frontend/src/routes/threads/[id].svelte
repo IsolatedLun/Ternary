@@ -1,9 +1,9 @@
 <script>
     import { page } from "$app/stores";
-    import PostArea from "../../components/Layouts/PostArea.svelte";
+    import PostView from "../../components/Views/PostView.svelte";
 
 
     let id = Number($page.params.id);
 </script>
 
-<PostArea id={id} />
+<PostView id={id} />

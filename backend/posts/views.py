@@ -8,3 +8,9 @@ from rest_framework import generics
 class PostsView(generics.ListAPIView):
     queryset = models.Post.objects.all().order_by('-date_created')
     serializer_class = serializers.PostPreviewSerializer
+
+class PostView(APIView):
+    def get(self, req, post_id):
+        post = serializers.PostSerializer(models.Post.objects.get(id=post_id)).data
+
+        return Response(data=post, status=200)

@@ -13,3 +13,7 @@ export function downvote(votes: number, prevAction: string): [number, string] {
 
 	return [0, 'neutral'];
 }
+
+export function lenArrOrNum(x: any[] | number): number {
+	return typeof x === 'object' ? x.length : x;
+}

@@ -10,7 +10,7 @@
 import UserRepr from "../User/UserRepr.svelte";
 import StatController from "../StatController/StatController.svelte";
 
-    export let props: import("./types").Props_Post = {
+    export let props: import("./types").Props_Post<any, any> = {
         user: {
             id: 0,
             honor: 0,

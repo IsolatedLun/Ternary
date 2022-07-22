@@ -9,7 +9,7 @@
 
 <nav class="[ main-navbar ] [ flex align-items-center gap-2 padding-inline-2 padding-block-small ]">
     <FlexyCenter cubeClass={{ utilClass: 'flex-grow' }}>
-        <h1 class="[ fs-600 fw-normal ]">Ternary</h1>
+        <a class="[ fs-600 fw-normal ]" href='/' data-variant='default'>Ternary</a>
         <input type="text" placeholder="Search" class="[ fs-350 input width-100 ]" data-variant='text' />
     </FlexyCenter>
 

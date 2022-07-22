@@ -4,7 +4,7 @@
     import Button from "../../../components/Interactibles/Button.svelte";
     import { ICON_COMMENTS, ICON_DOWNVOTE, ICON_UPVOTE } from "../../../consts";
     import Icon from "../Icon/Icon.svelte";
-    import { downvote, upvote } from "../Post/_funcs";
+    import { downvote, lenArrOrNum, upvote } from "../Post/_funcs";
 
     export let props: import("./types").Props_StatController = {
         comments: 0,
@@ -34,12 +34,12 @@
 <FlexyCenter useJustify={false} props={{ gap: 1 }} cubeClass={{ utilClass: 'justify-content-end' }}>
     <FlexyCenter props={{ gap: 1 }} cubeClass={{ utilClass: 'margin-inline-end-1' }}>
         <Icon cubeClass={{ utilClass: 'text-muted' }}>{ ICON_COMMENTS }</Icon>
-        <p>{ props.comments }</p>
+        <p>{ lenArrOrNum(props.comments) }</p>
     </FlexyCenter>
 
     <Button on:click={() => handleUpvote(props.action)} 
         ariaLabel='Upvote' 
-    variant='action'
+        variant='action'
         secondaryVariant={props.action === 'upvote' ? 'upvote' : 'default'}
         >
         <Icon>{ ICON_UPVOTE }</Icon>

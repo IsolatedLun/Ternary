@@ -9,6 +9,14 @@
 	@include createButton($color: $button-action-color, $color-on-hov: $button-action-color-on-hov);
 }
 
+.button:where([data-variant='primary']) {
+	@include createButton(
+		$background-color: $button-primary-background-color,
+		$background-color-on-hov: $button-primary-background-color-on-hov,
+		$padding: $button-primary-padding
+	);
+}
+
 .button:where([data-variant='action-difference']) {
 	@include createButton(
 		$color: $button-action-color,
