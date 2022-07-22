@@ -55,6 +55,11 @@ td[title] {
 	cursor: crosshair;
 }
 
+ul[role='list'],
+ul {
+	list-style: none;
+}
+
 input,
 button,
 *.button {

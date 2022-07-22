@@ -1,0 +1,10 @@
+.post-view {
+	.comments .comment::after {
+		content: '';
+		position: absolute;
+
+		inset: 8px auto 8px 10px;
+		background-color: red;
+		width: 2px;
+	}
+}

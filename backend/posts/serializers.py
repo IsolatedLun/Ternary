@@ -9,10 +9,14 @@ def get_user_by_id(obj):
 
 class PostPreviewSerializer(serializers.ModelSerializer):
     user = serializers.SerializerMethodField(method_name='get_user')
+    comments = serializers.SerializerMethodField(method_name='get_comments')
     date_created = serializers.DateTimeField(format="%b %d, %Y")
 
     def get_user(self, obj):
         return get_user_by_id(obj)
+
+    def get_comments(self, obj):
+        return models.Comment.objects.filter(post_id=obj.id).count()
 
     class Meta:
         model = models.Post

@@ -3,6 +3,8 @@
 @forward './layouts/navbar';
 @forward './layouts/feed';
 
+@forward './views/post_view';
+
 @forward './modules/profile';
 @forward './modules/card';
 

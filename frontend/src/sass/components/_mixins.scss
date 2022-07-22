@@ -39,6 +39,7 @@
 	&:is(:focus-visible, :hover) {
 		background-color: $background-color-on-hov;
 		color: $color-on-hov;
+		border-color: $background-color-on-hov;
 	}
 }
 

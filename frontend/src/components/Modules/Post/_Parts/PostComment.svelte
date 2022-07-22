@@ -18,9 +18,8 @@ import type { Props_PostComment } from "../types";
     }
 
 </script>
-<Card 
-    cubeClass={{ utilClass: 'padding-2 margin-block-1 flex-direction-column gap-2' }}
-    variant='difference'
+<div 
+    class="[ pos-relative padding-2 margin-block-1 flex-direction-column gap-2 ]"
     >
     <div class="[ comment ] [ under-border ] [ flex-direction-column ]">
         <div>
@@ -30,4 +29,4 @@ import type { Props_PostComment } from "../types";
             </p>
         </div>
     </div>
-</Card>
+</div>

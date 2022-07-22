@@ -1,5 +1,9 @@
 @use '../mixins' as *;
 
-.input {
+.input:where([data-variant='default']) {
 	@include createInput();
+}
+
+.input:where([data-variant='primary']) {
+	@include createInput($background-color: red);
 }

@@ -17,6 +17,15 @@
 	);
 }
 
+.button:where([data-variant='primary-difference']) {
+	@include createButton(
+		$background-color: $button-primary-difference-background-color,
+		$border: $button-primary-difference-border,
+		$background-color-on-hov: $button-primary-difference-background-color-on-hov,
+		$padding: $button-primary-padding
+	);
+}
+
 .button:where([data-variant='action-difference']) {
 	@include createButton(
 		$color: $button-action-color,
@@ -26,6 +35,9 @@
 	);
 }
 
+// ========================
+// Secondary Variants
+// =========================
 .button:is([data-secondary-variant='upvote']) {
 	@include createButton(
 		$background-color: $button-upvote-background-color,

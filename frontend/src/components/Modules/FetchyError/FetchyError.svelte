@@ -13,7 +13,7 @@
         <p class="[ text-muted fs-600 ]">An Error Occurred.</p>
     </div>
     
-    <Card cubeClass={{ utilClass: 'padding-2' }} variant='difference'>
+    <Card cubeClass={{ utilClass: 'padding-2 clr-downvote-400' }} variant='difference'>
         { err }
     </Card>
 

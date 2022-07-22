@@ -11,6 +11,9 @@ class PostsView(generics.ListAPIView):
 
 class PostView(APIView):
     def get(self, req, post_id):
-        post = serializers.PostSerializer(models.Post.objects.get(id=post_id)).data
-
-        return Response(data=post, status=200)
+        try:
+            post = serializers.PostSerializer(models.Post.objects.get(id=post_id)).data
+        
+            return Response(data=post, status=200)
+        except:
+            return Response(data={'detail': 'Post does not exist.'}, status=404)
