@@ -1,13 +1,10 @@
 <script lang='ts'>
+    import Miscellaneuos from "../../../components/Modules/Miscellaneuos/Miscellaneuos.svelte";
     import { getFeed } from "../../../services/postFetchers";
-import Button from "../../Interactibles/Button.svelte";
-import TextInput from "../../Interactibles/Input/TextInput.svelte";
     import Card from "../../Modules/Card/Card.svelte";
-import Icon from "../../Modules/Icon/Icon.svelte";
     import GroupJoin from "../../Modules/Miscellaneuos/GroupJoin.svelte";
     import Post from "../../Modules/Post/Post.svelte";
-import HomeHeader from "./_Parts/HomeHeader.svelte";
-
+    import HomeHeader from "./_Parts/HomeHeader.svelte";
     const feedPromise = getFeed();
 </script>
 
@@ -25,10 +22,10 @@ import HomeHeader from "./_Parts/HomeHeader.svelte";
         </section>
     </div>
 
-    <section class="[ miscellaneous ]" data-desktop>
+    <Miscellaneuos>
         <Card cubeClass={{ utilClass: 'padding-1' }} variant='difference'>
             <p class="[ under-border ] [ text-center margin-block-end-1 ]">Relevant Communities</p>
             <GroupJoin />
         </Card>
-    </section>
+    </Miscellaneuos>
 </div>

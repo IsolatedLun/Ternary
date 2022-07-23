@@ -48,6 +48,16 @@
 	height: 100%;
 }
 
+.button:where([data-variant='select']) {
+	@include createButton(
+		$padding: 0.5em 1.25em,
+		$color: var(--clr-text-muted),
+		$color-on-hov: var(--clr-text-400),
+		$background-color: var(--clr-hover-200),
+		$background-color-on-hov: var(--clr-hover-400)
+	);
+}
+
 // ========================
 // Secondary Variants
 // =========================
@@ -76,7 +86,7 @@
 // ========================
 // Fixing issues
 // =========================
-a.button {
+.button {
 	display: grid;
 
 	& .icon {

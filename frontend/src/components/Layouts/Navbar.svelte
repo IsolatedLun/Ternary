@@ -17,21 +17,23 @@
         <TextInput cubeClass={{ utilClass: 'fs-350 width-100' }} placeholder={'Enter search'} />
     </FlexyCenter>
 
-    <FlexyCenter>
-        <LinkButton to='/' variant='icon-block'><Icon>{ ICON_HOME }</Icon></LinkButton>
-
-        {#if isLogged}
-            <Card cubeClass={{ utilClass: 'flex gap-2 margin-inline-start-auto fs-300 padding-1' }}>
-                <div>
-                    <p>{ user.username }</p>
-                    <p class="[ fs-300 clr-text-muted ]">{ user.honor } honor</p>
-                </div>
-                <Profile props={{ src: user.profile, alt: 'Your profile' }} />
-            </Card>
-
-            {:else}
-                <LinkButton variant='primary-difference'>Login</LinkButton>
-                <LinkButton variant='primary'>Sign up</LinkButton>
-        {/if}
-    </FlexyCenter>
+    <div data-desktop>
+        <FlexyCenter>
+            <LinkButton to='/' variant='icon-block'><Icon>{ ICON_HOME }</Icon></LinkButton>
+    
+            {#if isLogged}
+                <Card cubeClass={{ utilClass: 'flex gap-2 margin-inline-start-auto fs-300 padding-1' }}>
+                    <div>
+                        <p>{ user.username }</p>
+                        <p class="[ fs-300 clr-text-muted ]">{ user.honor } honor</p>
+                    </div>
+                    <Profile props={{ src: user.profile, alt: 'Your profile' }} />
+                </Card>
+    
+                {:else}
+                    <LinkButton variant='primary-difference'>Login</LinkButton>
+                    <LinkButton variant='primary'>Sign up</LinkButton>
+            {/if}
+        </FlexyCenter>
+    </div>
 </nav>

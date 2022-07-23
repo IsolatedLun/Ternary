@@ -1,7 +1,7 @@
 @use '../abstracts/' as *;
 
 .main-container {
-	width: min(#{$main-container-width}, calc(100% - #{$main-container-padding * 2}));
-	padding-inline: $main-container-padding;
+	width: min(#{$main-container-width}, calc(100% - #{$main-container-padding}));
+	padding-inline: $main-container-padding * 0.5;
 	margin-inline: auto;
 }

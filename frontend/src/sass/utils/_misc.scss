@@ -68,3 +68,7 @@
 .mix-blend-difference {
 	mix-blend-mode: difference;
 }
+
+.ignore-children > * {
+	pointer-events: none;
+}

@@ -103,3 +103,11 @@ video {
 [class*='grid'] {
 	display: grid;
 }
+
+[data-hide] {
+	display: none;
+}
+
+[data-mobile] {
+	display: none !important;
+}

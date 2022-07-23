@@ -1,6 +1,6 @@
 - Add navbar dropdown menu
 - Add Feed create component [contains search input and options for (top, latest, hottest) and sorting by (time)] DONE 
-- Add Miscellaneous component and dynamically change depending on the location
+- Add Miscellaneous component and dynamically change depending on the location DONE
 If user is in home: Show relevant groups that they can join. DONE
 Show relevant posts like stackoverflow.
 
