@@ -18,7 +18,7 @@
     </FlexyCenter>
 
     <FlexyCenter>
-        <LinkButton to='/'><Icon>{ ICON_HOME }</Icon></LinkButton>
+        <LinkButton to='/' variant='icon-block'><Icon>{ ICON_HOME }</Icon></LinkButton>
 
         {#if isLogged}
             <Card cubeClass={{ utilClass: 'flex gap-2 margin-inline-start-auto fs-300 padding-1' }}>

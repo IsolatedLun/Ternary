@@ -12,12 +12,13 @@
 	border: $border;
 	border-radius: $border-radius;
 
-	&:is(:focus, :hover) {
+	&:is(:focus-visible, :hover) {
 		border-color: $border-color-on-hov;
 	}
 }
 
 @mixin createButton(
+	$font-size: $def-button-font-size,
 	$padding: $def-button-padding,
 	$background-color: $def-button-background-color,
 	$color: var(--clr-text-400),
@@ -26,6 +27,8 @@
 	$background-color-on-hov: $def-button-background-color-on-hov,
 	$color-on-hov: var(--clr-text-400)
 ) {
+	font-size: $font-size;
+
 	padding: $padding;
 	background-color: $background-color;
 	color: $color;
@@ -35,6 +38,11 @@
 
 	cursor: pointer;
 	transition: background-color 95ms ease-in-out, color 95ms ease-in-out;
+
+	& > .icon {
+		font-size: $font-size;
+		color: $color;
+	}
 
 	&:is(:focus-visible, :hover) {
 		background-color: $background-color-on-hov;
@@ -53,7 +61,7 @@
 	border: $border;
 	border-radius: $border-radius;
 
-	&:is(:focus, :hover) {
+	&:is(:focus-visible, :hover) {
 		border-color: $border-color-on-hov;
 	}
 }

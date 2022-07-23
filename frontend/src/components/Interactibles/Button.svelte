@@ -8,7 +8,8 @@
     export let ariaLabel = 'button';
 
     const _class = createCubeCSSClass(cubeClass, {
-        compostClass: 'button fw-bold' 
+        compostClass: 'button',
+        utilClass: 'fw-bold text-center'
     });
 </script>
 

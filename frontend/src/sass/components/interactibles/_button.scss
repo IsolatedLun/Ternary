@@ -35,6 +35,19 @@
 	);
 }
 
+.button:where([data-variant='icon-block']) {
+	@include createButton(
+		$font-size: 1.05rem,
+		$color: var(--clr-text-muted),
+		$color-on-hov: var(--clr-text-400),
+		$background-color: var(--clr-background-500),
+		$background-color-on-hov: var(--clr-hover-200)
+	);
+
+	aspect-ratio: 1;
+	height: 100%;
+}
+
 // ========================
 // Secondary Variants
 // =========================
@@ -54,4 +67,19 @@
 		$color-on-hov: $button-downvote-color,
 		$background-color-on-hov: $button-downvote-background-color-on-hov
 	);
+}
+
+.button:is([data-secondary-variant='join']) {
+	font-size: $button-join-font-size;
+}
+
+// ========================
+// Fixing issues
+// =========================
+a.button {
+	display: grid;
+
+	& .icon {
+		place-self: center;
+	}
 }

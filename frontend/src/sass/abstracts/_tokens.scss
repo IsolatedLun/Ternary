@@ -32,6 +32,7 @@ $input-primary-border-radius: 4px;
 $input-primary-border-color-on-hov: var(--clr-input-border-on-hov);
 
 // Button
+$def-button-font-size: var(--fs-350);
 $def-button-padding: 0.25em 0.5em;
 $def-button-background-color: var(--clr-hover-200);
 $def-button-border-radius: $border-radius-cubed;
@@ -55,6 +56,8 @@ $button-primary-background-color-on-hov: var(--clr-upvote-400);
 $button-primary-difference-background-color: var(--clr-upvote-background);
 $button-primary-difference-background-color-on-hov: var(--clr-upvote-400);
 $button-primary-difference-border: 2px solid var(--clr-upvote-300);
+
+$button-join-font-size: var(--fs-300);
 
 // Card
 $def-card-background-color: var(--clr-background-600);

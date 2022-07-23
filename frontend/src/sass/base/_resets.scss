@@ -22,6 +22,7 @@ body {
 	background-color: $clr-body;
 
 	overflow-x: hidden;
+	text-rendering: optimizeLegibility;
 }
 
 h1,
@@ -85,13 +86,14 @@ video {
 	border-radius: inherit;
 }
 
-// :focus,
-// :target {
-// 	outline: 2px solid var(--clr-text-400);
-// 	outline-offset: 4px;
+:focus {
+	outline: 1px solid var(--clr-text-400);
+	outline-offset: 4px;
+}
 
-// 	border-radius: inherit;
-// }
+:is(.button, .input, body):focus {
+	outline: 0;
+}
 
 // Misc
 [class*='flex'] {

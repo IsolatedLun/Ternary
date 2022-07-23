@@ -6,12 +6,13 @@ import { onMount } from "svelte";
 
     export let cubeClass: Props_CubeCSS = defCubeClass();
     export let variant = 'default'
+    export let tag = 'div';
 
     const _class = createCubeCSSClass(cubeClass, {
         compostClass: 'card'
     });
 </script>
 
-<div class={_class} data-variant={variant}>
+<svelte:element this={tag} class={_class} data-variant={variant}>
     <slot></slot>
-</div>
+</svelte:element>

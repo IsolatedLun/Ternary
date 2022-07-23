@@ -5,5 +5,8 @@
 }
 
 .input:where([data-variant='primary']) {
-	@include createInput($background-color: red);
+	@include createInput(
+		$background-color: var(--clr-background-300),
+		$border: 1px solid var(--clr-background-900)
+	);
 }
