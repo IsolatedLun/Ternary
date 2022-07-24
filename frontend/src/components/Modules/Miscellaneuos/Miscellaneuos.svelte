@@ -1,3 +1,3 @@
-<section class="[ miscellaneous ]" data-desktop>
-    <slot></slot>
+<section class="[ miscellaneous ] [ flex-direction-column gap-3 ]" data-desktop>
+	<slot />
 </section>

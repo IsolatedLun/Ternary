@@ -18,7 +18,8 @@
 }
 
 .text-elliptic {
-	max-width: 24ch;
+	max-width: var(--_max-width, 32ch);
+	line-clamp: 2;
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;

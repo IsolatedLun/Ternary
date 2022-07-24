@@ -8,10 +8,21 @@
 	}
 }
 
+// Hoverables
 a.hoverable {
 	background-color: var(--clr-background-500);
 }
 
 .hoverable:is(:focus-visible, :hover) {
 	background-color: var(--clr-hover-400);
+}
+
+.hoverable:where([data-hover-variant='light']):is(:focus-visible, :hover) {
+	background-color: var(--clr-hover-200);
+}
+
+// Color schemes
+*:where([data-color-scheme='downvote']) {
+	color: var(--clr-downvote-400);
+	background-color: var(--clr-downvote-background);
 }

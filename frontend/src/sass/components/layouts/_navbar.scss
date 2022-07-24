@@ -5,8 +5,10 @@
 
 	.navbar__dropdown {
 		position: fixed;
-		inset: 7rem 4rem auto;
+		inset: 30% 4rem auto;
 
+		max-width: min(#{$breakpoint-small}, 100%);
+		margin: auto;
 		z-index: 999;
 
 		& a {
@@ -16,10 +18,11 @@
 
 	&[data-dropdown-state]::after {
 		content: '';
-		position: absolute;
+		position: fixed;
 
 		inset: 0;
 		background-image: linear-gradient(hsl(0 0 0 / 0.5), hsl(0 0 0 / 0.88));
+		height: 100vmax;
 
 		z-index: 998;
 	}

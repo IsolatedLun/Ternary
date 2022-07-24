@@ -1,8 +1,8 @@
 <script lang="ts">
-	import Miscellaneuos from '../../../components/Modules/Miscellaneuos/Miscellaneuos.svelte';
+	import Miscellaneuos from '../../Modules/Miscellaneuos/Miscellaneuos.svelte';
 	import { getFeed } from '../../../services/postFetchers';
 	import Card from '../../Modules/Card/Card.svelte';
-	import GroupJoin from '../../Modules/Miscellaneuos/GroupJoin.svelte';
+	import MiscGroup from '../../../components/Modules/Miscellaneuos/_Parts/MiscGroup.svelte';
 	import Post from '../../Modules/Post/Post.svelte';
 	import HomeHeader from './_Parts/HomeHeader.svelte';
 	const feedPromise = getFeed();
@@ -25,7 +25,11 @@
 	<Miscellaneuos>
 		<Card cubeClass={{ utilClass: 'padding-1' }} variant="difference">
 			<p class="[ under-border ] [ text-center margin-block-end-1 ]">Relevant Communities</p>
-			<GroupJoin />
+			<MiscGroup />
+		</Card>
+
+		<Card cubeClass={{ utilClass: 'padding-1' }} variant="difference">
+			<p class="[ under-border ] [ text-center margin-block-end-1 ]">Related Posts</p>
 		</Card>
 	</Miscellaneuos>
 </div>

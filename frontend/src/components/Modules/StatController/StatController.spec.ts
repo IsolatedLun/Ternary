@@ -1,8 +1,8 @@
-import { render } from '@testing-library/svelte';
+import { act, render } from '@testing-library/svelte';
 import 'jest';
 import StatController from './StatController.svelte';
 
-test('Upvote a post then downvote it for some reason.', () => {
+test('Upvote a post then downvote it for some reason.', async () => {
 	const data = {
 		votes: 0,
 		comments: 0,
@@ -14,9 +14,15 @@ test('Upvote a post then downvote it for some reason.', () => {
 	const upvoteBtn = document.querySelector('button[aria-label="Upvote"]')! as HTMLButtonElement;
 	const downvoteBtn = document.querySelector('button[aria-label="Downvote"]')! as HTMLButtonElement;
 
-	upvoteBtn.click(); // 0 => 1
+	await act(() => {
+		upvoteBtn.click(); // 0 => 1
+	});
+
 	expect(getByText('1')).not.toBeNull;
-	downvoteBtn.click(); // 1 => -1
+
+	await act(() => {
+		downvoteBtn.click(); // 1 => -1
+	});
 
 	expect(getByText('-1')).not.toBeNull;
 });
