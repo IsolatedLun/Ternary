@@ -2,4 +2,25 @@
 
 .main-navbar {
 	background-color: $clr-navbar-background;
+
+	.navbar__dropdown {
+		position: fixed;
+		inset: 7rem 4rem auto;
+
+		z-index: 999;
+
+		& a {
+			display: inline-block;
+		}
+	}
+
+	&[data-dropdown-state]::after {
+		content: '';
+		position: absolute;
+
+		inset: 0;
+		background-image: linear-gradient(hsl(0 0 0 / 0.5), hsl(0 0 0 / 0.88));
+
+		z-index: 998;
+	}
 }

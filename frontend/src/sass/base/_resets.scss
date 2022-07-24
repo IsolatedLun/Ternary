@@ -104,10 +104,10 @@ video {
 	display: grid;
 }
 
-[data-hide] {
-	display: none;
+[data-mobile] {
+	display: none !important;
 }
 
-[data-mobile] {
+[data-hide] {
 	display: none !important;
 }

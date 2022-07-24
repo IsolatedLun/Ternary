@@ -6,6 +6,7 @@
     export let variant = 'default';
     export let secondaryVariant = 'default';
     export let ariaLabel = 'button';
+    export let self: HTMLElement | null = null;
 
     const _class = createCubeCSSClass(cubeClass, {
         compostClass: 'button',
@@ -14,7 +15,10 @@
 </script>
 
 <button 
-    on:click class={_class} 
+    on:click
+    bind:this={self}
+
+    class={_class} 
     data-variant={variant} 
     data-secondary-variant={secondaryVariant}
     aria-label={ariaLabel}>

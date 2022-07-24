@@ -16,3 +16,4 @@ export const ICON_PLUS = '\uf067';
 export const ICON_IMAGE = '\uf03e';
 export const ICON_LINK = '\uf0c1';
 export const ICON_CARET_DOWN = '\uf0d7';
+export const ICON_BARS = '\uf0c9';

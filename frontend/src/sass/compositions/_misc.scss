@@ -8,6 +8,10 @@
 	}
 }
 
+a.hoverable {
+	background-color: var(--clr-background-500);
+}
+
 .hoverable:is(:focus-visible, :hover) {
-	background-color: var(--clr-hover-200);
+	background-color: var(--clr-hover-400);
 }

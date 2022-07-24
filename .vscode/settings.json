@@ -1,7 +1,7 @@
 {
   "editor.formatOnSave": true,
   "[svelte]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "svelte.svelte-vscode"
   },
   "files.exclude": {
     // -------- PROJECT DIRECTORIES --------
