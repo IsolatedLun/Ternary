@@ -1,5 +1,1 @@
-- Add navbar dropdown menu
-- Add relevant posts component like stackoverflow.
-
-- Make navbar responsive for mobile
 - Make posts and comments be vote-able.

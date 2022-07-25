@@ -44,10 +44,12 @@
 			<Icon>{ICON_CARET_DOWN}</Icon>
 		</span>
 
+		<!-- svelte-ignore a11y-no-redundant-roles -->
 		<ul
 			class="[ select__options ] [ card ] [ pos-absolute padding-1 ]"
 			data-variant="difference"
 			data-hide=""
+			role="list"
 			bind:this={_thisSelect}
 		>
 			{#each options as option}

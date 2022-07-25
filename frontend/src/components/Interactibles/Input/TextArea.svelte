@@ -24,7 +24,7 @@
 	const _class = createCubeCSSClass(cubeClass, {
 		compostClass: 'input'
 	});
-	let _this: HTMLInputElement;
+	let _this: HTMLTextAreaElement;
 	let errors: string[] = [];
 </script>
 
@@ -34,14 +34,14 @@
 	{useAlign}
 	props={{ gap: 1 }}
 >
-	<input
+	<textarea
 		on:input
 		class={_class}
 		bind:this={_this}
 		data-variant={variant}
 		data-secondary-variant={secondaryVariant}
 		{placeholder}
-		type="text"
+		data-input-type="textarea"
 	/>
 
 	{#if errors.length > 0}

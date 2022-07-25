@@ -22,7 +22,11 @@
 		cubeClass={{ utilClass: 'flex align-items-center gap-1 padding-1 margin-block-start-2' }}
 		variant="difference"
 	>
-		<TextInput cubeClass={{ utilClass: 'width-100' }} placeholder="Search post" variant="primary" />
+		<TextInput
+			cubeClass={{ utilClass: 'width-100' }}
+			placeholder="Search posts"
+			variant="primary"
+		/>
 		<Select selectText="Sort by" options={['Top', 'Controversial']} />
 	</Card>
 </header>

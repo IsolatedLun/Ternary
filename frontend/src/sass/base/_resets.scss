@@ -56,12 +56,12 @@ td[title] {
 	cursor: crosshair;
 }
 
-ul[role='list'],
-ul {
+ul[role='list'] {
 	list-style: none;
 }
 
 input,
+textarea,
 button,
 *.button {
 	font-size: calc(var(--fs-350) * 1.05);

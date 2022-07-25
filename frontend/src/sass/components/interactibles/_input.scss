@@ -1,3 +1,4 @@
+@use '../../abstracts/' as *;
 @use '../mixins' as *;
 
 .input:where([data-variant='default']) {
@@ -9,4 +10,13 @@
 		$background-color: var(--clr-background-300),
 		$border: 1px solid var(--clr-background-900)
 	);
+}
+
+.input:is([data-input-type='textarea']) {
+	@include createInput();
+
+	resize: vertical;
+	min-width: 100%;
+	min-height: $input-textarea-height;
+	white-space: pre-wrap;
 }
