@@ -2,12 +2,7 @@ import { act, render } from '@testing-library/svelte';
 import 'jest';
 import { generateNChars } from '../../../utils/testFuncs';
 import Post from './Post.svelte';
-import type {
-	Props_Post,
-	Props_PostComment,
-	Props_Post_Content_Image,
-	Props_Post_Content_Text
-} from './types';
+import type { Props_Post, Props_Post_Content_Image, Props_Post_Content_Text } from './types';
 import { createTestPost } from './_funcs';
 
 test('Render a post that has a long paragraph', () => {

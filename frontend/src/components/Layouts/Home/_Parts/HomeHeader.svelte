@@ -9,11 +9,17 @@
 
 <header class="[ flex-direction-column gap-2 ]">
 	<Card cubeClass={{ utilClass: 'flex align-items-center gap-1 padding-1' }} variant="difference">
-		<TextInput cubeClass={{ utilClass: 'width-100' }} placeholder="Create post" variant="primary" />
-		<LinkButton variant="icon-block">
+		<a href="/create" class="[ width-100 ]">
+			<TextInput
+				cubeClass={{ utilClass: 'width-100' }}
+				placeholder="Create post"
+				variant="primary"
+			/>
+		</a>
+		<LinkButton variant="icon-block" to="/create?type=media">
 			<Icon>{ICON_IMAGE}</Icon>
 		</LinkButton>
-		<LinkButton variant="icon-block">
+		<LinkButton variant="icon-block" to="/create?type=link">
 			<Icon>{ICON_LINK}</Icon>
 		</LinkButton>
 	</Card>

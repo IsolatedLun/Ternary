@@ -9,3 +9,7 @@
 	background-color: var(--clr-background-400);
 	border: 1px solid var(--clr-background-600);
 }
+
+.card[data-variant='dark'] {
+	background-color: var(--clr-background-500);
+}
