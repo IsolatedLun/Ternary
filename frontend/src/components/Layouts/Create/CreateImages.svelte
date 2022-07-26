@@ -1,23 +1,20 @@
 <script lang="ts">
 	import Image from '../../../components/Modules/MediaElements/Image.svelte';
 	import MediaInput from '../../../components/Interactibles/Input/MediaInput.svelte';
-	import { imageValidator } from '../../../utils/inputValidators';
+	import { imageValidator, isImageLoop } from '../../../utils/inputValidators';
 
 	let images: File[] = [];
 	function addImage(e: Event) {
 		const target = e.target as HTMLInputElement;
 
-		if (target.files) images = [...images, ...(<any>target.files)];
+		if (target.files && isImageLoop(target)) images = [...images, ...(<any>target.files)];
 	}
 
 	function removeImage(idx: number) {
 		images.splice(idx, 1);
 
-		_this.dispatchEvent(new Event('media-change'));
 		images = [...images];
 	}
-
-	let _this: HTMLInputElement;
 </script>
 
 <div class="[ flex flex-wrap align-items-center gap-1 ]">
@@ -31,7 +28,6 @@
 	{/each}
 	<MediaInput
 		on:input={addImage}
-		bind:_this
 		validators={[imageValidator()]}
 		cubeClass={{ utilClass: 'margin-inline-end-auto' }}
 		type="image"

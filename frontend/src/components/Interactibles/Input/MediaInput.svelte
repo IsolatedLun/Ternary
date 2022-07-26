@@ -13,12 +13,6 @@
 			handleErrors(errors);
 		});
 
-		// Used when the multiple files are used
-		_this.addEventListener('media-change', () => {
-			errors = runValidators(_this as HTMLInputElement, validators);
-			handleErrors(errors);
-		});
-
 		errors = runValidators(_this as HTMLInputElement, validators);
 		handleErrors(errors);
 	});
@@ -41,7 +35,7 @@
 	});
 	const dispatch = createEventDispatcher();
 
-	export let _this: HTMLInputElement;
+	let _this: HTMLInputElement;
 	let errors: string[] = [];
 	let id = 'file-input-' + rand(1000);
 </script>
@@ -58,7 +52,6 @@
 	<input
 		on:input
 		on:click
-		bind:this={_this}
 		{id}
 		data-variant={variant}
 		data-hide={true}

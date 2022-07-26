@@ -12,6 +12,8 @@
 	import Select from '../components/Modules/Dropdown/Select.svelte';
 	import CreateImages from '../components/Layouts/Create/CreateImages.svelte';
 	import MediaInput from '../components/Interactibles/Input/MediaInput.svelte';
+	import Log from '../components/Modules/Logs/Log.svelte';
+	import type { Props_Log } from '../components/Modules/Logs/types';
 
 	function handleCreatePost(_data: any) {
 		createPost(_data);
@@ -25,6 +27,7 @@
 	};
 
 	let mediaType = 'image';
+	let logs: Props_Log[] = [];
 </script>
 
 <section class="[ feed ] [ grid ]" data-grid-collapse>
@@ -72,6 +75,17 @@
 	</div>
 
 	<Miscellaneuos>
-		<p>Info about making posts</p>
+		<Card cubeClass={{ utilClass: 'padding-inline-3 padding-block-1' }} variant="difference">
+			<p class="[ under-border ]">Logs</p>
+
+			<Card
+				cubeClass={{ utilClass: 'flex-direction-column gap-1 padding-1 margin-block-1 fs-300' }}
+				variant="dark"
+			>
+				{#each logs as log}
+					<Log cubeClass={{ utilClass: 'margin-inline-1' }} {...log} />
+				{/each}
+			</Card>
+		</Card>
 	</Miscellaneuos>
 </section>
