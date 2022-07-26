@@ -72,7 +72,10 @@
 		tabindex="-1"
 		bind:this={_thisDropdown}
 	>
-		<ul class="[ dropdown__list ] [ flex-direction-column gap-1 place-items-center text-center ]">
+		<ul
+			role="list"
+			class="[ dropdown__list ] [ flex-direction-column gap-1 place-items-center text-center ]"
+		>
 			<li class="[ width-100 ]">
 				<a
 					href="/"

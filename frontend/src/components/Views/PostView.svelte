@@ -1,7 +1,6 @@
 <script lang="ts">
 	import FlexyCenter from '../Divs/FlexyCenter.svelte';
 	import { getPost } from '../../services/postFetchers';
-	import TextInput from '../Interactibles/Input/TextInput.svelte';
 	import Card from '../Modules/Card/Card.svelte';
 	import FetchyError from '../Modules/FetchyError/FetchyError.svelte';
 	import Post from '../Modules/Post/Post.svelte';

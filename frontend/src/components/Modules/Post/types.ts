@@ -4,11 +4,11 @@ export interface Props_Post<CommentT, ContentT> extends Props_DataModel {
 	user: Props_User;
 
 	votes: number;
-	comments: CommentT | any;
+	comments: CommentT;
 
 	title: string;
-	content: Props_Post_Content_Text | Props_Post_Content_Image | Props_Post_Content_Video;
-	content_type: 'text' | 'media';
+	content: ContentT;
+	content_type: 'text' | 'video' | 'image' | 'link' | 'any';
 }
 
 export interface Props_PostComment {
@@ -18,21 +18,4 @@ export interface Props_PostComment {
 	text: string;
 
 	date_created: string;
-}
-
-// =================
-export interface Props_Post_Content_Text {
-	text: string;
-}
-
-export interface Props_Post_Content_Image {
-	images: string[];
-}
-
-export interface Props_PostImages extends Props_Post_Content_Image {
-	title: string;
-}
-
-export interface Props_Post_Content_Video {
-	video: string;
 }

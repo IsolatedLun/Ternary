@@ -11,7 +11,7 @@
 <div class="[ feed ] [ grid ]" data-grid-collapse>
 	<div class="[ flex-direction-column gap-1 ]">
 		<HomeHeader />
-		<section class="[ posts ] [ width-100 ]">
+		<section class="[ posts ] [ flex-direction-column gap-2 ] [ width-100 ]">
 			{#await feedPromise}
 				<p>LOADING</p>
 			{:then feed}

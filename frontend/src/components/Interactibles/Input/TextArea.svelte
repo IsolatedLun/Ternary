@@ -26,6 +26,7 @@
 	export let placeholder = 'Enter text';
 	export let validators: Props_InputValidator[] = [];
 	export let label = '';
+	export let value = '';
 
 	export let useColumn = true;
 	export let useAlign = false;
@@ -48,9 +49,9 @@
 		<label for="">{label}</label>
 	{/if}
 	<textarea
-		on:input
-		class={_class}
+		on:input={() => (value = _this.value)}
 		bind:this={_this}
+		class={_class}
 		data-variant={variant}
 		data-secondary-variant={secondaryVariant}
 		{placeholder}

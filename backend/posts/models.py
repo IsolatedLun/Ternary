@@ -2,7 +2,8 @@ from django.db import models
 from users.models import cUser
 
 CONTENT_TYPE_CHOICES = [
-    ('both', 'Both'),
+    ('text', 'Text'),
+    ('image', 'Image'),
     ('video', 'Video'),
     ('url', 'Url'),
 ]
@@ -10,7 +11,7 @@ CONTENT_TYPE_CHOICES = [
 class Post(models.Model):
     title = models.CharField(max_length=64)
 
-    content = models.JSONField()
+    content = models.TextField()
     content_type = models.CharField(max_length=16, choices=CONTENT_TYPE_CHOICES)
 
     votes = models.IntegerField(default=0)

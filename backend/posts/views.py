@@ -17,3 +17,10 @@ class PostView(APIView):
             return Response(data=post, status=200)
         except:
             return Response(data={'detail': 'Post does not exist.'}, status=404)
+
+class CreatePostView(APIView):
+    def post(self, req):
+        post_data = req.data
+        post = models.Post.objects.create(**post_data, user_id=1)
+
+        return Response(data='Good job', status=200)

@@ -21,6 +21,7 @@ export function lenArrOrNum(x: any[] | number): number {
 }
 
 export function createTestPost<CommentT, ContentT>(
+	content: ContentT,
 	comments: CommentT
 ): Props_Post<CommentT, ContentT> {
 	return {
@@ -36,8 +37,8 @@ export function createTestPost<CommentT, ContentT>(
 		title: 'Lol',
 		comments: comments,
 		votes: 0,
-		content: { images: ['img1.png', 'img2.png'] },
-		content_type: 'media',
+		content: content,
+		content_type: 'any',
 		date_created: ''
 	};
 }

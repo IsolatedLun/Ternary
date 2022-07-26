@@ -26,6 +26,8 @@
 	export let placeholder = 'Enter text';
 	export let validators: Props_InputValidator[] = [];
 	export let label = '';
+	export let value = '';
+	export let thenOnInput: Function | null = null;
 
 	export let useColumn = true;
 	export let useAlign = false;
@@ -48,7 +50,10 @@
 		<label for="">{label}</label>
 	{/if}
 	<input
-		on:input
+		on:input={(e) => {
+			value = _this.value;
+			if (thenOnInput) thenOnInput(e);
+		}}
 		on:click
 		bind:this={_this}
 		class={_class}
