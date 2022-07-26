@@ -30,7 +30,7 @@ export async function createPost(data: Props_CreatePost) {
 		const request = await axios.post('http://localhost:8000/posts/create', data);
 		const res = await request.data;
 
-		return res as any;
+		location.href = '/';
 	} catch (e) {
 		throw handleError(e);
 	}

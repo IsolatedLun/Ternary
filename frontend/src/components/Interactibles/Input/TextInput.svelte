@@ -8,11 +8,11 @@
 
 	onMount(() => {
 		_this.addEventListener('input', (e) => {
-			errors = runValidators(e, validators);
+			errors = runValidators(e.target as HTMLInputElement, validators);
 			handleErrors(errors);
 		});
 
-		errors = runValidators(_this.value, validators);
+		errors = runValidators(_this, validators);
 		handleErrors(errors);
 	});
 

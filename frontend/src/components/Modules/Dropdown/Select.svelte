@@ -19,7 +19,7 @@
 
 	function dispatchSelect(val: string) {
 		dispatch('select', {
-			value: val
+			value: val.toLowerCase()
 		});
 	}
 
@@ -46,7 +46,7 @@
 
 		<!-- svelte-ignore a11y-no-redundant-roles -->
 		<ul
-			class="[ select__options ] [ card ] [ pos-absolute padding-1 ]"
+			class="[ select__options ] [ card ] [ pos-absolute padding-1 z-index-999 ]"
 			data-variant="difference"
 			data-hide=""
 			role="list"

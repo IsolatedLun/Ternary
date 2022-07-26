@@ -53,3 +53,14 @@ $ops: bold, bolder, light, lighter, normal, 100, 200, 300, 400, 500, 600, 700, 8
 .whitespace-nowrap {
 	white-space: nowrap;
 }
+
+// Screen readers
+.visually-hidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}

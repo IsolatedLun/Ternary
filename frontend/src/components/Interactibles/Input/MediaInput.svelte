@@ -1,18 +1,25 @@
 <script lang="ts">
 	import FlexyCenter from '../../../components/Divs/FlexyCenter.svelte';
-	import { onMount } from 'svelte';
+	import { createEventDispatcher, onMount } from 'svelte';
 	import type { Props_CubeCSS } from '../../../types';
 	import { createCubeCSSClass, defCubeClass } from '../../../utils/componentFuncs';
 	import { runValidators } from './_funcs';
 	import type { Props_InputValidator } from 'src/utils/types';
-	import { createEventDispatcher } from 'svelte';
+	import { rand } from '../../../utils/generalFuncs';
 
 	onMount(() => {
 		_this.addEventListener('input', (e) => {
-			errors = runValidators(e.target as HTMLTextAreaElement, validators);
+			errors = runValidators(e.target as HTMLInputElement, validators);
+			handleErrors(errors);
 		});
 
-		errors = runValidators(_this, validators);
+		// Used when the multiple files are used
+		_this.addEventListener('media-change', () => {
+			errors = runValidators(_this as HTMLInputElement, validators);
+			handleErrors(errors);
+		});
+
+		errors = runValidators(_this as HTMLInputElement, validators);
 		handleErrors(errors);
 	});
 
@@ -21,41 +28,43 @@
 	}
 
 	export let cubeClass: Props_CubeCSS = defCubeClass();
-	export let variant = 'default';
-	export let secondaryVariant = 'default';
-	export let placeholder = 'Enter text';
 	export let validators: Props_InputValidator[] = [];
-	export let label = '';
-	export let value = '';
+	export let variant = '';
+	export let type = '';
 
 	export let useColumn = true;
 	export let useAlign = false;
 
 	const _class = createCubeCSSClass(cubeClass, {
-		compostClass: 'input'
+		compostClass: type === 'image' ? 'button' : 'input',
+		utilClass: type === 'video' ? 'grid place-items-center text-muted cursor-pointer' : ''
 	});
 	const dispatch = createEventDispatcher();
-	let _this: HTMLTextAreaElement;
+
+	export let _this: HTMLInputElement;
 	let errors: string[] = [];
+	let id = 'file-input-' + rand(1000);
 </script>
 
 <FlexyCenter
-	cubeClass={{ blockClass: 'input-container', utilClass: 'width-100' }}
+	cubeClass={{ blockClass: 'input-container', utilClass: 'pos-relative width-100' }}
 	{useColumn}
 	{useAlign}
 	props={{ gap: 1 }}
 >
-	{#if label.length > 0}
-		<label for="">{label}</label>
-	{/if}
-	<textarea
-		on:input={() => (value = _this.value)}
+	<label class={_class} for={id} data-variant={type === 'image' ? variant : 'media-video'}>
+		<p>Add Media</p>
+	</label>
+	<input
+		on:input
+		on:click
 		bind:this={_this}
-		class={_class}
+		{id}
 		data-variant={variant}
-		data-secondary-variant={secondaryVariant}
-		{placeholder}
-		data-input-type="textarea"
+		data-hide={true}
+		type="file"
+		accept={type + '/*'}
+		multiple={type === 'video' ? false : true}
 	/>
 
 	{#if errors.length > 0}

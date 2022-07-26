@@ -1,14 +1,13 @@
 <script lang="ts">
-	import { ICON_COMMENTS, ICON_DOWNVOTE, ICON_UPVOTE } from '../../../consts';
+	import { ICON_LINK } from '../../../consts';
 	import FlexyCenter from '../../../components/Divs/FlexyCenter.svelte';
-	import Button from '../../../components/Interactibles/Button.svelte';
 	import Icon from '../Icon/Icon.svelte';
-	import Profile from '../Profile/Profile.svelte';
 	import Video from '../MediaElements/Video.svelte';
 	import PostImages from './_Parts/PostImages.svelte';
 	import LinkButton from '../../../components/Interactibles/LinkButton.svelte';
 	import UserRepr from '../User/UserRepr.svelte';
 	import StatController from '../StatController/StatController.svelte';
+	import PostUrl from './_Parts/PostUrl.svelte';
 
 	export let props: import('./types').Props_Post<any, any> = {
 		user: {
@@ -48,7 +47,7 @@
 		{#if props.content_type === 'text'}
 			{props.content}
 		{:else if props.content_type === 'link'}
-			<a href="/">{props.content}</a>
+			<PostUrl content={props.content} />
 		{:else if props.content_type === 'image'}
 			<PostImages props={{ title: props.title, images: props.content.images }} />
 		{:else if props.content_type === 'video'}

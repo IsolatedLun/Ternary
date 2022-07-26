@@ -9,6 +9,9 @@
 	import { page } from '$app/stores';
 	import type { Props_CreatePost } from 'src/services/types';
 	import { createPost } from '../services/postFetchers';
+	import Select from '../components/Modules/Dropdown/Select.svelte';
+	import CreateImages from '../components/Layouts/Create/CreateImages.svelte';
+	import MediaInput from '../components/Interactibles/Input/MediaInput.svelte';
 
 	function handleCreatePost(_data: any) {
 		createPost(_data);
@@ -20,12 +23,14 @@
 		content: '',
 		content_type: ''
 	};
+
+	let mediaType = 'image';
 </script>
 
 <section class="[ feed ] [ grid ]" data-grid-collapse>
 	<div class="[ flex-direction-column gap-1 ]">
 		<CreateHeader on:typeChange={(_type) => (type = _type.detail.data)} />
-
+		{mediaType}
 		<Card variant="difference" cubeClass={{ utilClass: 'flex-direction-column gap-2 padding-2' }}>
 			<TextInput
 				bind:value={data.title}
@@ -37,7 +42,17 @@
 			{#if type === 'text'}
 				<TextArea bind:value={data.title} placeholder="Enter Text" label="Description" />
 			{:else if type === 'media'}
-				<p>// Add media component</p>
+				<Select
+					options={['Image', 'Video']}
+					on:select={(e) => (mediaType = e.detail.value)}
+					selectText="Type"
+				/>
+
+				{#if mediaType === 'image'}
+					<CreateImages />
+				{:else}
+					<MediaInput type="video" />
+				{/if}
 			{:else}
 				<TextInput
 					bind:value={data.content}

@@ -1,12 +1,13 @@
 import type { Props_InputValidator } from 'src/utils/types';
 
-export function runValidators(e: Event | string, validators: Props_InputValidator[]): string[] {
+export function runValidators(
+	e: HTMLInputElement | HTMLTextAreaElement,
+	validators: Props_InputValidator[]
+): string[] {
 	let _errors: string[] = [];
-	let text = typeof e === 'object' ? (e.target as HTMLInputElement).value : e;
 
 	validators.forEach((validator) => {
-		console.log(e);
-		let res = validator.validate(text);
+		let res = validator.validate(e);
 
 		if (!res) _errors.push(validator.text);
 	});
