@@ -4,10 +4,15 @@ from users.models import cUser
 from users.serializers import cUserSerializer
 from . import models
 
+from json import loads as json_loads
+
+
 def get_user_by_id(obj):
     return cUserSerializer(cUser.objects.get(id=obj.user.id)).data
 
+
 class PostPreviewSerializer(serializers.ModelSerializer):
+    content = serializers.SerializerMethodField(method_name='get_content')
     user = serializers.SerializerMethodField(method_name='get_user')
     comments = serializers.SerializerMethodField(method_name='get_comments')
     date_created = serializers.DateTimeField(format="%b %d, %Y")
@@ -18,11 +23,18 @@ class PostPreviewSerializer(serializers.ModelSerializer):
     def get_comments(self, obj):
         return models.Comment.objects.filter(post_id=obj.id).count()
 
+    def get_content(self, obj):
+        if obj.content_type == 'image':
+            return json_loads(obj.content)
+        return obj.content
+
     class Meta:
         model = models.Post
         fields = '__all__'
 
+
 class PostSerializer(serializers.ModelSerializer):
+    content = serializers.SerializerMethodField(method_name='get_content')
     user = serializers.SerializerMethodField(method_name='get_user')
     comments = serializers.SerializerMethodField(method_name='get_comments')
     date_created = serializers.DateTimeField(format="%b %d, %Y")
@@ -33,9 +45,15 @@ class PostSerializer(serializers.ModelSerializer):
     def get_comments(self, obj):
         return CommentSerializer(models.Comment.objects.filter(post_id=obj.id), many=True).data
 
+    def get_content(self, obj):
+        if obj.content_type == 'image':
+            return json_loads(obj.content)
+        return obj.content
+
     class Meta:
         model = models.Post
         fields = '__all__'
+
 
 class CommentSerializer(serializers.ModelSerializer):
     user = serializers.SerializerMethodField(method_name='get_user')

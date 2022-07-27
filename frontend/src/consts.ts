@@ -18,6 +18,11 @@ export const ICON_LINK = '\uf0c1';
 export const ICON_CARET_DOWN = '\uf0d7';
 export const ICON_BARS = '\uf0c9';
 export const ICON_TEXT = '\uf11c';
+export const ICON_TRASH = '\uf1f8';
+
+// Back-end Urls
+export const POSTS_URL = API_URL + '/posts';
+export const CREATE_POST_URL = POSTS_URL + '/create';
 
 // Regex
 export const urlRegex =

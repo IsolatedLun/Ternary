@@ -1,4 +1,6 @@
+@use '../../abstracts/' as *;
+
 .create__image-preview {
-	width: 128px;
+	width: $create-image-preview-width;
 	aspect-ratio: 1;
 }

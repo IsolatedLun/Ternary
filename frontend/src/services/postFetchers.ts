@@ -1,10 +1,12 @@
 import axios from 'axios';
+import { constructFormData } from '../utils/generalFuncs';
 import type { Props_PostComment } from '../components/Modules/Post/types';
 import type { ErrorResponse, Props_CreatePost } from './types';
 import { handleError } from './utils';
+import { CREATE_POST_URL, POSTS_URL } from '../consts';
 
 export async function getFeed() {
-	const request = await axios.get('http://localhost:8000/posts');
+	const request = await axios.get(POSTS_URL);
 	const res = await request.data;
 
 	if (request.status === 200)
@@ -13,9 +15,8 @@ export async function getFeed() {
 }
 
 export async function getPost(id: number) {
-	const req = null;
 	try {
-		const request = await axios.get('http://localhost:8000/posts/' + id);
+		const request = await axios.get(POSTS_URL + '/' + id);
 		const res = await request.data;
 
 		return res as import('../components/Modules/Post/types').Props_Post<Props_PostComment[], any>;
@@ -25,12 +26,22 @@ export async function getPost(id: number) {
 }
 
 export async function createPost(data: Props_CreatePost) {
-	const req = null;
 	try {
-		const request = await axios.post('http://localhost:8000/posts/create', data);
-		const res = await request.data;
+		const request = await axios.post(
+			CREATE_POST_URL,
+			{
+				...data,
+				content: [...data.content]
+			},
+			{
+				headers: {
+					'content-type': 'multipart/form-data'
+				}
+			}
+		);
+		const res = (await request.data.id) as number;
 
-		location.href = '/';
+		location.href = '/threads/' + res;
 	} catch (e) {
 		throw handleError(e);
 	}

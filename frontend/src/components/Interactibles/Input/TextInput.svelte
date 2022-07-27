@@ -18,6 +18,7 @@
 
 	function handleErrors(errors: string[]) {
 		if (errors.length > 0) dispatch('error', { amount: errors.length });
+		else dispatch('error', { amount: -validators.length });
 	}
 
 	export let cubeClass: Props_CubeCSS = defCubeClass();

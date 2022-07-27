@@ -1,36 +1,37 @@
 <script lang="ts">
-	import Image from '../../../components/Modules/MediaElements/Image.svelte';
-	import MediaInput from '../../../components/Interactibles/Input/MediaInput.svelte';
-	import { imageValidator, isImageLoop } from '../../../utils/inputValidators';
+	import ImageInput from '../../../components/Interactibles/Input/ImageInput.svelte';
+	import { createEventDispatcher } from 'svelte';
+	import Button from '../../../components/Interactibles/Button.svelte';
+	import { isImageLoop } from '../../../utils/inputValidators';
 
-	let images: File[] = [];
 	function addImage(e: Event) {
 		const target = e.target as HTMLInputElement;
 
-		if (target.files && isImageLoop(target)) images = [...images, ...(<any>target.files)];
+		if (target.files && isImageLoop(target)) {
+			images = [...images, ...(<any>target.files)];
+			handleImageUploads(<any>images);
+		}
 	}
 
-	function removeImage(idx: number) {
-		images.splice(idx, 1);
+	function removeImage(e: CustomEvent) {
+		const name = e.detail.name as string;
 
-		images = [...images];
+		images = [...images.filter((file) => file.name !== name)];
+		handleImageUploads(images);
 	}
+
+	function handleImageUploads(files: File[]) {
+		dispatch('input', { images: files });
+	}
+
+	const dispatch = createEventDispatcher();
+	let inputs = 0;
+	let images: File[] = [];
 </script>
 
 <div class="[ flex flex-wrap align-items-center gap-1 ]">
-	{#each images as image, idx (image.name + idx)}
-		<button
-			on:click={() => removeImage(idx)}
-			class="[ create__image-preview ] [ card hoverable ] [ padding-1 border-radius-cubed cursor-pointer ]"
-		>
-			<Image props={{ src: URL.createObjectURL(image), alt: '' }} />
-		</button>
+	{#each { length: inputs } as _, i}
+		<ImageInput on:input={addImage} on:remove={removeImage} />
 	{/each}
-	<MediaInput
-		on:input={addImage}
-		validators={[imageValidator()]}
-		cubeClass={{ utilClass: 'margin-inline-end-auto' }}
-		type="image"
-		variant="primary"
-	/>
+	<Button variant="primary" on:click={() => inputs++}>Add image</Button>
 </div>

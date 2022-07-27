@@ -12,5 +12,8 @@ export function runValidators(
 		if (!res) _errors.push(validator.text);
 	});
 
+	if (_errors.length > 0) e.setAttribute('data-input-valid', 'false');
+	else e.setAttribute('data-input-valid', 'true');
+
 	return [..._errors];
 }

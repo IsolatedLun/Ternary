@@ -18,6 +18,8 @@ $border-radius-cubed: 9px;
 // Navbar
 $clr-navbar-background: var(--clr-background-500);
 
+$navbar-mobile-dropdown-inset: 30% 4rem auto;
+
 // Input
 $def-input-padding: 0.5em 0.75em;
 $def-input-background-color: var(--clr-background-400);
@@ -74,8 +76,16 @@ $def-profile-img-background-color: var(--clr-background-700);
 
 // Home
 $feed-grid-column-template: 65% 35%;
+$feed-gap: 2em;
+
 $posts-grid-row-auto: 300px;
 $post-media-width: 1024px;
+
+// Create
+$create-image-preview-width: 128px;
+
+// Feed
+$post-text-max-width: 90ch;
 
 // =================
 // Composition

@@ -49,7 +49,7 @@
 		{:else if props.content_type === 'link'}
 			<PostUrl content={props.content} />
 		{:else if props.content_type === 'image'}
-			<PostImages props={{ title: props.title, images: props.content.images }} />
+			<PostImages title={props.title} images={props.content} />
 		{:else if props.content_type === 'video'}
 			<Video props={{ src: props.content.video }} />
 		{/if}

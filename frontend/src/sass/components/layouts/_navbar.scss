@@ -5,7 +5,7 @@
 
 	.navbar__dropdown {
 		position: fixed;
-		inset: 30% 4rem auto;
+		inset: $navbar-mobile-dropdown-inset;
 
 		max-width: min(#{$breakpoint-small}, 100%);
 		margin: auto;

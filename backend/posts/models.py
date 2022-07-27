@@ -8,11 +8,13 @@ CONTENT_TYPE_CHOICES = [
     ('url', 'Url'),
 ]
 
+
 class Post(models.Model):
     title = models.CharField(max_length=64)
 
     content = models.TextField()
-    content_type = models.CharField(max_length=16, choices=CONTENT_TYPE_CHOICES)
+    content_type = models.CharField(
+        max_length=16, choices=CONTENT_TYPE_CHOICES)
 
     votes = models.IntegerField(default=0)
     comments = models.IntegerField(default=0)
@@ -20,6 +22,14 @@ class Post(models.Model):
     user = models.ForeignKey(cUser, on_delete=models.CASCADE)
 
     date_created = models.DateTimeField(auto_now_add=True)
+
+
+class PostImage(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='posts/%Y')
+
+    date_created = models.DateTimeField(auto_now_add=True)
+
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)

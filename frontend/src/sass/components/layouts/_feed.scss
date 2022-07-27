@@ -2,31 +2,32 @@
 
 .feed {
 	grid-template-columns: $feed-grid-column-template;
-	gap: 2em;
+	gap: $feed-gap;
 }
 
 .posts {
 	display: grid;
 	grid-auto-rows: $posts-grid-row-auto;
+}
 
-	& .post:where([data-content-type='text']) {
-		max-width: 90ch;
+.post:where([data-content-type='text']) {
+	max-width: $post-text-max-width;
+}
+
+.post:where([data-content-type='image'], [data-content-type='video']) {
+	aspect-ratio: 16 / 9;
+
+	.post__content {
+		aspect-ratio: 16 / 9;
+		max-width: $post-media-width;
 	}
 
-	& .post:where([data-content-type='media']) {
-		aspect-ratio: 16 / 9;
+	.image__button:nth-of-type(1) {
+		@include transformCenter($top: 50%, $left: 3%);
+		color: white;
+	}
 
-		.post__content {
-			aspect-ratio: 16 / 9;
-			max-width: $post-media-width;
-		}
-
-		.image__button:nth-of-type(1) {
-			@include transformCenter($top: 50%, $left: 3%);
-		}
-
-		.image__button:nth-of-type(2) {
-			@include transformCenter($top: 50%, $left: 97%);
-		}
+	.image__button:nth-of-type(2) {
+		@include transformCenter($top: 50%, $left: 97%);
 	}
 }
