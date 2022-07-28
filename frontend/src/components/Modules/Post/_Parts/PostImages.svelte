@@ -20,7 +20,7 @@
 		<Icon>{ICON_ARROW_LEFT}</Icon>
 	</Button>
 
-	<div>
+	<div class="[ grid place-items-center ]">
 		<Image props={{ src: API_URL + images[idx], alt: `${title} image ${idx}` }} />
 	</div>
 

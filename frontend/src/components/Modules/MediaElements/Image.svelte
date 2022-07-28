@@ -26,7 +26,8 @@
 	export let useRandFilter = false;
 
 	const _class = createCubeCSSClass(cubeClass, {});
-	let _this: HTMLElement;
+	let _this: HTMLImageElement;
+	let isTooSmall = false;
 </script>
 
 <img
@@ -36,4 +37,5 @@
 	src={props.src}
 	alt={props.alt}
 	data-media-error="false"
+	data-small={false}
 />

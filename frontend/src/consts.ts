@@ -23,6 +23,7 @@ export const ICON_TRASH = '\uf1f8';
 // Back-end Urls
 export const POSTS_URL = API_URL + '/posts';
 export const CREATE_POST_URL = POSTS_URL + '/create';
+export const COMMENT_ON_POST_URL = (id: number) => POSTS_URL + `/${id}` + '/comment';
 
 // Regex
 export const urlRegex =

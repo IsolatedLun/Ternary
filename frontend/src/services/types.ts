@@ -13,3 +13,8 @@ export interface Props_CreatePost {
 	content: any;
 	content_type: string;
 }
+
+export interface Props_PostCommentData {
+	text: string;
+	postId: number;
+}

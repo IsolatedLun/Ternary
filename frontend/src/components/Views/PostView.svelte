@@ -1,28 +1,38 @@
 <script lang="ts">
 	import FlexyCenter from '../Divs/FlexyCenter.svelte';
-	import { getPost } from '../../services/postFetchers';
+	import { commentOnPost, getPost } from '../../services/postFetchers';
 	import Card from '../Modules/Card/Card.svelte';
 	import FetchyError from '../Modules/FetchyError/FetchyError.svelte';
 	import Post from '../Modules/Post/Post.svelte';
 	import PostComment from '../Modules/Post/_Parts/PostComment.svelte';
 	import Button from '../Interactibles/Button.svelte';
 	import TextArea from '../Interactibles/Input/TextArea.svelte';
+	import type { Props_Post, Props_PostComment } from '../Modules/Post/types';
+
+	async function postPromise() {
+		post = await getPost(id);
+	}
+
+	async function handleAddComment() {
+		if (newComment.length > 0)
+			commentOnPost({ text: newComment, postId: id }).then((data) => {
+				post.comments = [...post.comments, data];
+			});
+	}
 
 	export let id: number = -1;
-
-	const postPromise = getPost(id);
+	let post: Props_Post<Props_PostComment[], any>;
+	let newComment = '';
 </script>
 
 <div class="[ post-view ] [ feed ] [ grid ]" data-grid-collapse>
-	{#await postPromise}
-		<h1>LOADING</h1>
-	{:then post}
+	{#await postPromise() then _}
 		<section class="[ width-100 ]">
 			<Post props={{ ...post }} isInThread={true} />
 
 			<FlexyCenter cubeClass={{ utilClass: 'margin-block-start-3' }}>
-				<TextArea placeholder="Add comment" />
-				<Button variant="primary">Comment</Button>
+				<TextArea placeholder="Add comment" bind:value={newComment} />
+				<Button variant="primary" on:click={handleAddComment}>Comment</Button>
 			</FlexyCenter>
 
 			<Card

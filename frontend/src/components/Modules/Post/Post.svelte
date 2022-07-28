@@ -1,7 +1,5 @@
 <script lang="ts">
-	import { ICON_LINK } from '../../../consts';
 	import FlexyCenter from '../../../components/Divs/FlexyCenter.svelte';
-	import Icon from '../Icon/Icon.svelte';
 	import Video from '../MediaElements/Video.svelte';
 	import PostImages from './_Parts/PostImages.svelte';
 	import LinkButton from '../../../components/Interactibles/LinkButton.svelte';

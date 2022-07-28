@@ -80,10 +80,18 @@ video {
 	display: block;
 	width: 100%;
 	height: 100%;
-	background-color: $def-profile-img-background-color;
 
 	object-fit: cover;
 	border-radius: inherit;
+}
+
+img[data-small='true'] {
+	width: auto;
+	object-fit: contain;
+}
+
+img[src=''] {
+	background-color: $def-profile-img-background-color;
 }
 
 :focus {

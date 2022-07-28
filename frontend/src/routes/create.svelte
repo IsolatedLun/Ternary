@@ -1,10 +1,5 @@
 <script lang="ts">
-	import {
-		minLenValidator,
-		urlValidator,
-		validInputs,
-		videoValidator
-	} from '../utils/inputValidators';
+	import { minLenValidator, urlValidator, validInputs } from '../utils/inputValidators';
 	import Button from '../components/Interactibles/Button.svelte';
 	import TextArea from '../components/Interactibles/Input/TextArea.svelte';
 	import TextInput from '../components/Interactibles/Input/TextInput.svelte';

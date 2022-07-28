@@ -41,3 +41,12 @@ class CreatePostView(APIView):
 
         post.save()
         return Response(data={'id': post.id}, status=200)
+
+
+class CommentOnPostView(APIView):
+    def post(self, req, post_id):
+        text = req.POST['text']
+        comment = models.Comment.objects.create(
+            text=text, post_id=post_id, user_id=1)
+
+        return Response(data=serializers.CommentSerializer(comment).data, status=200)
