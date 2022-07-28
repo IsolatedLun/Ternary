@@ -8,6 +8,7 @@
 	export let ariaLabel = 'button';
 	export let self: HTMLElement | null = null;
 	export let submit = false;
+	export let workCondition = true;
 
 	const _class = createCubeCSSClass(cubeClass, {
 		compostClass: 'button',
@@ -21,6 +22,7 @@
 	class={_class}
 	data-variant={variant}
 	data-secondary-variant={secondaryVariant}
+	data-work-condition={workCondition}
 	type={submit ? 'submit' : 'button'}
 	aria-label={ariaLabel}
 >

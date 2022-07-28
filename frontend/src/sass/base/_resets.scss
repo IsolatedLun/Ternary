@@ -119,3 +119,12 @@ img[src=''] {
 [data-hide] {
 	display: none !important;
 }
+
+[data-work-condition='false'] {
+	opacity: 0.75;
+	pointer-events: none;
+}
+
+:where(.flow > * + *) {
+	margin-block-start: $flow-spacing;
+}

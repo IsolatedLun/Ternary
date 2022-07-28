@@ -17,6 +17,8 @@
 		if (newComment.length > 0)
 			commentOnPost({ text: newComment, postId: id }).then((data) => {
 				post.comments = [...post.comments, data];
+
+				newComment = '';
 			});
 	}
 
@@ -32,7 +34,9 @@
 
 			<FlexyCenter cubeClass={{ utilClass: 'margin-block-start-3' }}>
 				<TextArea placeholder="Add comment" bind:value={newComment} />
-				<Button variant="primary" on:click={handleAddComment}>Comment</Button>
+				<Button workCondition={newComment.length > 0} variant="primary" on:click={handleAddComment}
+					>Comment</Button
+				>
 			</FlexyCenter>
 
 			<Card

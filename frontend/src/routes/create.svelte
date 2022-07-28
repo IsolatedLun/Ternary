@@ -12,6 +12,7 @@
 	import Select from '../components/Modules/Dropdown/Select.svelte';
 	import CreateImages from '../components/Layouts/Create/CreateImages.svelte';
 	import VideoInput from '../components/Interactibles/Input/VideoInput.svelte';
+	import { POST_CREATION_RULES } from '../consts';
 
 	function handleCreatePost() {
 		let to_send = data;
@@ -57,7 +58,7 @@
 				bind:value={data.title}
 				placeholder="Enter title"
 				label="Title"
-				validators={[minLenValidator(7)]}
+				validators={[minLenValidator(1)]}
 			/>
 
 			{#if type === 'text'}
@@ -65,7 +66,7 @@
 					bind:value={data.content}
 					placeholder="Enter Text"
 					label="Description"
-					validators={[minLenValidator(2)]}
+					validators={[minLenValidator(1)]}
 				/>
 			{:else if type === 'media'}
 				<Select
@@ -97,7 +98,16 @@
 
 	<Miscellaneuos>
 		<Card cubeClass={{ utilClass: 'padding-inline-3 padding-block-1' }} variant="difference">
-			<p class="[ under-border ]">How to make a post</p>
+			<p class="[ under-border ] [ fs-500 ]">How to make a post</p>
+
+			<ul role="list" class="[ margin-block-start-1 ] [ flow ]">
+				{#each POST_CREATION_RULES as info, i}
+					<li class="[ card ] [ padding-1 ]" data-variant="dark">
+						<span class="[ fw-bold fs-400 ]">{i + 1}.</span>
+						{info}
+					</li>
+				{/each}
+			</ul>
 		</Card>
 	</Miscellaneuos>
 </section>
