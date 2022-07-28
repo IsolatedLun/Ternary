@@ -11,25 +11,32 @@
 	import { createPost } from '../services/postFetchers';
 	import Select from '../components/Modules/Dropdown/Select.svelte';
 	import CreateImages from '../components/Layouts/Create/CreateImages.svelte';
+	import VideoInput from '../components/Interactibles/Input/VideoInput.svelte';
 
 	function handleCreatePost() {
 		let to_send = data;
 
 		if (type === 'media' && mediaType === 'image') {
-			to_send = { ...data, content_type: 'image' };
+			to_send = { ...data, content: [...data.content], content_type: 'image' };
+		} else if (type === 'media' && mediaType === 'video') {
+			to_send = { ...data, content_type: 'video' };
+		} else if (type === 'link') {
+			to_send = { ...data, content_type: 'link' };
+		} else {
+			to_send = { ...data, content_type: 'text' };
 		}
 
 		createPost(to_send);
 	}
 
 	function handleForm(e: SubmitEvent) {
-		if (validInputs(_thisForm)) handleCreatePost();
+		if (validInputs(_thisForm) && data.content) handleCreatePost();
 	}
 
 	let type = $page.url.searchParams.get('type') ? $page.url.searchParams.get('type') : 'text';
 	let data: Props_CreatePost = {
 		title: '',
-		content: '',
+		content: null,
 		content_type: ''
 	};
 
@@ -55,7 +62,7 @@
 
 			{#if type === 'text'}
 				<TextArea
-					bind:value={data.title}
+					bind:value={data.content}
 					placeholder="Enter Text"
 					label="Description"
 					validators={[minLenValidator(2)]}
@@ -70,7 +77,7 @@
 				{#if mediaType === 'image'}
 					<CreateImages on:input={(e) => (data.content = e.detail.images)} />
 				{:else}
-					<p>// Add video input</p>
+					<VideoInput on:input={(e) => (data.content = e.detail.video)} />
 				{/if}
 			{:else}
 				<TextInput

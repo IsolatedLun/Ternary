@@ -19,6 +19,8 @@ export const ICON_CARET_DOWN = '\uf0d7';
 export const ICON_BARS = '\uf0c9';
 export const ICON_TEXT = '\uf11c';
 export const ICON_TRASH = '\uf1f8';
+export const ICON_VIDEO = '\uf03d';
+export const ICON_EDIT = '\uf044';
 
 // Back-end Urls
 export const POSTS_URL = API_URL + '/posts';

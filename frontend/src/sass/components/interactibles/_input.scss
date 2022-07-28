@@ -21,6 +21,16 @@
 	aspect-ratio: 1;
 }
 
+.input:where([data-variant='media-video']) {
+	@include createInput(
+		$background-color: var(--clr-background-300),
+		$border: 2px dashed var(--clr-background-600)
+	);
+
+	width: 100%;
+	aspect-ratio: 16 / 9;
+}
+
 .input:is([data-input-type='textarea']) {
 	@include createInput();
 

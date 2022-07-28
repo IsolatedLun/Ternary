@@ -29,8 +29,7 @@ export async function createPost(data: Props_CreatePost) {
 		const request = await axios.post(
 			CREATE_POST_URL,
 			{
-				...data,
-				content: [...data.content]
+				...data
 			},
 			{
 				headers: {

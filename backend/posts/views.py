@@ -39,6 +39,16 @@ class CreatePostView(APIView):
                     post_id=post.id, image=file).image.url)
             post.content = json_dumps(image_urls)
 
+        elif post_data['content_type'] == 'video':
+            file = files['content']
+
+            video = models.PostVideo.objects.create(
+                post_id=post.id, video=file)
+            post.content = video.video.url
+
+        else:
+            post.content = post_data['content']
+
         post.save()
         return Response(data={'id': post.id}, status=200)
 

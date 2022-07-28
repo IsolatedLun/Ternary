@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import FileExtensionValidator
 from users.models import cUser
 
 CONTENT_TYPE_CHOICES = [
@@ -26,7 +27,16 @@ class Post(models.Model):
 
 class PostImage(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='posts/%Y')
+    image = models.ImageField(upload_to='posts/%Y',
+                              validators=[FileExtensionValidator(allowed_extensions=['png', 'jpg', 'jpeg', 'webp', 'gif'])])
+
+    date_created = models.DateTimeField(auto_now_add=True)
+
+
+class PostVideo(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    video = models.FileField(upload_to='posts/%Y',
+                             validators=[FileExtensionValidator(allowed_extensions=['MOV', 'avi', 'mp4', 'webm', 'mkv'])])
 
     date_created = models.DateTimeField(auto_now_add=True)
 

@@ -6,6 +6,7 @@
 	import UserRepr from '../User/UserRepr.svelte';
 	import StatController from '../StatController/StatController.svelte';
 	import PostUrl from './_Parts/PostUrl.svelte';
+	import { API_URL } from '../../../consts';
 
 	export let props: import('./types').Props_Post<any, any> = {
 		user: {
@@ -49,7 +50,7 @@
 		{:else if props.content_type === 'image'}
 			<PostImages title={props.title} images={props.content} />
 		{:else if props.content_type === 'video'}
-			<Video props={{ src: props.content.video }} />
+			<Video props={{ src: API_URL + props.content }} />
 		{/if}
 	</article>
 	<footer

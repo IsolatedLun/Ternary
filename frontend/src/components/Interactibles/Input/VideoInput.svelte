@@ -1,12 +1,13 @@
 <script lang="ts">
-	import Image from '../../../components/Modules/MediaElements/Image.svelte';
 	import Icon from '../../../components/Modules/Icon/Icon.svelte';
-	import { ICON_IMAGE, ICON_TRASH } from '../../../consts';
+	import { ICON_EDIT, ICON_VIDEO } from '../../../consts';
 	import type { Props_CubeCSS } from '../../../types';
 	import { createCubeCSSClass, defCubeClass } from '../../../utils/componentFuncs';
 	import { rand } from '../../../utils/generalFuncs';
 	import Button from '../Button.svelte';
 	import { createEventDispatcher, onMount } from 'svelte';
+	import Video from '../../../components/Modules/MediaElements/Video.svelte';
+	import { isVideo } from '../../../utils/inputValidators';
 
 	onMount(() => {
 		_thisInput.addEventListener('input', handleInput);
@@ -15,7 +16,12 @@
 	function handleInput(e: Event) {
 		const target = e.currentTarget as HTMLInputElement;
 
-		if (target.files) previewUrl = URL.createObjectURL(target.files[0]);
+		if (target.files && isVideo(target.files[0])) {
+			previewUrl = URL.createObjectURL(target.files[0]);
+			dispatch('input', { video: target.files[0] });
+		} else {
+			previewUrl = '';
+		}
 	}
 
 	function handleDestroy() {
@@ -27,31 +33,42 @@
 	export let cubeClass: Props_CubeCSS = defCubeClass();
 
 	const _class = createCubeCSSClass(cubeClass, {
-		blockClass: 'create__image-preview',
 		compostClass: 'input',
 		utilClass: 'cursor-pointer grid place-items-center text-muted padding-1 pos-relative'
 	});
 	const dispatch = createEventDispatcher();
 
 	let errors: string[] = [];
-	let id = 'image-input-' + rand(1000);
+	let id = 'video-input-' + rand(1000);
 	let previewUrl: string = '';
 	let _this: HTMLElement;
 	let _thisInput: HTMLInputElement;
 </script>
 
 <div class="input-container" bind:this={_this}>
-	<div class="[ flex gap-1 align-items-starts ]">
-		<label for={id} class={_class} data-variant="media-image">
+	<div class="[ flex gap-1 align-items-start ]">
+		<label for={id} class={_class} data-variant="media-video">
 			{#if previewUrl.length === 0}
-				<Icon cubeClass={{ utilClass: 'pos-absolute' }}>{ICON_IMAGE}</Icon>
+				<Icon cubeClass={{ utilClass: 'pos-absolute' }}>{ICON_VIDEO}</Icon>
+			{:else}
+				<Video props={{ src: previewUrl }} />
 			{/if}
-			<Image props={{ src: previewUrl, alt: '' }} />
 		</label>
-		<Button variant="icon-block" secondaryVariant="downvote" on:click={handleDestroy}>
-			<Icon>{ICON_TRASH}</Icon>
-		</Button>
+
+		{#if previewUrl.length > 0}
+			<Button on:click={() => _thisInput.click()} variant="icon-block" secondaryVariant="upvote"
+				><Icon>{ICON_EDIT}</Icon></Button
+			>
+		{/if}
 	</div>
 
-	<input {id} type="file" accept="image/*" data-hide="true" bind:this={_thisInput} on:input />
+	<input
+		{id}
+		type="file"
+		accept="video/*"
+		data-hide="true"
+		data-input-valid={true}
+		bind:this={_thisInput}
+		on:input={handleInput}
+	/>
 </div>
