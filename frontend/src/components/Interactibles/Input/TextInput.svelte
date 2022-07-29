@@ -57,6 +57,7 @@
 		}}
 		on:click
 		bind:this={_this}
+		bind:value
 		class={_class}
 		data-variant={variant}
 		data-secondary-variant={secondaryVariant}

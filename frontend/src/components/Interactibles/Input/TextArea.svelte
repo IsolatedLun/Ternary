@@ -50,6 +50,7 @@
 	{/if}
 	<textarea
 		on:input={() => (value = _this.value)}
+		bind:value
 		bind:this={_this}
 		class={_class}
 		data-variant={variant}

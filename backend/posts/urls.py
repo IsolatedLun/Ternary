@@ -8,5 +8,8 @@ urlpatterns = [
     path('<int:post_id>/comment',
          views.CommentOnPostView.as_view(), name='comment-on-post'),
 
-    path('create', views.CreatePostView.as_view(), name='create-post')
+    path('<int:post_id>/vote',
+         views.VotePostView.as_view(), name='vote-post'),
+
+    path('create', views.CreatePostView.as_view(), name='create-post'),
 ]

@@ -26,6 +26,7 @@ export const ICON_EDIT = '\uf044';
 export const POSTS_URL = API_URL + '/posts';
 export const CREATE_POST_URL = POSTS_URL + '/create';
 export const COMMENT_ON_POST_URL = (id: number) => POSTS_URL + `/${id}` + '/comment';
+export const VOTE_POST_URL = (id: number) => POSTS_URL + `/${id}` + '/vote';
 
 // Regex
 export const urlRegex =

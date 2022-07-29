@@ -18,3 +18,8 @@ export interface Props_PostCommentData {
 	text: string;
 	postId: number;
 }
+
+export interface Props_VotePostData {
+	votes: number;
+	postId: number;
+}

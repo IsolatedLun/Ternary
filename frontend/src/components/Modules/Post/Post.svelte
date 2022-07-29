@@ -7,24 +7,14 @@
 	import StatController from '../StatController/StatController.svelte';
 	import PostUrl from './_Parts/PostUrl.svelte';
 	import { API_URL } from '../../../consts';
+	import { createTestPost } from './_funcs';
+	import { votePost } from '../../../services/postFetchers';
 
-	export let props: import('./types').Props_Post<any, any> = {
-		user: {
-			id: 0,
-			honor: 0,
-			username: '',
-			profile: '',
-			date_created: ''
-		},
-
-		id: 0,
-		votes: 0,
-		comments: 0,
-		title: '',
-		content: { text: '' },
-		content_type: 'text',
-		date_created: 'Recently'
-	};
+	export let props: import('./types').Props_Post<any, any> = createTestPost(
+		'Wow, so boring',
+		0,
+		'text'
+	);
 
 	export let isInThread = false;
 </script>
@@ -64,6 +54,9 @@
 			{/if}
 		</FlexyCenter>
 
-		<StatController props={{ votes: props.votes, comments: props.comments, action: 'neutral' }} />
+		<StatController
+			on:vote={(e) => votePost({ votes: e.detail.votes, postId: props.id })}
+			props={{ votes: props.votes, comments: props.comments, action: 'neutral' }}
+		/>
 	</footer>
 </div>

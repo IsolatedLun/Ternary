@@ -22,7 +22,8 @@ export function lenArrOrNum(x: any[] | number): number {
 
 export function createTestPost<CommentT, ContentT>(
 	content: ContentT,
-	comments: CommentT
+	comments: CommentT,
+	contentType: string = 'any'
 ): Props_Post<CommentT, ContentT> {
 	return {
 		user: {
@@ -38,7 +39,7 @@ export function createTestPost<CommentT, ContentT>(
 		comments: comments,
 		votes: 0,
 		content: content,
-		content_type: 'any',
+		content_type: contentType as any,
 		date_created: ''
 	};
 }

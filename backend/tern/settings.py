@@ -35,7 +35,8 @@ INSTALLED_APPS = [
     'corsheaders',
 
     'users',
-    'posts'
+    'posts',
+    'communities'
 ]
 
 # Custom changes

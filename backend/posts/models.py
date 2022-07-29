@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import FileExtensionValidator
+from communities.models import Community
 from users.models import cUser
 
 CONTENT_TYPE_CHOICES = [
@@ -21,6 +22,8 @@ class Post(models.Model):
     comments = models.IntegerField(default=0)
 
     user = models.ForeignKey(cUser, on_delete=models.CASCADE)
+    community = models.ForeignKey(
+        Community, on_delete=models.CASCADE, null=True, blank=True)
 
     date_created = models.DateTimeField(auto_now_add=True)
 

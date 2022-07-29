@@ -14,18 +14,22 @@
 
 	function handleUpvote(currAction: string) {
 		const [votes, action] = upvote(props.votes, currAction);
-		dispatch('upvote', { votes });
 
 		props.votes = votes;
 		props.action = action;
+		handleVote(votes);
 	}
 
 	function handleDownvote(currAction: string) {
 		const [votes, action] = downvote(props.votes, currAction);
-		dispatch('downvote', { votes });
 
 		props.votes = votes;
 		props.action = action;
+		handleVote(votes);
+	}
+
+	function handleVote(votes: number) {
+		dispatch('vote', { votes });
 	}
 
 	const dispatch = createEventDispatcher();

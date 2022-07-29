@@ -6,6 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework import generics
 
 from json import dumps as json_dumps
+from responses import OK, ERR
 
 
 class PostsView(generics.ListAPIView):
@@ -21,7 +22,7 @@ class PostView(APIView):
 
             return Response(data=post, status=200)
         except:
-            return Response(data={'detail': 'Post does not exist.'}, status=404)
+            return Response(data={'detail': 'Post does not exist.'}, status=OK)
 
 
 class CreatePostView(APIView):
@@ -50,7 +51,7 @@ class CreatePostView(APIView):
             post.content = post_data['content']
 
         post.save()
-        return Response(data={'id': post.id}, status=200)
+        return Response(data={'id': post.id}, status=OK)
 
 
 class CommentOnPostView(APIView):
@@ -59,4 +60,14 @@ class CommentOnPostView(APIView):
         comment = models.Comment.objects.create(
             text=text, post_id=post_id, user_id=1)
 
-        return Response(data=serializers.CommentSerializer(comment).data, status=200)
+        return Response(data=serializers.CommentSerializer(comment).data, status=OK)
+
+
+class VotePostView(APIView):
+    def post(self, req, post_id):
+        post = models.Post.objects.get(id=post_id)
+
+        post.votes = req.data['votes']
+        post.save()
+
+        return Response(data={'detail': 'Post voted.'}, status=OK)
