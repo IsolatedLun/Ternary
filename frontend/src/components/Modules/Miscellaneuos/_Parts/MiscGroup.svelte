@@ -5,6 +5,7 @@
 	import Icon from '../../Icon/Icon.svelte';
 	import Profile from '../../Profile/Profile.svelte';
 	import type { Props_GroupInvite } from '../types';
+	import type { Props_Community } from 'src/components/Layouts/Community/types';
 
 	function handleJoin() {
 		// Add joining POST request
@@ -19,11 +20,14 @@
 		}
 	}
 
-	export let props: Props_GroupInvite = {
+	export let props: Props_Community<null, number> = {
 		id: -1,
 		members: 0,
+		posts: null,
 		name: '',
-		profile: ''
+		profile: '',
+		banner: '',
+		date_created: ''
 	};
 
 	let hasJoined = false;
@@ -32,7 +36,7 @@
 <div class="[ misc__group ] [ flex align-items-center justify-content-space-between ]">
 	<FlexyCenter cubeClass={{ utilClass: 'fs-300' }} useJustify={true} props={{ gap: 1 }}>
 		<Profile props={{ src: props.profile, alt: `${props.name} group profile` }} />
-		<a href={`/groups/${props.id}`}>g/{props.name}</a>
+		<a href={`/communities/${props.id}/${props.name}`}>g/{props.name}</a>
 	</FlexyCenter>
 	<FlexyCenter>
 		<p class="[ group__members ] [ fs-300 text-muted ]">{props.members} members</p>

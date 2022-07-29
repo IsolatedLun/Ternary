@@ -9,6 +9,7 @@
 	import { API_URL } from '../../../consts';
 	import { createTestPost } from './_funcs';
 	import { votePost } from '../../../services/postFetchers';
+	import FlexyCustom from '../../../components/Divs/FlexyCustom.svelte';
 
 	export let props: import('./types').Props_Post<any, any> = createTestPost(
 		'Wow, so boring',
@@ -43,12 +44,19 @@
 			<Video props={{ src: API_URL + props.content }} />
 		{/if}
 	</article>
-	<footer
-		class="[ flex gap-1 align-items-center justify-content-space-between ] [ margin-block-start-auto upper-border ]"
+
+	<FlexyCustom
+		align="center"
+		justify="space-between"
+		cubeClass={{ compostClass: 'upper-border', utilClass: 'margin-block-start-auto' }}
 	>
 		<FlexyCenter useJustify={false} props={{ gap: 1 }}>
 			{#if !isInThread}
-				<LinkButton ariaLabel="Open thread" variant="action" to={`/threads/${props.id}`}>
+				<LinkButton
+					ariaLabel="Open thread"
+					variant="action"
+					to={`/threads/${props.id}/${props.title}`}
+				>
 					View thread
 				</LinkButton>
 			{/if}
@@ -58,5 +66,5 @@
 			on:vote={(e) => votePost({ votes: e.detail.votes, postId: props.id })}
 			props={{ votes: props.votes, comments: props.comments, action: 'neutral' }}
 		/>
-	</footer>
+	</FlexyCustom>
 </div>

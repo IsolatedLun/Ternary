@@ -5,7 +5,10 @@
 	import MiscGroup from '../../../components/Modules/Miscellaneuos/_Parts/MiscGroup.svelte';
 	import Post from '../../Modules/Post/Post.svelte';
 	import HomeHeader from './_Parts/HomeHeader.svelte';
+	import { getRelevantCommunities } from '../../../services/communityFetchers';
+
 	const feedPromise = getFeed();
+	const communitiesPromise = getRelevantCommunities();
 </script>
 
 <div class="[ feed ] [ grid ]" data-grid-collapse>
@@ -25,7 +28,14 @@
 	<Miscellaneuos>
 		<Card cubeClass={{ utilClass: 'padding-1' }} variant="difference">
 			<p class="[ under-border ] [ text-center margin-block-end-1 ]">Relevant Communities</p>
-			<MiscGroup />
+
+			<div class="[ flow ]">
+				{#await communitiesPromise then communities}
+					{#each communities as community}
+						<MiscGroup props={{ ...community }} />
+					{/each}
+				{/await}
+			</div>
 		</Card>
 
 		<Card cubeClass={{ utilClass: 'padding-1' }} variant="difference">

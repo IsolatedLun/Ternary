@@ -39,7 +39,7 @@ class PostImage(models.Model):
 class PostVideo(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     video = models.FileField(upload_to='posts/%Y',
-                             validators=[FileExtensionValidator(allowed_extensions=['MOV', 'avi', 'mp4', 'webm', 'mkv'])])
+                             validators=[FileExtensionValidator(allowed_extensions=['mov', 'avi', 'mp4', 'webm', 'mkv'])])
 
     date_created = models.DateTimeField(auto_now_add=True)
 

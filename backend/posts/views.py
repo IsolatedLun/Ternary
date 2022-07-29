@@ -20,9 +20,9 @@ class PostView(APIView):
             post = serializers.PostSerializer(
                 models.Post.objects.get(id=post_id)).data
 
-            return Response(data=post, status=200)
+            return Response(data=post, status=OK)
         except:
-            return Response(data={'detail': 'Post does not exist.'}, status=OK)
+            return Response(data={'detail': 'Post does not exist.'}, status=ERR)
 
 
 class CreatePostView(APIView):

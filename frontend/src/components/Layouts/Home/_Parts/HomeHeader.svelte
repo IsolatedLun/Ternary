@@ -3,7 +3,7 @@
 	import Icon from '../../../../components/Modules/Icon/Icon.svelte';
 	import LinkButton from '../../../../components/Interactibles/LinkButton.svelte';
 	import Card from '../../../../components/Modules/Card/Card.svelte';
-	import { ICON_IMAGE, ICON_LINK } from '../../../../consts';
+	import { ICON_IMAGE, ICON_LINK, POST_SELECT_VALUES } from '../../../../consts';
 	import Select from '../../../../components/Modules/Dropdown/Select.svelte';
 </script>
 
@@ -25,7 +25,7 @@
 	</Card>
 
 	<Card
-		cubeClass={{ utilClass: 'flex align-items-center gap-1 padding-1 margin-block-start-2' }}
+		cubeClass={{ utilClass: 'flex align-items-center gap-3 padding-1 margin-block-start-2' }}
 		variant="difference"
 	>
 		<TextInput
@@ -33,6 +33,6 @@
 			placeholder="Search posts"
 			variant="primary"
 		/>
-		<Select selectText="Sort by" options={['Top', 'Controversial']} />
+		<Select selectText="Sort by" options={POST_SELECT_VALUES} />
 	</Card>
 </header>

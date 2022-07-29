@@ -1,0 +1,9 @@
+@use '../../abstracts/' as *;
+
+.community {
+	.community__banner {
+		width: 100%;
+		aspect-ratio: 16 / 9;
+		height: $community-banner-height;
+	}
+}

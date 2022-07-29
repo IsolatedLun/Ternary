@@ -1,4 +1,6 @@
 <script lang="ts">
+	import FlexyCustom from 'src/components/Divs/FlexyCustom.svelte';
+
 	import type { Props_MiscPost } from '../types';
 
 	export let props: Props_MiscPost = {
@@ -17,7 +19,7 @@
 	};
 </script>
 
-<div class="[ misc__post ] [ flex align-items-center gap-1 ]">
+<FlexyCustom align="center" cubeClass={{ blockClass: 'misc__post' }}>
 	<a
 		class="[ hoverable ] [ padding-1 flex align-items-center gap-1 border-radius-cubed ]"
 		data-hover-variant="light"
@@ -37,4 +39,4 @@
 	<p class="[ text-elliptic ] [ fs-350 ]">
 		- <a href={`/users/${props.user.id}`}>{props.user.username}</a>
 	</p>
-</div>
+</FlexyCustom>

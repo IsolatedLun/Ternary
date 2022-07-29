@@ -2,6 +2,7 @@
 	import { ICON_CARET_DOWN } from '../../../consts';
 	import { createEventDispatcher, onMount } from 'svelte';
 	import Icon from '../Icon/Icon.svelte';
+	import FlexyCustom from '../../../components/Divs/FlexyCustom.svelte';
 
 	onMount(() => {
 		_this.addEventListener('focusout', () => _thisSelect.setAttribute('data-hide', ''));
@@ -32,7 +33,7 @@
 	export let selectText: string = 'Choose';
 </script>
 
-<div class="[ flex align-items-center gap-1 ]">
+<FlexyCustom align="center">
 	<p class="[ fs-350 whitespace-nowrap text-muted ]">{selectText}:</p>
 	<button
 		class="[ select button ] [ pos-relative text-muted border-radius-100vw ]"
@@ -63,4 +64,4 @@
 			{/each}
 		</ul>
 	</button>
-</div>
+</FlexyCustom>
