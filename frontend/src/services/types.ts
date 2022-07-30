@@ -10,8 +10,11 @@ export interface ErrorResponse {
 
 export interface Props_CreatePost {
 	title: string;
-	content: any;
 	content_type: string;
+
+	communityId: number;
+
+	content: any;
 }
 
 export interface Props_PostCommentData {

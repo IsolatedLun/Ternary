@@ -15,19 +15,19 @@
 	import { POST_CREATION_RULES } from '../consts';
 
 	function handleCreatePost() {
-		let to_send = data;
+		let toSend = data;
 
 		if (type === 'media' && mediaType === 'image') {
-			to_send = { ...data, content: [...data.content], content_type: 'image' };
+			toSend = { ...data, content: [...data.content], content_type: 'image' };
 		} else if (type === 'media' && mediaType === 'video') {
-			to_send = { ...data, content_type: 'video' };
+			toSend = { ...data, content_type: 'video' };
 		} else if (type === 'link') {
-			to_send = { ...data, content_type: 'link' };
+			toSend = { ...data, content_type: 'link' };
 		} else {
-			to_send = { ...data, content_type: 'text' };
+			toSend = { ...data, content_type: 'text' };
 		}
 
-		createPost(to_send);
+		createPost({ ...toSend, communityId: Number($page.url.searchParams.get('communityId')) });
 	}
 
 	function handleForm(e: SubmitEvent) {
@@ -37,8 +37,9 @@
 	let type = $page.url.searchParams.get('type') ? $page.url.searchParams.get('type') : 'text';
 	let data: Props_CreatePost = {
 		title: '',
-		content: null,
-		content_type: ''
+		content_type: '',
+		communityId: -1,
+		content: null
 	};
 
 	let mediaType = 'image';

@@ -30,8 +30,16 @@ class CreatePostView(APIView):
         post_data = req.POST
         files = req.FILES
 
-        post = models.Post.objects.create(
-            title=post_data['title'], user_id=1, content_type=post_data['content_type'])
+        community_id = int(post_data['communityId'])
+        if(community_id > 0):
+            post = models.Post.objects.create(
+                title=post_data['title'], user_id=1,
+                content_type=post_data['content_type'],
+                community_id=community_id
+            )
+        else:
+            post = models.Post.objects.create(
+                title=post_data['title'], user_id=1, content_type=post_data['content_type'])
 
         if post_data['content_type'] == 'image':
             image_urls = []

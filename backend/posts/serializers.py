@@ -13,6 +13,7 @@ def get_user_by_id(obj):
 
 class PostPreviewSerializer(serializers.ModelSerializer):
     content = serializers.SerializerMethodField(method_name='get_content')
+    community = serializers.SerializerMethodField(method_name='get_community')
     user = serializers.SerializerMethodField(method_name='get_user')
     comments = serializers.SerializerMethodField(method_name='get_comments')
     date_created = serializers.DateTimeField(format="%b %d, %Y")
@@ -27,6 +28,13 @@ class PostPreviewSerializer(serializers.ModelSerializer):
         if obj.content_type == 'image':
             return json_loads(obj.content)
         return obj.content
+
+    def get_community(self, obj):
+        from communities.serializers import CommunityPreviewSerializer
+
+        if(obj.community):
+            return CommunityPreviewSerializer(obj.community).data
+        return 0
 
     class Meta:
         model = models.Post

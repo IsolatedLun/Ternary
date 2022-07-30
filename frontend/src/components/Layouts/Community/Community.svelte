@@ -11,6 +11,8 @@
 	import FlexyCenter from '../../../components/Divs/FlexyCenter.svelte';
 	import CardWithHeader from '../../../components/Modules/Card/CardWithHeader.svelte';
 	import Numeric from '../../../components/Modules/Numeric/Numeric.svelte';
+	import CreatePostDecor from '../../../components/Modules/CreatePostDecor/CreatePostDecor.svelte';
+	import Post from '../../../components/Modules/Post/Post.svelte';
 
 	export let id = -1;
 	let communityPromise = getCommunity(id);
@@ -42,14 +44,25 @@
 			</Card>
 		</header>
 
-		<div class="[ feed ] [ grid margin-block-start-2 ]">
-			<div>
+		<div class="[ feed ] [ grid margin-block-start-2 ]" data-grid-collapse>
+			<div class="[ flow ]">
+				<CreatePostDecor
+					communityId={community.id}
+					communityName={community.name}
+					communityProfile={community.profile}
+				/>
 				<Card variant="difference" cubeClass={{ utilClass: 'padding-1' }}>
 					<FlexyCustom align="center" justify="space-between" gap={3}>
 						<TextInput placeholder="Search posts" />
 						<Select selectText="Sort by" options={POST_SELECT_VALUES} />
 					</FlexyCustom>
 				</Card>
+
+				<div class=" [ posts ] [ flex-direction-column gap-2 ]">
+					{#each community.posts as post}
+						<Post props={{ ...post }} />
+					{/each}
+				</div>
 			</div>
 			<Miscellaneuos>
 				<CardWithHeader

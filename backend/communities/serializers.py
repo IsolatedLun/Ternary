@@ -12,6 +12,20 @@ def get_user_by_id(obj):
 
 
 class CommunitySerializer(serializers.ModelSerializer):
+    posts = serializers.SerializerMethodField(method_name='get_posts')
+
+    def get_posts(self, obj):
+        from posts.models import Post
+        from posts.serializers import PostPreviewSerializer
+
+        return PostPreviewSerializer(Post.objects.filter(community_id=obj.id), many=True).data
+
+    class Meta:
+        model = models.Community
+        fields = '__all__'
+
+
+class CommunityPreviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Community
         fields = '__all__'

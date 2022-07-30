@@ -4,8 +4,10 @@ Youtube + Reddit
 
 ## Screenshots
 
-Home
+## Home
+
 <img src='./README_FILES/home.png'>
 
-Create post
+## Create post
+
 <img src='./README_FILES/create.png'>

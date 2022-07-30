@@ -28,7 +28,11 @@
 >
 	<header class="[ under-border ]">
 		<FlexyCenter useJustify={false}>
-			<UserRepr user={props.user} />
+			<UserRepr
+				user={props.user}
+				community={props.community}
+				type={props.community ? 'community' : 'user'}
+			/>
 			<p class="[ fs-350 align-self-start text-muted ]">on {props.date_created}</p>
 		</FlexyCenter>
 		<p class="[ fs-500 ]">{props.title}</p>

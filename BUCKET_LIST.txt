@@ -1,1 +1,6 @@
-- Make posts and comments be vote-able.
+- Make posts work with communities and communities work with posts.
+- Show top members in community.
+- Create post in community.
+- Ability to join community.
+- Add loading ui.
+- AUTHENTICATION...

@@ -36,6 +36,14 @@
 	padding-block-end: 0.45em;
 }
 
+.long-bar {
+	display: inline-block;
+	width: 1.25rem;
+	height: 1px;
+	margin-bottom: 0.2em;
+	background-color: var(--clr-text-400);
+}
+
 // Fonts
 $ops: bold, bolder, light, lighter, normal, 100, 200, 300, 400, 500, 600, 700, 800, 900;
 

@@ -1,3 +1,4 @@
+import type { Props_Community } from 'src/components/Layouts/Community/types';
 import type { Props_DataModel, Props_User } from 'src/types';
 
 export interface Props_Post<CommentT, ContentT> extends Props_DataModel {
@@ -5,6 +6,7 @@ export interface Props_Post<CommentT, ContentT> extends Props_DataModel {
 
 	votes: number;
 	comments: CommentT;
+	community: Props_Community<null, number>;
 
 	title: string;
 	content: ContentT;

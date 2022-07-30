@@ -4,6 +4,7 @@
 	import Card from '../Card/Card.svelte';
 	import Icon from '../Icon/Icon.svelte';
 	import FlexyCenter from '../../../components/Divs/FlexyCenter.svelte';
+	import Button from '../../../components/Interactibles/Button.svelte';
 
 	export let err: string = 'Something went wrong.';
 </script>
@@ -18,5 +19,5 @@
 		{err}
 	</Card>
 
-	<LinkButton variant="primary">Go back</LinkButton>
+	<Button on:click={() => history.back()} variant="primary">Go back</Button>
 </FlexyCenter>
