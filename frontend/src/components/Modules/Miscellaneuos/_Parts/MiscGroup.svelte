@@ -4,8 +4,8 @@
 	import Button from '../../../../components/Interactibles/Button.svelte';
 	import Icon from '../../Icon/Icon.svelte';
 	import Profile from '../../Profile/Profile.svelte';
-	import type { Props_GroupInvite } from '../types';
 	import type { Props_Community } from 'src/components/Layouts/Community/types';
+	import Numeric from '../../Numeric/Numeric.svelte';
 
 	function handleJoin() {
 		// Add joining POST request
@@ -39,7 +39,7 @@
 		<a href={`/communities/${props.id}/${props.name}`}>g/{props.name}</a>
 	</FlexyCenter>
 	<FlexyCenter>
-		<p class="[ group__members ] [ fs-300 text-muted ]">{props.members} members</p>
+		<p class="[ group__members ] [ fs-300 text-muted ]"><Numeric num={props.members} /> members</p>
 		<Button
 			cubeClass={{ utilClass: 'flex align-items-center border-radius-100vw' }}
 			variant={hasJoined ? 'primary' : 'primary-difference'}

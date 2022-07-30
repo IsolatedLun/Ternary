@@ -2,6 +2,7 @@
 	import FlexyCustom from '../../../components/Divs/FlexyCustom.svelte';
 	import { API_URL } from '../../../consts';
 	import type { Props_User } from '../../../types';
+	import Numeric from '../Numeric/Numeric.svelte';
 	import Profile from '../Profile/Profile.svelte';
 
 	export let user: Props_User = {
@@ -21,10 +22,10 @@
 
 	<div class="[ user__info ]">
 		<FlexyCustom useColumn={true} align="center">
-			<p class="[ fs-300 margin-block-end-05 ]">
+			<p class="[ fs-300 ]">
 				<a href={`/users/${user.id}`}>u/{user.username}</a>
 			</p>
-			<p class="[ fs-300 text-muted ]">{user.honor} honor</p>
+			<p class="[ fs-300 text-muted ]"><Numeric num={user.honor} /> honor</p>
 		</FlexyCustom>
 	</div>
 </div>

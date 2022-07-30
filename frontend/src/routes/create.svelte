@@ -100,6 +100,7 @@
 		<Card cubeClass={{ utilClass: 'padding-inline-3 padding-block-1' }} variant="difference">
 			<p class="[ under-border ] [ fs-500 ]">How to make a post</p>
 
+			<!-- svelte-ignore a11y-no-redundant-roles -->
 			<ul role="list" class="[ margin-block-start-1 ] [ flow ]">
 				{#each POST_CREATION_RULES as info, i}
 					<li class="[ card ] [ padding-1 ]" data-variant="dark">

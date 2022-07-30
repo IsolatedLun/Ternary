@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Miscellaneuos from '../../Modules/Miscellaneuos/Miscellaneuos.svelte';
 	import { getFeed } from '../../../services/postFetchers';
-	import Card from '../../Modules/Card/Card.svelte';
+	import CardWithHeader from '../../Modules/Card/CardWithHeader.svelte';
 	import MiscGroup from '../../../components/Modules/Miscellaneuos/_Parts/MiscGroup.svelte';
 	import Post from '../../Modules/Post/Post.svelte';
 	import HomeHeader from './_Parts/HomeHeader.svelte';
@@ -26,9 +26,11 @@
 	</div>
 
 	<Miscellaneuos>
-		<Card cubeClass={{ utilClass: 'padding-1' }} variant="difference">
-			<p class="[ under-border ] [ text-center margin-block-end-1 ]">Relevant Communities</p>
-
+		<CardWithHeader
+			title="Relevant Communities"
+			cubeClass={{ utilClass: 'padding-1' }}
+			variant="difference"
+		>
 			<div class="[ flow ]">
 				{#await communitiesPromise then communities}
 					{#each communities as community}
@@ -36,10 +38,12 @@
 					{/each}
 				{/await}
 			</div>
-		</Card>
+		</CardWithHeader>
 
-		<Card cubeClass={{ utilClass: 'padding-1' }} variant="difference">
-			<p class="[ under-border ] [ text-center margin-block-end-1 ]">Related Posts</p>
-		</Card>
+		<CardWithHeader
+			title="Related Posts"
+			cubeClass={{ utilClass: 'padding-1' }}
+			variant="difference"
+		/>
 	</Miscellaneuos>
 </div>

@@ -8,13 +8,16 @@
 	import TextInput from '../../../components/Interactibles/Input/TextInput.svelte';
 	import Select from '../../../components/Modules/Dropdown/Select.svelte';
 	import FlexyCustom from '../../../components/Divs/FlexyCustom.svelte';
+	import FlexyCenter from '../../../components/Divs/FlexyCenter.svelte';
+	import CardWithHeader from '../../../components/Modules/Card/CardWithHeader.svelte';
+	import Numeric from '../../../components/Modules/Numeric/Numeric.svelte';
 
 	export let id = -1;
 	let communityPromise = getCommunity(id);
 </script>
 
 {#await communityPromise then community}
-	<section class="community">
+	<section class="[ community ]">
 		<header class="[ community__header ]">
 			<div class="[ community__banner ]">
 				<Image
@@ -29,10 +32,13 @@
 					utilClass: 'padding-1 margin-block-start-1 padding-inline-3'
 				}}
 			>
-				<div class="[ flex align-items-center justify-content-space-between ]">
+				<FlexyCustom align="center" justify="space-between">
 					<h2>{community.name}</h2>
-					<Button variant="primary-difference">Join</Button>
-				</div>
+					<FlexyCenter>
+						<p class="[ text-muted fs-300 ]"><Numeric num={community.members} /> members</p>
+						<Button variant="primary-difference">Join</Button>
+					</FlexyCenter>
+				</FlexyCustom>
 			</Card>
 		</header>
 
@@ -46,7 +52,11 @@
 				</Card>
 			</div>
 			<Miscellaneuos>
-				<p>misc</p>
+				<CardWithHeader
+					title="Top members"
+					variant="difference"
+					cubeClass={{ utilClass: 'padding-1' }}
+				/>
 			</Miscellaneuos>
 		</div>
 	</section>

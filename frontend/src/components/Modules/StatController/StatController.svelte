@@ -4,6 +4,7 @@
 	import Button from '../../../components/Interactibles/Button.svelte';
 	import { ICON_COMMENTS, ICON_DOWNVOTE, ICON_UPVOTE } from '../../../consts';
 	import Icon from '../Icon/Icon.svelte';
+	import Numeric from '../Numeric/Numeric.svelte';
 	import { downvote, lenArrOrNum, upvote } from '../Post/_funcs';
 
 	export let props: import('./types').Props_StatController = {
@@ -51,7 +52,9 @@
 	</Button>
 
 	<p class={props.votes > 0 ? '[ clr-upvote-400 ]' : props.votes < 0 ? '[ clr-downvote-400 ]' : ''}>
-		{props.votes}
+		{#key props.votes}
+			<Numeric num={props.votes} />
+		{/key}
 	</p>
 
 	<Button
