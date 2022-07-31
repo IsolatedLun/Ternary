@@ -32,15 +32,15 @@
 <div class="[ user-repr ] [ flex gap-1 margin-block-end-05 ]">
 	<Profile
 		props={{
-			src: API_URL + (community.id > 0 ? community.profile : user.profile),
-			alt: `${community.name} community profile`
+			src: API_URL + (community && community.id > 0 ? community.profile : user.profile),
+			alt: `${community ? community.name : user.username} community profile`
 		}}
 	/>
 
 	<div class="[ user__info ] [ fs-300 ]">
 		<FlexyCustom align="start" justify="center">
 			<p>
-				{#if community.id > 0}
+				{#if community && community.id > 0}
 					<a href={`/communities/${community.id}/${community.name}`}>g/{community.name}</a>
 					<span class="[ long-bar ]" />
 				{/if}

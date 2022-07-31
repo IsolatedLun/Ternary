@@ -2,12 +2,15 @@
 	import FlexyCenter from '../Divs/FlexyCenter.svelte';
 	import { commentOnPost, getPost } from '../../services/postFetchers';
 	import Card from '../Modules/Card/Card.svelte';
+	import CardWithHeader from '../Modules/Card/CardWithHeader.svelte';
 	import FetchyError from '../Modules/FetchyError/FetchyError.svelte';
 	import Post from '../Modules/Post/Post.svelte';
 	import PostComment from '../Modules/Post/_Parts/PostComment.svelte';
 	import Button from '../Interactibles/Button.svelte';
 	import TextArea from '../Interactibles/Input/TextArea.svelte';
 	import type { Props_Post, Props_PostComment } from '../Modules/Post/types';
+	import Miscellaneuos from '../Modules/Miscellaneuos/Miscellaneuos.svelte';
+	import LoadingBar from '../Modules/Bars/LoadingBar.svelte';
 
 	async function postPromise() {
 		post = await getPost(id);
@@ -28,7 +31,9 @@
 </script>
 
 <div class="[ post-view ] [ feed ] [ grid ]" data-grid-collapse>
-	{#await postPromise() then _}
+	{#await postPromise()}
+		<LoadingBar />
+	{:then _}
 		<section class="[ width-100 ]">
 			<Post props={{ ...post }} isInThread={true} />
 
@@ -57,7 +62,11 @@
 		<FetchyError {err} />
 	{/await}
 
-	<section class="[ miscellaneous ]" data-desktop>
-		<p>Misc</p>
-	</section>
+	<Miscellaneuos>
+		<CardWithHeader
+			title="Related Posts"
+			cubeClass={{ utilClass: 'padding-1' }}
+			variant="difference"
+		/>
+	</Miscellaneuos>
 </div>

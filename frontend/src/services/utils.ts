@@ -11,3 +11,7 @@ export function handleError(e: any) {
 
 	return 'Something went wrong';
 }
+
+export function propOrDef<T, D>(x: T, def: D) {
+	return x ? x : def;
+}

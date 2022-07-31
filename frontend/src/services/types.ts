@@ -26,3 +26,8 @@ export interface Props_VotePostData {
 	votes: number;
 	postId: number;
 }
+
+export interface Props_Tokens<T> {
+	refresh: T;
+	access: T;
+}

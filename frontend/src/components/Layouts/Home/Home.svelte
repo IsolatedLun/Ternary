@@ -6,6 +6,7 @@
 	import Post from '../../Modules/Post/Post.svelte';
 	import HomeHeader from './_Parts/HomeHeader.svelte';
 	import { getRelevantCommunities } from '../../../services/communityFetchers';
+	import LoadingBar from '../../../components/Modules/Bars/LoadingBar.svelte';
 
 	const feedPromise = getFeed();
 	const communitiesPromise = getRelevantCommunities();
@@ -16,7 +17,7 @@
 		<HomeHeader />
 		<section class="[ posts ] [ flex-direction-column gap-2 ] [ width-100 ]">
 			{#await feedPromise}
-				<p>LOADING</p>
+				<LoadingBar />
 			{:then feed}
 				{#each feed as post}
 					<Post props={{ ...post }} />
@@ -32,7 +33,9 @@
 			variant="difference"
 		>
 			<div class="[ flow ]">
-				{#await communitiesPromise then communities}
+				{#await communitiesPromise}
+					<LoadingBar />
+				{:then communities}
 					{#each communities as community}
 						<MiscGroup props={{ ...community }} />
 					{/each}

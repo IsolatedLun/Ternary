@@ -14,13 +14,16 @@
 	import CreatePostDecor from '../../../components/Modules/CreatePostDecor/CreatePostDecor.svelte';
 	import Post from '../../../components/Modules/Post/Post.svelte';
 	import UserRepr from '../../../components/Modules/User/UserRepr.svelte';
+	import LoadingBar from '../../../components/Modules/Bars/LoadingBar.svelte';
 
 	export let id = -1;
 	let communityPromise = getCommunity(id);
 	let topCommunityMembersPromise = getTopMembers(id);
 </script>
 
-{#await communityPromise then community}
+{#await communityPromise}
+	<LoadingBar />
+{:then community}
 	<section class="[ community ]">
 		<header class="[ community__header ]">
 			<div class="[ community__banner ]">
