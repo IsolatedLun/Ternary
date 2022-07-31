@@ -2,7 +2,7 @@
 	import Card from '../../../components/Modules/Card/Card.svelte';
 	import Button from '../../../components/Interactibles/Button.svelte';
 	import Image from '../../../components/Modules/MediaElements/Image.svelte';
-	import { getCommunity } from '../../../services/communityFetchers';
+	import { getCommunity, getTopMembers } from '../../../services/communityFetchers';
 	import { API_URL, POST_SELECT_VALUES } from '../../../consts';
 	import Miscellaneuos from '../../../components/Modules/Miscellaneuos/Miscellaneuos.svelte';
 	import TextInput from '../../../components/Interactibles/Input/TextInput.svelte';
@@ -13,9 +13,11 @@
 	import Numeric from '../../../components/Modules/Numeric/Numeric.svelte';
 	import CreatePostDecor from '../../../components/Modules/CreatePostDecor/CreatePostDecor.svelte';
 	import Post from '../../../components/Modules/Post/Post.svelte';
+	import UserRepr from '../../../components/Modules/User/UserRepr.svelte';
 
 	export let id = -1;
 	let communityPromise = getCommunity(id);
+	let topCommunityMembersPromise = getTopMembers(id);
 </script>
 
 {#await communityPromise then community}
@@ -51,9 +53,9 @@
 					communityName={community.name}
 					communityProfile={community.profile}
 				/>
-				<Card variant="difference" cubeClass={{ utilClass: 'padding-1' }}>
+				<Card variant="difference" cubeClass={{ utilClass: 'padding-1 margin-block-end-3' }}>
 					<FlexyCustom align="center" justify="space-between" gap={3}>
-						<TextInput placeholder="Search posts" />
+						<TextInput placeholder="Search posts" variant="primary" />
 						<Select selectText="Sort by" options={POST_SELECT_VALUES} />
 					</FlexyCustom>
 				</Card>
@@ -69,7 +71,15 @@
 					title="Top members"
 					variant="difference"
 					cubeClass={{ utilClass: 'padding-1' }}
-				/>
+				>
+					<div class="[ grid ] [ place-items-center gap-2 ]">
+						{#await topCommunityMembersPromise then topMembers}
+							{#each topMembers as topMember}
+								<UserRepr {...topMember} />
+							{/each}
+						{/await}
+					</div>
+				</CardWithHeader>
 			</Miscellaneuos>
 		</div>
 	</section>

@@ -21,6 +21,8 @@ export const ICON_TEXT = '\uf11c';
 export const ICON_TRASH = '\uf1f8';
 export const ICON_VIDEO = '\uf03d';
 export const ICON_EDIT = '\uf044';
+export const ICON_USER = '\uf007';
+export const ICON_SHIELD = '\uf132';
 
 // Back-end Urls
 export const POSTS_URL = API_URL + '/posts';
@@ -31,6 +33,7 @@ export const VOTE_POST_URL = (id: number) => POSTS_URL + `/${id}` + '/vote';
 export const COMMUNITIES_URL = API_URL + '/communities';
 export const RELEVANT_COMMUNITIES_URL = COMMUNITIES_URL + '/relevant';
 export const COMMUNITY_URL = (id: number) => COMMUNITIES_URL + `/${id}`;
+export const TOP_COMMUNITY_MEMBERS_URL = (id: number) => COMMUNITIES_URL + `/${id}/top/members`;
 
 // Regex
 export const urlRegex =

@@ -6,5 +6,8 @@ urlpatterns = [
          name='relevant-communities'),
 
     path('<int:community_id>', views.CommunityView.as_view(),
-         name='relevant-communities')
+         name='relevant-communities'),
+
+    path('<int:community_id>/top/members', views.TopCommunityMembersView.as_view(),
+         name='top-community-members')
 ]

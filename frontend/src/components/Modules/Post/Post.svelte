@@ -3,13 +3,13 @@
 	import Video from '../MediaElements/Video.svelte';
 	import PostImages from './_Parts/PostImages.svelte';
 	import LinkButton from '../../../components/Interactibles/LinkButton.svelte';
-	import UserRepr from '../User/UserRepr.svelte';
 	import StatController from '../StatController/StatController.svelte';
 	import PostUrl from './_Parts/PostUrl.svelte';
 	import { API_URL } from '../../../consts';
 	import { createTestPost } from './_funcs';
 	import { votePost } from '../../../services/postFetchers';
 	import FlexyCustom from '../../../components/Divs/FlexyCustom.svelte';
+	import CommunityUserRepr from '../User/CommunityUserRepr.svelte';
 
 	export let props: import('./types').Props_Post<any, any> = createTestPost(
 		'Wow, so boring',
@@ -28,11 +28,7 @@
 >
 	<header class="[ under-border ]">
 		<FlexyCenter useJustify={false}>
-			<UserRepr
-				user={props.user}
-				community={props.community}
-				type={props.community ? 'community' : 'user'}
-			/>
+			<CommunityUserRepr user={props.user} community={props.community} />
 			<p class="[ fs-350 align-self-start text-muted ]">on {props.date_created}</p>
 		</FlexyCenter>
 		<p class="[ fs-500 ]">{props.title}</p>

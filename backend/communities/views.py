@@ -14,6 +14,16 @@ class RelavantCommunitiesView(generics.ListAPIView):
     serializer_class = serializers.CommunitySerializer
 
 
+class TopCommunityMembersView(APIView):
+    def get(self, req, community_id):
+        queryset = models.CommunityMember.objects.filter(
+            community_id=community_id).order_by('user__honor')[:10]
+        serialized = serializers.CommunityMemberSerializer(
+            queryset, many=True).data
+
+        return Response(data=serialized, status=OK)
+
+
 class CommunityView(APIView):
     def get(self, req, community_id):
         try:

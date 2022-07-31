@@ -10,7 +10,10 @@
 	export let communityProfile = '';
 </script>
 
-<Card cubeClass={{ utilClass: 'flex align-items-center gap-1 padding-1' }} variant="difference">
+<Card
+	cubeClass={{ utilClass: 'flex align-items-center gap-1 padding-1 margin-block-end-2' }}
+	variant="difference"
+>
 	<a
 		href={`/create?communityId=${communityId}&communityName=${communityName}&communityProfile=${communityProfile}`}
 		class="[ width-100 ]"

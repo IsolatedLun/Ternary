@@ -29,3 +29,14 @@ class CommunityPreviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Community
         fields = '__all__'
+
+
+class CommunityMemberSerializer(serializers.ModelSerializer):
+    user = serializers.SerializerMethodField(method_name='get_user')
+
+    def get_user(self, obj):
+        return get_user_by_id(obj)
+
+    class Meta:
+        model = models.CommunityMember
+        fields = '__all__'

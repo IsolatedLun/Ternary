@@ -1,3 +1,5 @@
+import type { Props_User } from 'src/types';
+
 export interface Props_Community<PostT, MemberT> {
 	id: number;
 
@@ -10,4 +12,11 @@ export interface Props_Community<PostT, MemberT> {
 	banner: string;
 
 	date_created: string;
+}
+
+export interface Props_CommunityUser {
+	user: Props_User;
+
+	is_owner: boolean;
+	is_moderator: boolean;
 }
