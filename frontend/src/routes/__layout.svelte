@@ -2,6 +2,7 @@
 	import { authenticate } from '../services/authFetchers';
 	import { onMount } from 'svelte';
 	import Navbar from '../components/Layouts/Navbar.svelte';
+	import { userState } from '../stores/userStore/userStore';
 
 	onMount(() => {
 		authenticate();

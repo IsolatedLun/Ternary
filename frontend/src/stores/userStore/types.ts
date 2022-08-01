@@ -1,9 +1,11 @@
+import type { Props_DataModel } from 'src/types';
+
 export interface Store_UserState {
 	user: Store_User;
 	isLogged: boolean;
 }
 
-interface Store_User {
+export interface Store_User extends Props_DataModel {
 	id: number;
 	honor: number;
 

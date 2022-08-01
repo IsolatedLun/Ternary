@@ -13,7 +13,8 @@
 		honor: 0,
 		id: 0,
 		date_created: '',
-		profile: ''
+		profile: '',
+		is_staff: false
 	};
 	export let is_owner = false;
 	export let is_moderator = false;

@@ -1,7 +1,5 @@
 <script lang="ts">
-	import Profile from '../../components/Modules/Profile/Profile.svelte';
 	import FlexyCenter from '../../components/Divs/FlexyCenter.svelte';
-	import Card from '../../components/Modules/Card/Card.svelte';
 	import Icon from '../Modules/Icon/Icon.svelte';
 	import { ICON_BARS, ICON_HOME } from '../../consts';
 	import LinkButton from '../Interactibles/LinkButton.svelte';
@@ -9,6 +7,12 @@
 	import TextInput from '../Interactibles/Input/TextInput.svelte';
 	import Button from '../Interactibles/Button.svelte';
 	import { onMount } from 'svelte';
+	import type { Props_User } from '../../types';
+	import { createDefaultUser } from '../../stores/_funcs';
+	import Dropdown from '../Modules/Dropdown/Dropdown.svelte';
+	import DropdownItem from '../Modules/Dropdown/_Parts/DropdownItem.svelte';
+	import MobileDropdown from './Navbar/_Parts/MobileDropdown.svelte';
+	import NavbarUserRepr from './Navbar/_Parts/NavbarUserRepr.svelte';
 
 	onMount(() => {
 		_thisToggler.addEventListener('click', () => {
@@ -24,7 +28,13 @@
 		});
 	});
 
-	const { isLogged, user } = $userState;
+	let isLogged = false;
+	let user: Props_User = createDefaultUser();
+
+	userState.subscribe((data) => {
+		isLogged = data.isLogged;
+		user = data.user;
+	});
 
 	let _thisToggler: HTMLElement;
 	let _thisDropdown: HTMLElement;
@@ -43,15 +53,16 @@
 	<div data-desktop>
 		<FlexyCenter>
 			<LinkButton to="/" variant="icon-block"><Icon>{ICON_HOME}</Icon></LinkButton>
-
 			{#if isLogged}
-				<Card cubeClass={{ utilClass: 'flex gap-2 margin-inline-start-auto fs-300 padding-1' }}>
-					<div>
-						<p>{user.username}</p>
-						<p class="[ fs-300 clr-text-muted ]">{user.honor} honor</p>
+				<Dropdown>
+					<div slot="toggler">
+						<NavbarUserRepr {user} />
 					</div>
-					<Profile props={{ src: user.profile, alt: 'Your profile' }} />
-				</Card>
+					<svelte:fragment slot="list">
+						<DropdownItem variant="link"><a href="/" data-variant="">My profile</a></DropdownItem>
+						<DropdownItem variant="link"><a href="/" data-variant="">Log out</a></DropdownItem>
+					</svelte:fragment>
+				</Dropdown>
 			{:else}
 				<LinkButton variant="primary-difference">Login</LinkButton>
 				<LinkButton variant="primary">Sign up</LinkButton>
@@ -72,24 +83,12 @@
 		tabindex="-1"
 		bind:this={_thisDropdown}
 	>
+		<!-- svelte-ignore a11y-no-redundant-roles -->
 		<ul
 			role="list"
 			class="[ dropdown__list ] [ flex-direction-column gap-1 place-items-center text-center ]"
 		>
-			<li class="[ width-100 ]">
-				<a
-					href="/"
-					class="[ hoverable ] [ width-100 padding-block-1 padding-inline-2 fw-500 border-radius-100vw ]"
-					data-variant="">Login</a
-				>
-			</li>
-			<li class="[ width-100 ]">
-				<a
-					href="/"
-					class="[ hoverable ] [ width-100 padding-block-1 padding-inline-2 fw-500 border-radius-100vw ]"
-					data-variant="">Sign up</a
-				>
-			</li>
+			<MobileDropdown {isLogged} {user} />
 		</ul>
 	</div>
 </nav>

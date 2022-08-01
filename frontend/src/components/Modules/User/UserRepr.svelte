@@ -1,6 +1,5 @@
 <script lang="ts">
 	import FlexyCenter from '../../../components/Divs/FlexyCenter.svelte';
-	import type { Props_Community } from 'src/components/Layouts/Community/types';
 	import FlexyCustom from '../../../components/Divs/FlexyCustom.svelte';
 	import { API_URL, ICON_SHIELD, ICON_USER } from '../../../consts';
 	import type { Props_User } from '../../../types';
@@ -13,7 +12,8 @@
 		honor: 0,
 		id: 0,
 		date_created: '',
-		profile: ''
+		profile: '',
+		is_staff: false
 	};
 	export let is_owner = false;
 	export let is_moderator = false;

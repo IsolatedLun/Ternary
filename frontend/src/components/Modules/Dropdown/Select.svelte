@@ -36,7 +36,7 @@
 <FlexyCustom align="center">
 	<p class="[ fs-350 whitespace-nowrap text-muted ]">{selectText}:</p>
 	<button
-		class="[ select button ] [ pos-relative text-muted border-radius-100vw ]"
+		class="[ dropdown button ] [ pos-relative text-muted border-radius-100vw ]"
 		data-variant="select"
 		bind:this={_this}
 	>
@@ -47,7 +47,7 @@
 
 		<!-- svelte-ignore a11y-no-redundant-roles -->
 		<ul
-			class="[ select__options ] [ card ] [ pos-absolute padding-1 z-index-999 ]"
+			class="[ dropdown__items ] [ card ] [ pos-absolute padding-1 z-index-999 ]"
 			data-variant="difference"
 			data-hide=""
 			role="list"

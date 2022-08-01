@@ -1,5 +1,12 @@
-.select {
-	.select__options {
-		top: 120%;
+@use '../../abstracts/' as *;
+
+.dropdown {
+	.dropdown__items {
+		top: $dropdown-items-top;
+	}
+
+	.dropdown__item[data-variant='link'] a {
+		display: inline-block;
+		padding: $dropdown-item-padding;
 	}
 }

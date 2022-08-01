@@ -1,17 +1,25 @@
 import axios from 'axios';
+import { userState } from '../stores/userStore/userStore';
 import { AUTHENTICATE_URL } from '../consts';
-import type { Props_User } from '../types';
 import type { Props_Tokens } from './types';
 import { handleError, propOrDef } from './utils';
 
 export async function authenticate() {
-	try {
-		// Add authorization header.
-		const request = await axios.post(AUTHENTICATE_URL);
-		const res = (await request.data) as Props_User;
+	const config = {
+		headers: {
+			authorization: getAuthHeader()
+		},
+		method: 'POST'
+	};
 
-		return res;
+	try {
+		// Using fetch, since headers are not being added with axios.
+		const request = await fetch(AUTHENTICATE_URL, config);
+		const res = await request.json();
+
+		userState.set({ user: res, isLogged: true });
 	} catch (e) {
+		setTokens({ refresh: '', access: '' });
 		throw handleError(e);
 	}
 }
@@ -29,7 +37,7 @@ function setTokens(tokens: Props_Tokens<string>) {
 	localStorage.setItem('access', tokens.access);
 }
 
-function createAuthHeader() {
+function getAuthHeader() {
 	const tokens = getTokens();
 
 	return `Bearer ${tokens.access}`;

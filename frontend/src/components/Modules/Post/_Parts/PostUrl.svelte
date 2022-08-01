@@ -11,5 +11,5 @@
 	<Card cubeClass={{ utilClass: 'padding-4 width-max-content' }}>
 		<Icon>{ICON_LINK}</Icon>
 	</Card>
-	<a href={content} class="[ clr-upvote-400 ]">{content}</a>
+	<a href={content} class="[ clr-upvote-400 ]" target="_blank">{content}</a>
 </FlexyCenter>
