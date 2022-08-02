@@ -1,9 +1,10 @@
 import axios from 'axios';
 import { userState } from '../stores/userStore/userStore';
-import { AUTHENTICATE_URL } from '../consts';
+import { AUTHENTICATE_URL, LOGIN_URL } from '../consts';
 import type { Props_Tokens } from './types';
 import { handleError, propOrDef } from './utils';
 import { createDefaultUser } from '../stores/_funcs';
+import type { Props_LoginData, Props_LoginFetched } from 'src/components/Layouts/Auth/types';
 
 export async function authenticate() {
 	const config = {
@@ -24,6 +25,13 @@ export async function authenticate() {
 	}
 }
 
+export async function login(data: Props_LoginData) {
+	const request = await axios.post(LOGIN_URL, data);
+	const res = await request.data;
+
+	return res as Props_LoginFetched;
+}
+
 // Getters & Setters
 function getTokens(): Props_Tokens<string> {
 	return {
@@ -32,7 +40,7 @@ function getTokens(): Props_Tokens<string> {
 	};
 }
 
-function setTokens(tokens: Props_Tokens<string>) {
+export function setTokens(tokens: Props_Tokens<string>) {
 	localStorage.setItem('refresh', tokens.refresh);
 	localStorage.setItem('access', tokens.access);
 }

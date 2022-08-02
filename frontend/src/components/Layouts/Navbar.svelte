@@ -71,8 +71,8 @@
 					</svelte:fragment>
 				</Dropdown>
 			{:else}
-				<LinkButton variant="primary-difference">Login</LinkButton>
-				<LinkButton variant="primary">Sign up</LinkButton>
+				<LinkButton variant="primary-difference" to="/auth/login">Login</LinkButton>
+				<LinkButton variant="primary" to="/auth/signup">Sign up</LinkButton>
 			{/if}
 		</FlexyCenter>
 	</div>

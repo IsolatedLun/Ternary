@@ -35,8 +35,9 @@ export const RELEVANT_COMMUNITIES_URL = COMMUNITIES_URL + '/relevant';
 export const COMMUNITY_URL = (id: number) => COMMUNITIES_URL + `/${id}`;
 export const TOP_COMMUNITY_MEMBERS_URL = (id: number) => COMMUNITIES_URL + `/${id}/top/members`;
 
-export const AUTH_URL = '/auth';
-export const AUTHENTICATE_URL = API_URL + AUTH_URL + '/authenticate';
+export const AUTH_URL = API_URL + '/auth';
+export const AUTHENTICATE_URL =  AUTH_URL + '/authenticate';
+export const LOGIN_URL = AUTH_URL + '/token';
 
 // Regex
 export const urlRegex =

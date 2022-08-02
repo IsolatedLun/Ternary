@@ -40,9 +40,9 @@ class JWTLoginView(APIView):
     def post(self, req):
         try:
             user = models.cUser.objects.get(
-                email_address=req.POST['email_address'])
+                email_address=req.data['email_address'])
 
-            if not check_password(req.POST['password'], user.password):
+            if not check_password(req.data['password'], user.password):
                 raise Exception()
 
             refresh = RefreshToken.for_user(user)
