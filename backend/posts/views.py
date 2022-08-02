@@ -1,3 +1,4 @@
+from users.views import decode_user_id
 from . import models
 from . import serializers
 
@@ -26,20 +27,23 @@ class PostView(APIView):
 
 
 class CreatePostView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def post(self, req):
         post_data = req.POST
         files = req.FILES
+        user_id = decode_user_id(req.headers)
 
         community_id = int(post_data['communityId'])
         if(community_id > 0):
             post = models.Post.objects.create(
-                title=post_data['title'], user_id=1,
+                title=post_data['title'], user_id=user_id,
                 content_type=post_data['content_type'],
                 community_id=community_id
             )
         else:
             post = models.Post.objects.create(
-                title=post_data['title'], user_id=1, content_type=post_data['content_type'])
+                title=post_data['title'], user_id=user_id, content_type=post_data['content_type'])
 
         if post_data['content_type'] == 'image':
             image_urls = []
@@ -63,15 +67,21 @@ class CreatePostView(APIView):
 
 
 class CommentOnPostView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def post(self, req, post_id):
-        text = req.POST['text']
+        text = req.data['text']
+        user_id = decode_user_id(req.headers)
+
         comment = models.Comment.objects.create(
-            text=text, post_id=post_id, user_id=1)
+            text=text, post_id=post_id, user_id=user_id)
 
         return Response(data=serializers.CommentSerializer(comment).data, status=OK)
 
 
 class VotePostView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def post(self, req, post_id):
         post = models.Post.objects.get(id=post_id)
 

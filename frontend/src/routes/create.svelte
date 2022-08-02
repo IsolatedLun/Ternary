@@ -13,6 +13,7 @@
 	import CreateImages from '../components/Layouts/Create/CreateImages.svelte';
 	import VideoInput from '../components/Interactibles/Input/VideoInput.svelte';
 	import { POST_CREATION_RULES } from '../consts';
+	import { goto } from '$app/navigation';
 
 	function handleCreatePost() {
 		let toSend = data;
@@ -27,7 +28,11 @@
 			toSend = { ...data, content_type: 'text' };
 		}
 
-		createPost({ ...toSend, communityId: Number($page.url.searchParams.get('communityId')) });
+		createPost({ ...toSend, communityId: Number($page.url.searchParams.get('communityId')) }).then(
+			(id) => {
+				goto('/threads/' + id);
+			}
+		);
 	}
 
 	function handleForm(e: SubmitEvent) {

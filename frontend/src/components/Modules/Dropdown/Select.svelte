@@ -3,10 +3,16 @@
 	import { createEventDispatcher, onMount } from 'svelte';
 	import Icon from '../Icon/Icon.svelte';
 	import FlexyCustom from '../../../components/Divs/FlexyCustom.svelte';
+	import { isOnMobile } from '../../../utils/generalFuncs';
 
 	onMount(() => {
 		_this.addEventListener('focusout', () => _thisSelect.setAttribute('data-hide', ''));
-		_this.addEventListener('focusin', () => _thisSelect.removeAttribute('data-hide'));
+		_this.addEventListener('focusin', () => {
+			if (isOnMobile()) {
+				_thisSelect.style.transform = 'translate(-4rem)';
+			}
+			_thisSelect.removeAttribute('data-hide');
+		});
 
 		selected = options[0];
 	});

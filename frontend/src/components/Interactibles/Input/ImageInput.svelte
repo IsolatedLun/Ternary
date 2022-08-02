@@ -25,6 +25,8 @@
 	}
 
 	export let cubeClass: Props_CubeCSS = defCubeClass();
+	export let deleteable = false;
+	export let label = '';
 
 	const _class = createCubeCSSClass(cubeClass, {
 		blockClass: 'create__image-preview',
@@ -42,15 +44,22 @@
 
 <div class="input-container" bind:this={_this}>
 	<div class="[ flex gap-1 align-items-starts ]">
-		<label for={id} class={_class} data-variant="media-image">
-			{#if previewUrl.length === 0}
-				<Icon cubeClass={{ utilClass: 'pos-absolute' }}>{ICON_IMAGE}</Icon>
+		<div class="[ flow ]">
+			{#if label}
+				<p>{label}</p>
 			{/if}
-			<Image props={{ src: previewUrl, alt: '' }} />
-		</label>
-		<Button variant="icon-block" secondaryVariant="downvote" on:click={handleDestroy}>
-			<Icon>{ICON_TRASH}</Icon>
-		</Button>
+			<label for={id} class={_class} data-variant="media-image">
+				{#if previewUrl.length === 0}
+					<Icon cubeClass={{ utilClass: 'pos-absolute' }}>{ICON_IMAGE}</Icon>
+				{/if}
+				<Image props={{ src: previewUrl, alt: '' }} />
+			</label>
+		</div>
+		{#if deleteable}
+			<Button variant="icon-block" secondaryVariant="downvote" on:click={handleDestroy}>
+				<Icon>{ICON_TRASH}</Icon>
+			</Button>
+		{/if}
 	</div>
 
 	<input {id} type="file" accept="image/*" data-hide="true" bind:this={_thisInput} on:input />

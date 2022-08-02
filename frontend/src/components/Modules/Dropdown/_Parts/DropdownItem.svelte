@@ -13,7 +13,7 @@
 			compostClass: useHover ? 'hoverable' : '',
 			utilClass: `clr-text-400 fs-400 ${
 				variant === 'default' ? 'padding-block-1 padding-inline-3' : '[  ]'
-			} border-radius-cubed cursor-pointer`
+			} border-radius-cubed cursor-pointer whitespace-nowrap`
 		},
 		cubeClass
 	);

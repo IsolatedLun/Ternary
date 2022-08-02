@@ -3,6 +3,7 @@
 .dropdown {
 	.dropdown__items {
 		top: $dropdown-items-top;
+		left: $dropdown-items-left-offset;
 	}
 
 	.dropdown__item[data-variant='inline'] > * {

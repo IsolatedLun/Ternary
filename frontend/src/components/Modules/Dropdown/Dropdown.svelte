@@ -3,8 +3,7 @@
 	import FlexyCustom from '../../../components/Divs/FlexyCustom.svelte';
 
 	onMount(() => {
-		// Fix interactibles elements not firing events.
-		// _this.addEventListener('focusout', (e) => _thisSelect.setAttribute('data-hide', ''));
+		// _thisSelect.addEventListener('focusout', (e) => _thisSelect.setAttribute('data-hide', ''));
 		_this.addEventListener('focusin', () => _thisSelect.removeAttribute('data-hide'));
 	});
 
@@ -25,6 +24,7 @@
 			data-variant="difference"
 			data-hide=""
 			role="list"
+			tabindex="-1"
 			bind:this={_thisSelect}
 		>
 			<slot name="list" />

@@ -1,10 +1,14 @@
 import axios from 'axios';
 import { userState } from '../stores/userStore/userStore';
-import { AUTHENTICATE_URL, LOGIN_URL } from '../consts';
+import { AUTHENTICATE_URL, LOGIN_URL, SIGNUP_URL } from '../consts';
 import type { Props_Tokens } from './types';
 import { handleError, propOrDef } from './utils';
 import { createDefaultUser } from '../stores/_funcs';
-import type { Props_LoginData, Props_LoginFetched } from 'src/components/Layouts/Auth/types';
+import type {
+	Props_LoginData,
+	Props_LoginFetched,
+	Props_SignupData
+} from 'src/components/Layouts/Auth/types';
 
 export async function authenticate() {
 	const config = {
@@ -32,6 +36,17 @@ export async function login(data: Props_LoginData) {
 	return res as Props_LoginFetched;
 }
 
+export async function signup(data: Props_SignupData) {
+	const request = await axios.post(SIGNUP_URL, data, {
+		headers: {
+			'content-type': 'multipart/form-data'
+		}
+	});
+	const res = await request.data;
+
+	return res as Props_LoginFetched;
+}
+
 // Getters & Setters
 function getTokens(): Props_Tokens<string> {
 	return {
@@ -45,7 +60,7 @@ export function setTokens(tokens: Props_Tokens<string>) {
 	localStorage.setItem('access', tokens.access);
 }
 
-function getAuthHeader() {
+export function getAuthHeader() {
 	const tokens = getTokens();
 
 	return `Bearer ${tokens.access}`;

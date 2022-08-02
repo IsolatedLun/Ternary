@@ -16,3 +16,9 @@ export function constructFormData(obj: object): FormData | null {
 
 	return null;
 }
+
+export function isOnMobile() {
+	const screen = { x: window.screen.width, y: window.screen.height };
+
+	return screen.x < 768;
+}

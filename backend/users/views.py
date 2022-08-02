@@ -21,16 +21,22 @@ def decode_user_id(request_header):
 class RegisterView(APIView):
     def post(self, req):
         try:
-            models.cUser.objects.create(
-                email_address=req.POST['email_address'],
-                password=make_password(req.POST['password']),
-                profile=req.files['profile'],
-                username=req.POST['username']
+            profile = req.FILES.get('profile', None)
+
+            user = models.cUser.objects.create(
+                email_address=req.data['email_address'],
+                password=make_password(req.data['password']),
+                username=req.data['username']
             )
 
-            return Response(data='Created user', status=OK)
+            if profile:
+                user.profile = profile
+                user.save()
 
-        except:
+            return Response(data='User signup', status=OK)
+
+        except Exception as e:
+            print(e)
             return Response(data='Something went wrong.', status=ERR)
 
 
