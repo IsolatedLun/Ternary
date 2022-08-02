@@ -1,17 +1,21 @@
 <script lang="ts">
-	import { createCubeCSSClass } from '../../../../utils/componentFuncs';
+	import type { Props_CubeCSS } from 'src/types';
+
+	import { createCubeCSSClass, defCubeClass } from '../../../../utils/componentFuncs';
 
 	export let variant = 'default';
+	export let cubeClass: Props_CubeCSS = defCubeClass();
+	export let useHover = true;
 
 	const _class = createCubeCSSClass(
 		{
 			blockClass: 'dropdown__item',
-			compostClass: 'hoverable',
+			compostClass: useHover ? 'hoverable' : '',
 			utilClass: `clr-text-400 fs-400 ${
 				variant === 'default' ? 'padding-block-1 padding-inline-3' : '[  ]'
 			} border-radius-cubed cursor-pointer`
 		},
-		{}
+		cubeClass
 	);
 </script>
 

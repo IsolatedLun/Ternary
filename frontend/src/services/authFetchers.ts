@@ -3,6 +3,7 @@ import { userState } from '../stores/userStore/userStore';
 import { AUTHENTICATE_URL } from '../consts';
 import type { Props_Tokens } from './types';
 import { handleError, propOrDef } from './utils';
+import { createDefaultUser } from '../stores/_funcs';
 
 export async function authenticate() {
 	const config = {
@@ -12,15 +13,14 @@ export async function authenticate() {
 		method: 'POST'
 	};
 
-	try {
-		// Using fetch, since headers are not being added with axios.
-		const request = await fetch(AUTHENTICATE_URL, config);
-		const res = await request.json();
+	// Using fetch, since headers are not being added with axios.
+	const request = await fetch(AUTHENTICATE_URL, config);
+	const res = await request.json();
 
-		userState.set({ user: res, isLogged: true });
-	} catch (e) {
+	if (request.ok) userState.set({ user: res, isLogged: true });
+	else {
 		setTokens({ refresh: '', access: '' });
-		throw handleError(e);
+		userState.set({ user: createDefaultUser(), isLogged: false });
 	}
 }
 
@@ -41,4 +41,11 @@ function getAuthHeader() {
 	const tokens = getTokens();
 
 	return `Bearer ${tokens.access}`;
+}
+
+export function logout() {
+	userState.set({ user: createDefaultUser(), isLogged: false });
+	setTokens({ refresh: '', access: '' });
+
+	location.href = '/';
 }

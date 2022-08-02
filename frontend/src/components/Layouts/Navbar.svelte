@@ -13,6 +13,7 @@
 	import DropdownItem from '../Modules/Dropdown/_Parts/DropdownItem.svelte';
 	import MobileDropdown from './Navbar/_Parts/MobileDropdown.svelte';
 	import NavbarUserRepr from './Navbar/_Parts/NavbarUserRepr.svelte';
+	import { logout } from '../../services/authFetchers';
 
 	onMount(() => {
 		_thisToggler.addEventListener('click', () => {
@@ -59,8 +60,14 @@
 						<NavbarUserRepr {user} />
 					</div>
 					<svelte:fragment slot="list">
-						<DropdownItem variant="link"><a href="/" data-variant="">My profile</a></DropdownItem>
-						<DropdownItem variant="link"><a href="/" data-variant="">Log out</a></DropdownItem>
+						<DropdownItem variant="inline"><a href="/" data-variant="">My profile</a></DropdownItem>
+						<DropdownItem
+							variant="inline"
+							useHover={false}
+							cubeClass={{ utilClass: 'margin-block-start-2' }}
+						>
+							<Button on:click={logout} secondaryVariant="downvote">Log out</Button>
+						</DropdownItem>
 					</svelte:fragment>
 				</Dropdown>
 			{:else}

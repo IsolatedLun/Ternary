@@ -5,8 +5,9 @@
 		top: $dropdown-items-top;
 	}
 
-	.dropdown__item[data-variant='link'] a {
+	.dropdown__item[data-variant='inline'] > * {
 		display: inline-block;
 		padding: $dropdown-item-padding;
+		width: 100%;
 	}
 }

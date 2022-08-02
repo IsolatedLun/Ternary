@@ -1,4 +1,4 @@
-import { urlRegex } from '../consts';
+import { emailRegex, urlRegex } from '../consts';
 import type { Props_InputValidator } from './types';
 
 export function minLenValidator(n: number): Props_InputValidator {
@@ -12,6 +12,13 @@ export function urlValidator(): Props_InputValidator {
 	return {
 		validate: (e: HTMLInputElement) => urlRegex.test(e.value),
 		text: `Must be a valid url.`
+	};
+}
+
+export function emailValidator(): Props_InputValidator {
+	return {
+		validate: (e: HTMLInputElement) => emailRegex.test(e.value),
+		text: `Must be a valid email address. (eg. something@gmail.com)`
 	};
 }
 

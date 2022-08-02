@@ -18,13 +18,7 @@
 			data-variant="">My profile</a
 		>
 	</li>
-	<li class="[ width-100 ]">
-		<a
-			href="/"
-			class="[ hoverable ] [ width-100 padding-block-1 padding-inline-2 fw-500 border-radius-100vw ]"
-			data-variant="">Log out</a
-		>
-	</li>
+	<li class="[ width-100 ]" />
 {:else}
 	<li class="[ width-100 ]">
 		<a

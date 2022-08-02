@@ -21,6 +21,10 @@
 		else dispatch('error', { amount: -validators.length });
 	}
 
+	function setType(node: HTMLInputElement) {
+		node.type = type;
+	}
+
 	export let cubeClass: Props_CubeCSS = defCubeClass();
 	export let variant = 'default';
 	export let secondaryVariant = 'default';
@@ -28,6 +32,7 @@
 	export let validators: Props_InputValidator[] = [];
 	export let label = '';
 	export let value = '';
+	export let type: 'text' | 'email' | 'password' = 'text';
 	export let thenOnInput: Function | null = null;
 
 	export let useColumn = true;
@@ -58,11 +63,11 @@
 		on:click
 		bind:this={_this}
 		bind:value
+		use:setType
 		class={_class}
 		data-variant={variant}
 		data-secondary-variant={secondaryVariant}
 		{placeholder}
-		type="text"
 	/>
 
 	{#if errors.length > 0}

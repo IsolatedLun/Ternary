@@ -3,7 +3,8 @@
 	import FlexyCustom from '../../../components/Divs/FlexyCustom.svelte';
 
 	onMount(() => {
-		_this.addEventListener('focusout', () => _thisSelect.setAttribute('data-hide', ''));
+		// Fix interactibles elements not firing events.
+		// _this.addEventListener('focusout', (e) => _thisSelect.setAttribute('data-hide', ''));
 		_this.addEventListener('focusin', () => _thisSelect.removeAttribute('data-hide'));
 	});
 
