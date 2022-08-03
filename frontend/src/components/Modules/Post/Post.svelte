@@ -19,6 +19,7 @@
 	);
 
 	export let isInThread = false;
+	export let canVote = false;
 </script>
 
 <div
@@ -63,7 +64,7 @@
 			{/if}
 		</FlexyCenter>
 
-		{#if isInThread}
+		{#if isInThread && canVote}
 			<StatController
 				on:vote={(e) => votePost({ votes: e.detail.votes, postId: props.id, type: e.detail.type })}
 				props={{ votes: props.votes, comments: props.comments, action: props.vote_type }}

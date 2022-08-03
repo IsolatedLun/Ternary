@@ -1,4 +1,5 @@
-import type { ErrorResponse } from './types';
+import { getAuthHeader, getTokens } from './authFetchers';
+import type { ErrorResponse, Props_CreateHeaderOptions } from './types';
 
 export function handleError(e: any) {
 	function isErrorResponse(e: any): e is ErrorResponse {
@@ -14,4 +15,18 @@ export function handleError(e: any) {
 
 export function propOrDef<T, D>(x: T, def: D) {
 	return x ? x : def;
+}
+
+export function createHeaders(options: Props_CreateHeaderOptions) {
+	const headers: any = {};
+
+	if (options.auth && getTokens().access) {
+		headers['authorization'] = getAuthHeader();
+	}
+
+	if (options.formData) {
+		headers['content-type'] = 'multipart/form-data';
+	}
+
+	return headers;
 }

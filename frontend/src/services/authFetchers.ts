@@ -48,7 +48,7 @@ export async function signup(data: Props_SignupData) {
 }
 
 // Getters & Setters
-function getTokens(): Props_Tokens<string> {
+export function getTokens(): Props_Tokens<string> {
 	return {
 		refresh: propOrDef(localStorage.getItem('refresh')!, 'null'),
 		access: propOrDef(localStorage.getItem('access')!, 'null')

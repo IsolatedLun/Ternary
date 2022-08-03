@@ -1,7 +1,7 @@
 import axios from 'axios';
 import type { Props_PostComment } from '../components/Modules/Post/types';
 import type { Props_CreatePost, Props_PostCommentData, Props_VotePostData } from './types';
-import { handleError } from './utils';
+import { createHeaders, handleError } from './utils';
 import { COMMENT_ON_POST_URL, CREATE_POST_URL, POSTS_URL, VOTE_POST_URL } from '../consts';
 import { getAuthHeader } from './authFetchers';
 
@@ -16,11 +16,7 @@ export async function getFeed() {
 
 export async function getPost(id: number) {
 	try {
-		const request = await axios.get(POSTS_URL + '/' + id, {
-			headers: {
-				authorization: getAuthHeader()
-			}
-		});
+		const request = await axios.get(POSTS_URL + '/' + id, createHeaders({ auth: true }));
 		const res = await request.data;
 
 		return res as import('../components/Modules/Post/types').Props_Post<Props_PostComment[], any>;
@@ -36,12 +32,7 @@ export async function createPost(data: Props_CreatePost) {
 			{
 				...data
 			},
-			{
-				headers: {
-					'content-type': 'multipart/form-data',
-					authorization: getAuthHeader()
-				}
-			}
+			createHeaders({ auth: true, formData: true })
 		);
 		const res = (await request.data.id) as number;
 

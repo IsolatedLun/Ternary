@@ -32,3 +32,8 @@ export interface Props_Tokens<T> {
 	refresh: T;
 	access: T;
 }
+
+export interface Props_CreateHeaderOptions {
+	auth?: boolean | null;
+	formData?: boolean | null;
+}

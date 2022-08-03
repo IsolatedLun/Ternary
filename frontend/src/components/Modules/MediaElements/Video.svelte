@@ -32,11 +32,11 @@
 </script>
 
 <video
+	bind:this={_this}
 	class={_class}
 	type="video/mp4"
 	src={props.src}
 	controls
-	bind:this={_this}
 	data-media-error="false"
 >
 	<track kind="captions" />

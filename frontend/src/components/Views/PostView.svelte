@@ -40,7 +40,7 @@
 			<LoadingBar />
 		{:then _}
 			<section class="[ width-100 ]">
-				<Post props={{ ...post }} isInThread={true} />
+				<Post props={{ ...post }} isInThread={true} canVote={isLogged} />
 
 				<FlexyCenter cubeClass={{ utilClass: 'margin-block-start-3' }}>
 					<TextArea placeholder="Add comment" bind:value={newComment} />

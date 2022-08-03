@@ -16,7 +16,7 @@ class PostsView(generics.ListAPIView):
 
 
 class PostView(APIView):
-    permission_classes = [IsAuthenticated, AllowAny]
+    permission_classes = [AllowAny]
 
     def get(self, req, post_id):
         try:
