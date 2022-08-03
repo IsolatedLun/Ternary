@@ -7,13 +7,15 @@
 	import { userState } from '../../../stores/userStore/userStore';
 	import { goto } from '$app/navigation';
 	import type { Props_LoginData } from './types';
+	import { goBack } from '../../../stores/locationStore/_funcs';
+	import { locationState } from '../../../stores/locationStore/locationStore';
 
 	function handleLogin() {
 		login(loginData).then((data) => {
 			setTokens(data.tokens);
 			userState.set({ user: data.user, isLogged: true });
 
-			goto('/');
+			goto(goBack($locationState.history));
 		});
 	}
 

@@ -79,6 +79,11 @@
 	);
 }
 
+.button:is([data-variant='transparent']) {
+	background-color: transparent;
+	padding: 0;
+}
+
 .button:is([data-secondary-variant='join']) {
 	font-size: $button-join-font-size;
 }

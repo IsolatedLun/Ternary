@@ -11,6 +11,7 @@ export interface Props_Post<CommentT, ContentT> extends Props_DataModel {
 	title: string;
 	content: ContentT;
 	content_type: 'text' | 'video' | 'image' | 'link' | 'any';
+	vote_type: 'upvote' | 'downvote' | 'neutral';
 }
 
 export interface Props_PostComment {

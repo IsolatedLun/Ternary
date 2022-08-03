@@ -3,3 +3,8 @@ export interface Props_StatController {
 	votes: number;
 	action: string;
 }
+
+export interface Props_StatDisplay {
+	comments: number;
+	votes: number;
+}

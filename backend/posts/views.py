@@ -3,7 +3,7 @@ from . import models
 from . import serializers
 
 from rest_framework.views import APIView, Response
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework import generics
 
 from json import dumps as json_dumps
@@ -16,13 +16,23 @@ class PostsView(generics.ListAPIView):
 
 
 class PostView(APIView):
+    permission_classes = [IsAuthenticated, AllowAny]
+
     def get(self, req, post_id):
         try:
             post = serializers.PostSerializer(
                 models.Post.objects.get(id=post_id)).data
+            user_id = decode_user_id(req.headers)
+
+            if user_id:
+                post['vote_type'] = models.VotedPost.objects.get(
+                    post_id=post_id, user_id=user_id).vote_type
+            else:
+                post['vote_type'] = 'neutral'
 
             return Response(data=post, status=OK)
-        except:
+        except Exception as e:
+            print(e)
             return Response(data={'detail': 'Post does not exist.'}, status=ERR)
 
 
@@ -83,9 +93,17 @@ class VotePostView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, req, post_id):
+        print(req.data)
         post = models.Post.objects.get(id=post_id)
+        user_id = decode_user_id(req.headers)
 
         post.votes = req.data['votes']
         post.save()
 
-        return Response(data={'detail': 'Post voted.'}, status=OK)
+        voted_post, created = models.VotedPost.objects.get_or_create(
+            post_id=post.id, user_id=user_id)
+
+        voted_post.vote_type = req.data['type']
+        voted_post.save()
+
+        return Response(data={'detail': 'Voted'}, status=OK)

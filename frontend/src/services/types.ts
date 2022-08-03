@@ -25,6 +25,7 @@ export interface Props_PostCommentData {
 export interface Props_VotePostData {
 	votes: number;
 	postId: number;
+	type: string;
 }
 
 export interface Props_Tokens<T> {

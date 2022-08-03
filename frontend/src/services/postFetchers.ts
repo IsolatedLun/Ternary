@@ -16,7 +16,11 @@ export async function getFeed() {
 
 export async function getPost(id: number) {
 	try {
-		const request = await axios.get(POSTS_URL + '/' + id);
+		const request = await axios.get(POSTS_URL + '/' + id, {
+			headers: {
+				authorization: getAuthHeader()
+			}
+		});
 		const res = await request.data;
 
 		return res as import('../components/Modules/Post/types').Props_Post<Props_PostComment[], any>;
@@ -63,7 +67,11 @@ export async function commentOnPost(data: Props_PostCommentData) {
 
 export async function votePost(data: Props_VotePostData) {
 	try {
-		const request = await axios.post(VOTE_POST_URL(data.postId), data);
+		const request = await axios.post(VOTE_POST_URL(data.postId), data, {
+			headers: {
+				authorization: getAuthHeader()
+			}
+		});
 
 		return (await request.data) as Props_PostComment;
 	} catch (e) {

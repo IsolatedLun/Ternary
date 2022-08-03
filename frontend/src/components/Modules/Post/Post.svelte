@@ -10,6 +10,7 @@
 	import { votePost } from '../../../services/postFetchers';
 	import FlexyCustom from '../../../components/Divs/FlexyCustom.svelte';
 	import CommunityUserRepr from '../User/CommunityUserRepr.svelte';
+	import StatDisplay from '../StatController/StatDisplay.svelte';
 
 	export let props: import('./types').Props_Post<any, any> = createTestPost(
 		'Wow, so boring',
@@ -62,9 +63,13 @@
 			{/if}
 		</FlexyCenter>
 
-		<StatController
-			on:vote={(e) => votePost({ votes: e.detail.votes, postId: props.id })}
-			props={{ votes: props.votes, comments: props.comments, action: 'neutral' }}
-		/>
+		{#if isInThread}
+			<StatController
+				on:vote={(e) => votePost({ votes: e.detail.votes, postId: props.id, type: e.detail.type })}
+				props={{ votes: props.votes, comments: props.comments, action: props.vote_type }}
+			/>
+		{:else}
+			<StatDisplay props={{ votes: props.votes, comments: props.comments }} />
+		{/if}
 	</FlexyCustom>
 </div>

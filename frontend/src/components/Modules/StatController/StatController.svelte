@@ -30,7 +30,7 @@
 	}
 
 	function handleVote(votes: number) {
-		dispatch('vote', { votes });
+		dispatch('vote', { votes, type: props.action });
 	}
 
 	const dispatch = createEventDispatcher();
@@ -38,7 +38,7 @@
 
 <FlexyCenter useJustify={false} props={{ gap: 1 }} cubeClass={{ utilClass: 'justify-content-end' }}>
 	<FlexyCenter props={{ gap: 1 }} cubeClass={{ utilClass: 'margin-inline-end-1' }}>
-		<Icon cubeClass={{ utilClass: 'text-muted' }}>{ICON_COMMENTS}</Icon>
+		<Icon cubeClass={{ utilClass: 'text-muted' }} ariaLabel="Comments">{ICON_COMMENTS}</Icon>
 		<p>{lenArrOrNum(props.comments)}</p>
 	</FlexyCenter>
 
@@ -48,7 +48,7 @@
 		variant="action"
 		secondaryVariant={props.action === 'upvote' ? 'upvote' : 'default'}
 	>
-		<Icon>{ICON_UPVOTE}</Icon>
+		<Icon ariaLabel="Upvote">{ICON_UPVOTE}</Icon>
 	</Button>
 
 	<p class={props.votes > 0 ? '[ clr-upvote-400 ]' : props.votes < 0 ? '[ clr-downvote-400 ]' : ''}>
@@ -63,6 +63,6 @@
 		variant="action"
 		secondaryVariant={props.action === 'downvote' ? 'downvote' : 'default'}
 	>
-		<Icon>{ICON_DOWNVOTE}</Icon>
+		<Icon ariaLabel="Downvote">{ICON_DOWNVOTE}</Icon>
 	</Button>
 </FlexyCenter>

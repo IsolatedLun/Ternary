@@ -10,7 +10,6 @@ from django.conf import settings
 
 
 def decode_user_id(request_header):
-    print(request_header)
     try:
         token = request_header['Authorization'].split(' ')[1]
         return decode(jwt=str(token), key=settings.SECRET_KEY, algorithms=['HS256'])['user_id']
@@ -36,7 +35,6 @@ class RegisterView(APIView):
             return Response(data='User signup', status=OK)
 
         except Exception as e:
-            print(e)
             return Response(data='Something went wrong.', status=ERR)
 
 
@@ -61,7 +59,6 @@ class JWTLoginView(APIView):
                 'user': serializers.cUserSerializer(user).data
             }, OK)
         except Exception as e:
-            print(e)
             return Response({'detail': 'Invalid email or password.'}, ERR)
 
 
@@ -69,7 +66,6 @@ class JWTAuthenticateView(APIView):
     permission_classes = [AllowAny]
 
     def post(self, req):
-        print(req)
         user = serializers.cUserSerializer(
             models.cUser.objects.get(id=decode_user_id(req.headers))).data
 

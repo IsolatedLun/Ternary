@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import FileExtensionValidator
+from django.contrib.contenttypes.fields import GenericForeignKey
 from communities.models import Community
 from users.models import cUser
 
@@ -53,3 +54,20 @@ class Comment(models.Model):
     votes = models.IntegerField(default=0)
 
     date_created = models.DateTimeField(auto_now_add=True)
+
+
+# =================
+# Voted Models
+# =================
+VOTE_TYPE_CHOICES = [
+    ('upvote', 'upvote'),
+    ('downvote', 'downvote'),
+    ('neutral', 'neutral'),
+]
+
+
+class VotedPost(models.Model):
+    user = models.ForeignKey(cUser, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    vote_type = models.CharField(
+        max_length=16, choices=VOTE_TYPE_CHOICES)
