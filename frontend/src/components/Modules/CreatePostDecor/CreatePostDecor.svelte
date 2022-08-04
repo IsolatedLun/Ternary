@@ -15,6 +15,7 @@
 	variant="difference"
 >
 	<a
+		data-variant="default"
 		href={`/create?communityId=${communityId}&communityName=${communityName}&communityProfile=${communityProfile}`}
 		class="[ width-100 ]"
 	>

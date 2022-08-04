@@ -16,7 +16,10 @@ export async function getFeed() {
 
 export async function getPost(id: number) {
 	try {
-		const request = await axios.get(POSTS_URL + '/' + id, createHeaders({ auth: true }));
+		console.log(createHeaders({ auth: true }));
+		const request = await axios.get(POSTS_URL + '/' + id, {
+			headers: createHeaders({ auth: true })
+		});
 		const res = await request.data;
 
 		return res as import('../components/Modules/Post/types').Props_Post<Props_PostComment[], any>;

@@ -15,7 +15,6 @@
 
 	async function postPromise() {
 		post = await getPost(id);
-		console.log(post);
 	}
 
 	async function handleAddComment() {

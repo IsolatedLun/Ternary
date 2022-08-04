@@ -1,18 +1,34 @@
-from users.views import decode_user_id
+from backend.communities.models import JoinedCommunity
+from utils import get_or_none
 from . import models
 from . import serializers
 
 from rest_framework.views import APIView, Response
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.permissions import IsAuthenticated, AllowAny, IsAuthenticatedOrReadOnly
 from rest_framework import generics
 
 from json import dumps as json_dumps
 from responses import OK, ERR
 
 
-class PostsView(generics.ListAPIView):
-    queryset = models.Post.objects.all().order_by('-date_created')
-    serializer_class = serializers.PostPreviewSerializer
+class PostsView(APIView):
+    def get(self, req):
+        if req.user:
+            posts = []
+
+            for community in JoinedCommunity.objects.filter(user_id=req.user.id):
+                for _post in models.Post.objects.filter(community_id=community.id):
+                    posts.append(_post)
+
+            serialized_posts = serializers.PostPreviewSerializer(
+                posts, many=True).data
+            return Response(data=serialized_posts, status=OK)
+        else:
+            queryset = models.Post.objects.all().order_by('-date_created')
+            serialized_data = serializers.PostPreviewSerializer(
+                queryset, many=True).data
+
+            return Response(data=serialized_data, status=OK)
 
 
 class PostView(APIView):
@@ -22,11 +38,13 @@ class PostView(APIView):
         try:
             post = serializers.PostSerializer(
                 models.Post.objects.get(id=post_id)).data
-            user_id = decode_user_id(req.headers)
 
-            if user_id:
-                post['vote_type'] = models.VotedPost.objects.get(
-                    post_id=post_id, user_id=user_id).vote_type
+            if req.user:
+                voted_post = get_or_none(
+                    models.VotedPost, post_id=post_id, user_id=req.user.id)
+
+                if voted_post is not None:
+                    post['vote_type'] = voted_post.vote_type
             else:
                 post['vote_type'] = 'neutral'
 
@@ -42,18 +60,17 @@ class CreatePostView(APIView):
     def post(self, req):
         post_data = req.POST
         files = req.FILES
-        user_id = decode_user_id(req.headers)
 
         community_id = int(post_data['communityId'])
         if(community_id > 0):
             post = models.Post.objects.create(
-                title=post_data['title'], user_id=user_id,
+                title=post_data['title'], user_id=req.user.id,
                 content_type=post_data['content_type'],
                 community_id=community_id
             )
         else:
             post = models.Post.objects.create(
-                title=post_data['title'], user_id=user_id, content_type=post_data['content_type'])
+                title=post_data['title'], user_id=req.user.id, content_type=post_data['content_type'])
 
         if post_data['content_type'] == 'image':
             image_urls = []
@@ -81,10 +98,9 @@ class CommentOnPostView(APIView):
 
     def post(self, req, post_id):
         text = req.data['text']
-        user_id = decode_user_id(req.headers)
 
         comment = models.Comment.objects.create(
-            text=text, post_id=post_id, user_id=user_id)
+            text=text, post_id=post_id, user_id=req.user.id)
 
         return Response(data=serializers.CommentSerializer(comment).data, status=OK)
 
@@ -93,15 +109,13 @@ class VotePostView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, req, post_id):
-        print(req.data)
         post = models.Post.objects.get(id=post_id)
-        user_id = decode_user_id(req.headers)
 
         post.votes = req.data['votes']
         post.save()
 
         voted_post, created = models.VotedPost.objects.get_or_create(
-            post_id=post.id, user_id=user_id)
+            post_id=post.id, user_id=req.user.id)
 
         voted_post.vote_type = req.data['type']
         voted_post.save()
