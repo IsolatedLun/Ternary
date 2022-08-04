@@ -34,6 +34,7 @@ export const COMMUNITIES_URL = API_URL + '/communities';
 export const RELEVANT_COMMUNITIES_URL = COMMUNITIES_URL + '/relevant';
 export const COMMUNITY_URL = (id: number) => COMMUNITIES_URL + `/${id}`;
 export const TOP_COMMUNITY_MEMBERS_URL = (id: number) => COMMUNITIES_URL + `/${id}/top/members`;
+export const JOIN_COMMUNITY_URL = (id: number) => COMMUNITIES_URL + `/${id}/join`;
 
 export const AUTH_URL = API_URL + '/auth';
 export const AUTHENTICATE_URL = AUTH_URL + '/authenticate';

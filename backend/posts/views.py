@@ -1,4 +1,4 @@
-from backend.communities.models import JoinedCommunity
+from communities.models import JoinedCommunity
 from utils import get_or_none
 from . import models
 from . import serializers
@@ -12,17 +12,19 @@ from responses import OK, ERR
 
 
 class PostsView(APIView):
+    permission_classes = [AllowAny]
+
     def get(self, req):
-        if req.user:
+        if req.user and req.user.is_authenticated:
             posts = []
 
-            for community in JoinedCommunity.objects.filter(user_id=req.user.id):
-                for _post in models.Post.objects.filter(community_id=community.id):
+            for joined in JoinedCommunity.objects.filter(user_id=req.user.id):
+                for _post in models.Post.objects.filter(community_id=joined.community.id):
                     posts.append(_post)
 
-            serialized_posts = serializers.PostPreviewSerializer(
+            serialized_data = serializers.PostPreviewSerializer(
                 posts, many=True).data
-            return Response(data=serialized_posts, status=OK)
+            return Response(data=serialized_data, status=OK)
         else:
             queryset = models.Post.objects.all().order_by('-date_created')
             serialized_data = serializers.PostPreviewSerializer(

@@ -20,7 +20,7 @@ export function propOrDef<T, D>(x: T, def: D) {
 export function createHeaders(options: Props_CreateHeaderOptions) {
 	const headers: any = {};
 
-	if (options.auth && getTokens().access) {
+	if (options.auth && getTokens().access !== 'null') {
 		headers['authorization'] = getAuthHeader();
 	}
 

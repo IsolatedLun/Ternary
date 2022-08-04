@@ -6,18 +6,21 @@
 	import Profile from '../../Profile/Profile.svelte';
 	import type { Props_Community } from 'src/components/Layouts/Community/types';
 	import Numeric from '../../Numeric/Numeric.svelte';
+	import { joinCommunity } from '../../../../services/communityFetchers';
+	import { onMount } from 'svelte';
 
 	function handleJoin() {
-		// Add joining POST request
-		// ...
+		joinCommunity(props.id).then((res) => {
+			hasJoined = res;
 
-		if (hasJoined) {
-			props.members--;
-			hasJoined = false;
-		} else {
-			props.members++;
-			hasJoined = true;
-		}
+			if (!hasJoined) {
+				props.members--;
+				hasJoined = false;
+			} else {
+				props.members++;
+				hasJoined = true;
+			}
+		});
 	}
 
 	export let props: Props_Community<null, number> = {

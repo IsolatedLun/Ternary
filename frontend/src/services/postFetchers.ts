@@ -6,7 +6,9 @@ import { COMMENT_ON_POST_URL, CREATE_POST_URL, POSTS_URL, VOTE_POST_URL } from '
 import { getAuthHeader } from './authFetchers';
 
 export async function getFeed() {
-	const request = await axios.get(POSTS_URL);
+	const request = await axios.get(POSTS_URL, {
+		headers: createHeaders({ auth: true })
+	});
 	const res = await request.data;
 
 	if (request.status === 200)
@@ -16,7 +18,6 @@ export async function getFeed() {
 
 export async function getPost(id: number) {
 	try {
-		console.log(createHeaders({ auth: true }));
 		const request = await axios.get(POSTS_URL + '/' + id, {
 			headers: createHeaders({ auth: true })
 		});
@@ -35,7 +36,9 @@ export async function createPost(data: Props_CreatePost) {
 			{
 				...data
 			},
-			createHeaders({ auth: true, formData: true })
+			{
+				headers: createHeaders({ auth: true, formData: true })
+			}
 		);
 		const res = (await request.data.id) as number;
 
@@ -48,9 +51,7 @@ export async function createPost(data: Props_CreatePost) {
 export async function commentOnPost(data: Props_PostCommentData) {
 	try {
 		const request = await axios.post(COMMENT_ON_POST_URL(data.postId), data, {
-			headers: {
-				authorization: getAuthHeader()
-			}
+			headers: createHeaders({ auth: true })
 		});
 
 		return (await request.data) as Props_PostComment;
@@ -62,9 +63,7 @@ export async function commentOnPost(data: Props_PostCommentData) {
 export async function votePost(data: Props_VotePostData) {
 	try {
 		const request = await axios.post(VOTE_POST_URL(data.postId), data, {
-			headers: {
-				authorization: getAuthHeader()
-			}
+			headers: createHeaders({ auth: true })
 		});
 
 		return (await request.data) as Props_PostComment;

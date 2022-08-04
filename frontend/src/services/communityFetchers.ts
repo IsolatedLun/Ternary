@@ -4,10 +4,11 @@ import type { Props_Community, Props_CommunityUser } from '../components/Layouts
 import {
 	COMMUNITIES_URL,
 	COMMUNITY_URL,
+	JOIN_COMMUNITY_URL,
 	RELEVANT_COMMUNITIES_URL,
 	TOP_COMMUNITY_MEMBERS_URL
 } from '../consts';
-import { handleError } from './utils';
+import { createHeaders, handleError } from './utils';
 
 export async function getRelevantCommunities() {
 	try {
@@ -35,6 +36,23 @@ export async function getTopMembers(id: number) {
 	try {
 		const request = await axios.get(TOP_COMMUNITY_MEMBERS_URL(id));
 		const res = (await request.data) as Props_CommunityUser[];
+
+		return res;
+	} catch (e) {
+		throw handleError(e);
+	}
+}
+
+export async function joinCommunity(id: number) {
+	try {
+		const request = await axios.post(
+			JOIN_COMMUNITY_URL(id),
+			{},
+			{
+				headers: createHeaders({ auth: true })
+			}
+		);
+		const res = (await request.data) as boolean;
 
 		return res;
 	} catch (e) {

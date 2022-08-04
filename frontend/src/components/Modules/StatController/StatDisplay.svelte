@@ -37,7 +37,7 @@
 		ariaLabel="Downvote"
 		variant="transparent"
 		workCondition={false}
-		secondaryVariant={props.votes < 0 ? 'upvote' : 'null'}
+		secondaryVariant={props.votes < 0 ? 'downvote' : 'null'}
 	>
 		<Icon ariaLabel="Downvote">{ICON_DOWNVOTE}</Icon>
 	</Button>

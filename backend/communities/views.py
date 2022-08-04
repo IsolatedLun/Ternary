@@ -5,7 +5,6 @@ from rest_framework.views import APIView, Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import generics
 
-from json import dumps as json_dumps
 from responses import OK, ERR
 
 
@@ -33,3 +32,19 @@ class CommunityView(APIView):
             return Response(data=post, status=OK)
         except:
             return Response(data={'detail': 'Post does not exist.'}, status=ERR)
+
+
+class JoinCommunityView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, req, community_id):
+        community, created = models.JoinedCommunity.objects.get_or_create(
+            community_id=community_id, user_id=req.user.id)
+        joined = False
+
+        if not created:
+            community.delete()
+        else:
+            joined = True
+
+        return Response(data=joined, status=OK)
