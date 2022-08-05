@@ -7,6 +7,7 @@
 	import HomeHeader from './_Parts/HomeHeader.svelte';
 	import { getRelevantCommunities } from '../../../services/communityFetchers';
 	import LoadingBar from '../../../components/Modules/Bars/LoadingBar.svelte';
+	import ComponentMap from '../../../components/Divs/ComponentMap.svelte';
 
 	const feedPromise = getFeed();
 	const communitiesPromise = getRelevantCommunities();
@@ -19,9 +20,12 @@
 			{#await feedPromise}
 				<LoadingBar />
 			{:then feed}
-				{#each feed as post}
-					<Post props={{ ...post }} />
-				{/each}
+				<ComponentMap
+					_this={Post}
+					items={feed}
+					fontSize={500}
+					fallbackText="No posts found, maybe join some communities!"
+				/>
 			{/await}
 		</section>
 	</div>
@@ -36,9 +40,11 @@
 				{#await communitiesPromise}
 					<LoadingBar />
 				{:then communities}
-					{#each communities as community}
-						<MiscGroup props={{ ...community }} />
-					{/each}
+					<ComponentMap
+						_this={MiscGroup}
+						items={communities}
+						fallbackText="No relevant communities found"
+					/>
 				{/await}
 			</div>
 		</CardWithHeader>

@@ -16,11 +16,11 @@ class PostsView(APIView):
 
     def get(self, req):
         if req.user and req.user.is_authenticated:
-            posts = []
+            posts = models.Post.objects.filter(user_id=req.user.id)
 
             for joined in JoinedCommunity.objects.filter(user_id=req.user.id):
-                for _post in models.Post.objects.filter(community_id=joined.community.id):
-                    posts.append(_post)
+                posts.union(models.Post.objects.filter(
+                    community_id=joined.community.id))
 
             serialized_data = serializers.PostPreviewSerializer(
                 posts, many=True).data

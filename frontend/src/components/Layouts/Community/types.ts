@@ -11,6 +11,8 @@ export interface Props_Community<PostT, MemberT> {
 	profile: string;
 	banner: string;
 
+	joined: boolean;
+
 	date_created: string;
 }
 

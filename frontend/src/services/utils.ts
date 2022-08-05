@@ -10,7 +10,7 @@ export function handleError(e: any) {
 		return e.response.data.detail;
 	}
 
-	return 'Something went wrong';
+	return 'Something went wrong.';
 }
 
 export function propOrDef<T, D>(x: T, def: D) {

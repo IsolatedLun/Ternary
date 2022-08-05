@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { ICON_PLUS } from '../../../../consts';
+	import { API_URL, ICON_PLUS } from '../../../../consts';
 	import FlexyCenter from '../../../../components/Divs/FlexyCenter.svelte';
 	import Button from '../../../../components/Interactibles/Button.svelte';
 	import Icon from '../../Icon/Icon.svelte';
@@ -8,6 +8,7 @@
 	import Numeric from '../../Numeric/Numeric.svelte';
 	import { joinCommunity } from '../../../../services/communityFetchers';
 	import { onMount } from 'svelte';
+	import { createDefaultCommunity } from '../_funcs';
 
 	function handleJoin() {
 		joinCommunity(props.id).then((res) => {
@@ -23,22 +24,14 @@
 		});
 	}
 
-	export let props: Props_Community<null, number> = {
-		id: -1,
-		members: 0,
-		posts: null,
-		name: '',
-		profile: '',
-		banner: '',
-		date_created: ''
-	};
+	export let props: Props_Community<null, number> = createDefaultCommunity();
 
 	let hasJoined = false;
 </script>
 
 <div class="[ misc__group ] [ flex align-items-center justify-content-space-between ]">
 	<FlexyCenter cubeClass={{ utilClass: 'fs-300' }} useJustify={true} props={{ gap: 1 }}>
-		<Profile props={{ src: props.profile, alt: `${props.name} group profile` }} />
+		<Profile props={{ src: API_URL + props.profile, alt: `${props.name} group profile` }} />
 		<a href={`/communities/${props.id}/${props.name}`}>g/{props.name}</a>
 	</FlexyCenter>
 	<FlexyCenter>

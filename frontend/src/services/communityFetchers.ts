@@ -12,7 +12,9 @@ import { createHeaders, handleError } from './utils';
 
 export async function getRelevantCommunities() {
 	try {
-		const request = await axios.get(RELEVANT_COMMUNITIES_URL);
+		const request = await axios.get(RELEVANT_COMMUNITIES_URL, {
+			headers: createHeaders({ auth: true })
+		});
 		const res = (await request.data) as Props_Community<null, number>[];
 
 		return res;
@@ -23,7 +25,9 @@ export async function getRelevantCommunities() {
 
 export async function getCommunity(id: number) {
 	try {
-		const request = await axios.get(COMMUNITY_URL(id));
+		const request = await axios.get(COMMUNITY_URL(id), {
+			headers: createHeaders({ auth: true })
+		});
 		const res = (await request.data) as Props_Community<Props_Post<number, any>[], number>;
 
 		return res;

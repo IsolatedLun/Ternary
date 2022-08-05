@@ -1,5 +1,6 @@
 <script lang="ts">
-	import FlexyCustom from 'src/components/Divs/FlexyCustom.svelte';
+	import FlexyCustom from '../../../../components/Divs/FlexyCustom.svelte';
+	import { createDefaultUser } from '../../../../stores/_funcs';
 
 	import type { Props_MiscPost } from '../types';
 
@@ -8,14 +9,7 @@
 		votes: 0,
 		title: '',
 
-		user: {
-			id: 0,
-			honor: 0,
-
-			date_created: '',
-			profile: '',
-			username: ''
-		}
+		user: createDefaultUser()
 	};
 </script>
 

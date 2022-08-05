@@ -1,5 +1,7 @@
+from consts import MAX_RELEVANT_COMMUNITIES
 from . import models
 from . import serializers
+from utils import get_or_none
 
 from rest_framework.views import APIView, Response
 from rest_framework.permissions import IsAuthenticated
@@ -8,9 +10,29 @@ from rest_framework import generics
 from responses import OK, ERR
 
 
-class RelavantCommunitiesView(generics.ListAPIView):
-    queryset = models.Community.objects.all()[:10]
-    serializer_class = serializers.CommunitySerializer
+class RelavantCommunitiesView(APIView):
+    def get(self, req):
+        serialized_data = None
+
+        if req.user.is_authenticated:
+            i = 0
+            communities = []
+            for community in models.Community.objects.all():
+                # If not joined
+                if not get_or_none(models.JoinedCommunity, user_id=req.user.id, community_id=community.id):
+                    communities.append(community)
+                if i > MAX_RELEVANT_COMMUNITIES:
+                    break
+
+            serialized_data = serializers.CommunityPreviewSerializer(
+                communities, many=True).data
+        else:
+            communities = models.Community.objects.all().order_by('members')[
+                :MAX_RELEVANT_COMMUNITIES]
+            serialized_data = serializers.CommunityPreviewSerializer(
+                communities, many=True).data
+
+        return Response(data=serialized_data, status=OK)
 
 
 class TopCommunityMembersView(APIView):
@@ -26,12 +48,21 @@ class TopCommunityMembersView(APIView):
 class CommunityView(APIView):
     def get(self, req, community_id):
         try:
-            post = serializers.CommunitySerializer(
+            community = serializers.CommunitySerializer(
                 models.Community.objects.get(id=community_id)).data
 
-            return Response(data=post, status=OK)
-        except:
-            return Response(data={'detail': 'Post does not exist.'}, status=ERR)
+            if req.user.is_authenticated:
+                joined = get_or_none(
+                    models.JoinedCommunity, user_id=req.user.id, community_id=community_id)
+                if joined is not None:
+                    community['joined'] = True
+            else:
+                community['joined'] = False
+
+            return Response(data=community, status=OK)
+        except Exception as e:
+            print(e)
+            return Response(data={'detail': 'Community does not exist.'}, status=ERR)
 
 
 class JoinCommunityView(APIView):
@@ -42,6 +73,7 @@ class JoinCommunityView(APIView):
             community_id=community_id, user_id=req.user.id)
         joined = False
 
+        # If already created
         if not created:
             community.delete()
         else:

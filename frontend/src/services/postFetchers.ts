@@ -3,7 +3,6 @@ import type { Props_PostComment } from '../components/Modules/Post/types';
 import type { Props_CreatePost, Props_PostCommentData, Props_VotePostData } from './types';
 import { createHeaders, handleError } from './utils';
 import { COMMENT_ON_POST_URL, CREATE_POST_URL, POSTS_URL, VOTE_POST_URL } from '../consts';
-import { getAuthHeader } from './authFetchers';
 
 export async function getFeed() {
 	const request = await axios.get(POSTS_URL, {

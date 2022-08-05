@@ -43,7 +43,11 @@
 					<h2>{community.name}</h2>
 					<FlexyCenter>
 						<p class="[ text-muted fs-300 ]"><Numeric num={community.members} /> members</p>
-						<Button variant="primary-difference">Join</Button>
+						{#if community.joined}
+							<Button secondaryVariant="downvote">Leave</Button>
+						{:else}
+							<Button variant="primary-difference">Join</Button>
+						{/if}
 					</FlexyCenter>
 				</FlexyCustom>
 			</Card>
