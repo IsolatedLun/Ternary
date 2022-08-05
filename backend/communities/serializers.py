@@ -18,7 +18,7 @@ class CommunitySerializer(serializers.ModelSerializer):
         from posts.models import Post
         from posts.serializers import PostPreviewSerializer
 
-        return PostPreviewSerializer(Post.objects.filter(community_id=obj.id), many=True).data
+        return PostPreviewSerializer(Post.objects.filter(community_id=obj.id).order_by('-date_created', '-votes'), many=True).data
 
     class Meta:
         model = models.Community

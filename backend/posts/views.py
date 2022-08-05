@@ -1,11 +1,10 @@
-from communities.models import JoinedCommunity
+from communities.models import CommunityMember
 from utils import get_or_none
 from . import models
 from . import serializers
 
 from rest_framework.views import APIView, Response
-from rest_framework.permissions import IsAuthenticated, AllowAny, IsAuthenticatedOrReadOnly
-from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated, AllowAny
 
 from json import dumps as json_dumps
 from responses import OK, ERR
@@ -18,15 +17,15 @@ class PostsView(APIView):
         if req.user and req.user.is_authenticated:
             posts = models.Post.objects.filter(user_id=req.user.id)
 
-            for joined in JoinedCommunity.objects.filter(user_id=req.user.id):
-                posts.union(models.Post.objects.filter(
+            for joined in CommunityMember.objects.filter(user_id=req.user.id):
+                posts = posts.union(models.Post.objects.filter(
                     community_id=joined.community.id))
 
             serialized_data = serializers.PostPreviewSerializer(
-                posts, many=True).data
+                posts.order_by('-date_created', '-votes'), many=True).data
             return Response(data=serialized_data, status=OK)
         else:
-            queryset = models.Post.objects.all().order_by('-date_created')
+            queryset = models.Post.objects.all().order_by('-date_created', '-votes')
             serialized_data = serializers.PostPreviewSerializer(
                 queryset, many=True).data
 

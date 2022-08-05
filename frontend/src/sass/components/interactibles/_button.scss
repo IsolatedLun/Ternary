@@ -26,6 +26,23 @@
 	);
 }
 
+.button:where([data-variant='red']) {
+	@include createButton(
+		$background-color: $button-red-background-color,
+		$background-color-on-hov: $button-red-background-color-on-hov,
+		$padding: $button-red-padding
+	);
+}
+
+.button:where([data-variant='red-difference']) {
+	@include createButton(
+		$background-color: $button-red-difference-background-color,
+		$border: $button-red-difference-border,
+		$background-color-on-hov: $button-red-difference-background-color-on-hov,
+		$padding: $button-red-padding
+	);
+}
+
 .button:where([data-variant='action-difference']) {
 	@include createButton(
 		$color: $button-action-color,

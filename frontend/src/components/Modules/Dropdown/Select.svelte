@@ -14,7 +14,7 @@
 			_thisSelect.removeAttribute('data-hide');
 		});
 
-		selected = options[0];
+		selected = defaultSelected || options[0];
 	});
 
 	function setSelect(val: string) {
@@ -37,6 +37,7 @@
 
 	export let options: string[] = ['Select'];
 	export let selectText: string = 'Choose';
+	export let defaultSelected = '';
 </script>
 
 <FlexyCustom align="center">

@@ -10,7 +10,7 @@ from rest_framework import generics
 from responses import OK, ERR
 
 
-class RelavantCommunitiesView(APIView):
+class RelevantCommunitiesView(APIView):
     def get(self, req):
         serialized_data = None
 
@@ -19,7 +19,7 @@ class RelavantCommunitiesView(APIView):
             communities = []
             for community in models.Community.objects.all():
                 # If not joined
-                if not get_or_none(models.JoinedCommunity, user_id=req.user.id, community_id=community.id):
+                if not get_or_none(models.CommunityMember, user_id=req.user.id, community_id=community.id):
                     communities.append(community)
                 if i > MAX_RELEVANT_COMMUNITIES:
                     break
@@ -38,7 +38,7 @@ class RelavantCommunitiesView(APIView):
 class TopCommunityMembersView(APIView):
     def get(self, req, community_id):
         queryset = models.CommunityMember.objects.filter(
-            community_id=community_id).order_by('user__honor')[:10]
+            community_id=community_id).order_by('-user__honor')[:10]
         serialized = serializers.CommunityMemberSerializer(
             queryset, many=True).data
 
@@ -53,7 +53,7 @@ class CommunityView(APIView):
 
             if req.user.is_authenticated:
                 joined = get_or_none(
-                    models.JoinedCommunity, user_id=req.user.id, community_id=community_id)
+                    models.CommunityMember, user_id=req.user.id, community_id=community_id)
                 if joined is not None:
                     community['joined'] = True
             else:
@@ -69,13 +69,13 @@ class JoinCommunityView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, req, community_id):
-        community, created = models.JoinedCommunity.objects.get_or_create(
+        joined_member, created = models.CommunityMember.objects.get_or_create(
             community_id=community_id, user_id=req.user.id)
         joined = False
 
         # If already created
         if not created:
-            community.delete()
+            joined_member.delete()
         else:
             joined = True
 

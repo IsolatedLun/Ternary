@@ -42,24 +42,40 @@ $def-button-background-color: var(--clr-hover-200);
 $def-button-border-radius: $border-radius-cubed;
 $def-button-background-color-on-hov: var(--clr-hover-600);
 
+// === Action
 $button-action-color: var(--clr-text-muted);
 $button-action-color-on-hov: var(--clr-text-400);
 
+// === Upvote
 $button-upvote-color: var(--clr-upvote-400);
 $button-upvote-background-color: var(--clr-upvote-background);
 $button-upvote-background-color-on-hov: var(--clr-upvote-hover);
 
+// === Downvote
 $button-downvote-color: var(--clr-downvote-400);
 $button-downvote-background-color: var(--clr-downvote-background);
 $button-downvote-background-color-on-hov: var(--clr-downvote-hover);
 
+// === Primary
 $button-primary-padding: 0.5em 0.75em;
 $button-primary-background-color: var(--clr-upvote-300);
 $button-primary-background-color-on-hov: var(--clr-upvote-400);
 
+// === Primary difference
 $button-primary-difference-background-color: var(--clr-upvote-background);
 $button-primary-difference-background-color-on-hov: var(--clr-upvote-400);
 $button-primary-difference-border: 2px solid var(--clr-upvote-300);
+
+// === Red
+$button-red-background-color: var(--clr-downvote-400);
+$button-red-background-color-on-hov: var(--clr-downvote-500);
+$button-red-padding: $button-primary-padding;
+
+// === Red difference
+$button-red-difference-background-color: var(--clr-downvote-hover);
+$button-red-difference-border: 2px solid var(--clr-downvote-500);
+$button-red-difference-background-color-on-hov: var(--clr-downvote-500);
+$button-red-padding: $button-primary-padding;
 
 $button-join-font-size: var(--fs-300);
 

@@ -21,8 +21,3 @@ class CommunityMember(models.Model):
     is_owner = models.BooleanField(default=False)
 
     date_created = models.DateTimeField(auto_now_add=True)
-
-
-class JoinedCommunity(models.Model):
-    user = models.ForeignKey(cUser, on_delete=models.CASCADE)
-    community = models.ForeignKey(Community, on_delete=models.CASCADE)

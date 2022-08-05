@@ -43,7 +43,7 @@
 					<ComponentMap
 						_this={MiscGroup}
 						items={communities}
-						fallbackText="No relevant communities found"
+						fallbackText="No relevant communities found."
 					/>
 				{/await}
 			</div>
