@@ -2,7 +2,7 @@ import { act, render } from '@testing-library/svelte';
 import 'jest';
 import { generateNChars } from '../../../utils/testFuncs';
 import Post from './Post.svelte';
-import { createTestPost } from './_funcs';
+import { createTestPost } from '../../../utils/defaultCreates';
 
 test('Render a post that has a long paragraph', () => {
 	const data = createTestPost(generateNChars(1000), 0);

@@ -120,6 +120,10 @@ img[src=''] {
 	display: none !important;
 }
 
+[data-dropdown-state='false'] {
+	display: none !important;
+}
+
 [data-work-condition='false'] {
 	opacity: 0.75;
 	pointer-events: none;

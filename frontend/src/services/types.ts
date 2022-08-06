@@ -28,6 +28,13 @@ export interface Props_VotePostData {
 	type: string;
 }
 
+export interface Props_VoteCommentData {
+	votes: number;
+	postId: number;
+	commentId: number;
+	type: string;
+}
+
 export interface Props_Tokens<T> {
 	refresh: T;
 	access: T;

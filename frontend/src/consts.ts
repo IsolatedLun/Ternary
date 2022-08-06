@@ -28,7 +28,13 @@ export const ICON_SHIELD = '\uf132';
 export const POSTS_URL = API_URL + '/posts';
 export const CREATE_POST_URL = POSTS_URL + '/create';
 export const COMMENT_ON_POST_URL = (id: number) => POSTS_URL + `/${id}` + '/comment';
-export const VOTE_POST_URL = (id: number) => POSTS_URL + `/${id}` + '/vote';
+
+export const REPLY_ON_POST_COMMENT_URL = (postId: number, commentId: number) =>
+	POSTS_URL + `/${postId}/comment/` + commentId;
+export const VOTE_COMMENT_URL = (postId: number, commentId: number) =>
+	POSTS_URL + `/${postId}` + '/vote/comment/' + commentId;
+
+export const VOTE_POST_URL = (id: number) => POSTS_URL + `/${id}` + '/vote/post';
 
 export const COMMUNITIES_URL = API_URL + '/communities';
 export const RELEVANT_COMMUNITIES_URL = COMMUNITIES_URL + '/relevant';

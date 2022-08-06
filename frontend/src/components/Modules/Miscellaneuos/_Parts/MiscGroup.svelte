@@ -7,8 +7,7 @@
 	import type { Props_Community } from 'src/components/Layouts/Community/types';
 	import Numeric from '../../Numeric/Numeric.svelte';
 	import { joinCommunity } from '../../../../services/communityFetchers';
-	import { onMount } from 'svelte';
-	import { createDefaultCommunity } from '../_funcs';
+	import { createDefaultCommunity } from '../../../../utils/defaultCreates';
 
 	function handleJoin() {
 		joinCommunity(props.id).then((res) => {

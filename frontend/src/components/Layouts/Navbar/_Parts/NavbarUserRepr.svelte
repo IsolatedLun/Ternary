@@ -3,7 +3,7 @@
 	import Numeric from '../../../../components/Modules/Numeric/Numeric.svelte';
 	import Profile from '../../../../components/Modules/Profile/Profile.svelte';
 	import { API_URL } from '../../../../consts';
-	import { createDefaultUser } from '../../../../stores/_funcs';
+	import { createDefaultUser } from '../../../../utils/defaultCreates';
 	import type { Props_User } from '../../../../types';
 
 	export let user: Props_User = createDefaultUser();

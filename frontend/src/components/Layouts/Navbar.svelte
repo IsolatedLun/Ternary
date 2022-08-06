@@ -8,12 +8,12 @@
 	import Button from '../Interactibles/Button.svelte';
 	import { onMount } from 'svelte';
 	import type { Props_User } from '../../types';
-	import { createDefaultUser } from '../../stores/_funcs';
 	import Dropdown from '../Modules/Dropdown/Dropdown.svelte';
 	import DropdownItem from '../Modules/Dropdown/_Parts/DropdownItem.svelte';
 	import MobileDropdown from './Navbar/_Parts/MobileDropdown.svelte';
 	import NavbarUserRepr from './Navbar/_Parts/NavbarUserRepr.svelte';
 	import { logout } from '../../services/authFetchers';
+	import { createDefaultUser } from '../../utils/defaultCreates';
 
 	onMount(() => {
 		_thisToggler.addEventListener('click', () => {
@@ -56,7 +56,7 @@
 			<LinkButton to="/" variant="icon-block"><Icon>{ICON_HOME}</Icon></LinkButton>
 			{#if isLogged}
 				<Dropdown>
-					<div slot="toggler">
+					<div slot="toggler" class="[ dropdown-toggler ] [ ignore-children ]">
 						<NavbarUserRepr {user} />
 					</div>
 					<svelte:fragment slot="list">

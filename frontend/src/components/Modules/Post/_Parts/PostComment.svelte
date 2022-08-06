@@ -1,20 +1,11 @@
 <script lang="ts">
+	import { voteComment } from '../../../../services/postFetchers';
+	import { createDefaultComment } from '../../../../utils/defaultCreates';
+	import StatController from '../../StatController/StatController.svelte';
 	import UserRepr from '../../User/UserRepr.svelte';
 	import type { Props_PostComment } from '../types';
 
-	export let comment: Props_PostComment = {
-		user: {
-			id: 0,
-			date_created: '',
-			username: '',
-			honor: 0,
-			profile: ''
-		},
-
-		post: 0,
-		text: '',
-		date_created: ''
-	};
+	export let comment: Props_PostComment = createDefaultComment();
 </script>
 
 <div class="[ pos-relative padding-2 margin-block-1 flex-direction-column gap-2 ]">
@@ -25,5 +16,16 @@
 				{comment.text}
 			</p>
 		</div>
+
+		<StatController
+			on:vote={(e) =>
+				voteComment({
+					votes: e.detail.votes,
+					postId: comment.post,
+					commentId: comment.id,
+					type: e.detail.type
+				})}
+			props={{ votes: comment.votes, comments: comment.replies, action: comment.vote_type }}
+		/>
 	</div>
 </div>

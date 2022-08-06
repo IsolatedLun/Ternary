@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store';
-import { createEmptyUser } from '../_funcs';
+import { createEmptyUserStore } from '../../utils/defaultCreates';
 import type { Store_UserState } from './types';
 
-export const userState = writable<Store_UserState>(createEmptyUser());
+export const userState = writable<Store_UserState>(createEmptyUserStore());

@@ -6,11 +6,11 @@
 	import StatController from '../StatController/StatController.svelte';
 	import PostUrl from './_Parts/PostUrl.svelte';
 	import { API_URL } from '../../../consts';
-	import { createTestPost } from './_funcs';
 	import { votePost } from '../../../services/postFetchers';
 	import FlexyCustom from '../../../components/Divs/FlexyCustom.svelte';
 	import CommunityUserRepr from '../User/CommunityUserRepr.svelte';
 	import StatDisplay from '../StatController/StatDisplay.svelte';
+	import { createTestPost } from '../../../utils/defaultCreates';
 
 	export let props: import('./types').Props_Post<any, any> = createTestPost(
 		'Wow, so boring',

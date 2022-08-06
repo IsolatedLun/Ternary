@@ -1,8 +1,19 @@
 import axios from 'axios';
 import type { Props_PostComment } from '../components/Modules/Post/types';
-import type { Props_CreatePost, Props_PostCommentData, Props_VotePostData } from './types';
+import type {
+	Props_CreatePost,
+	Props_PostCommentData,
+	Props_VoteCommentData,
+	Props_VotePostData
+} from './types';
 import { createHeaders, handleError } from './utils';
-import { COMMENT_ON_POST_URL, CREATE_POST_URL, POSTS_URL, VOTE_POST_URL } from '../consts';
+import {
+	COMMENT_ON_POST_URL,
+	CREATE_POST_URL,
+	POSTS_URL,
+	VOTE_COMMENT_URL,
+	VOTE_POST_URL
+} from '../consts';
 
 export async function getFeed() {
 	const request = await axios.get(POSTS_URL, {
@@ -62,6 +73,18 @@ export async function commentOnPost(data: Props_PostCommentData) {
 export async function votePost(data: Props_VotePostData) {
 	try {
 		const request = await axios.post(VOTE_POST_URL(data.postId), data, {
+			headers: createHeaders({ auth: true })
+		});
+
+		return (await request.data) as Props_PostComment;
+	} catch (e) {
+		throw handleError(e);
+	}
+}
+
+export async function voteComment(data: Props_VoteCommentData) {
+	try {
+		const request = await axios.post(VOTE_COMMENT_URL(data.postId, data.commentId), data, {
 			headers: createHeaders({ auth: true })
 		});
 

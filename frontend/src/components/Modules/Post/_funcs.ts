@@ -19,27 +19,3 @@ export function downvote(votes: number, prevAction: string): [number, string] {
 export function lenArrOrNum(x: any[] | number): number {
 	return typeof x === 'object' ? x.length : x;
 }
-
-export function createTestPost<CommentT, ContentT>(
-	content: ContentT,
-	comments: CommentT,
-	contentType: string = 'any'
-): Props_Post<CommentT, ContentT> {
-	return {
-		user: {
-			id: 0,
-			honor: 999,
-			username: 'EpicGamer',
-			profile: '',
-			date_created: 'Today'
-		},
-
-		id: 0,
-		title: 'Lol',
-		comments: comments,
-		votes: 0,
-		content: content,
-		content_type: contentType as any,
-		date_created: ''
-	};
-}

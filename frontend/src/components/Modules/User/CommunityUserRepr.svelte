@@ -5,29 +5,14 @@
 	import { API_URL, ICON_SHIELD, ICON_USER } from '../../../consts';
 	import type { Props_User } from '../../../types';
 	import Icon from '../Icon/Icon.svelte';
-	import Numeric from '../Numeric/Numeric.svelte';
 	import Profile from '../Profile/Profile.svelte';
+	import { createDefaultUser, createDefaultCommunity } from '../../../utils/defaultCreates';
 
-	export let user: Props_User = {
-		username: '',
-		honor: 0,
-		id: 0,
-		date_created: '',
-		profile: '',
-		is_staff: false
-	};
+	export let user: Props_User = createDefaultUser();
 	export let is_owner = false;
 	export let is_moderator = false;
 
-	export let community: Props_Community<null, number> = {
-		id: -1,
-		banner: '',
-		profile: '',
-		members: 0,
-		posts: null,
-		name: '',
-		date_created: ''
-	};
+	export let community: Props_Community<null, number> = createDefaultCommunity();
 </script>
 
 <div class="[ user-repr ] [ flex gap-1 margin-block-end-05 ]">

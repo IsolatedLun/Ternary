@@ -1,3 +1,4 @@
+from curses import A_ALTCHARSET
 from rest_framework import serializers
 from users.models import cUser
 from users.serializers import cUserSerializer

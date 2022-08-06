@@ -1,6 +1,6 @@
 <script lang="ts">
 	import FlexyCustom from '../../../../components/Divs/FlexyCustom.svelte';
-	import { createDefaultUser } from '../../../../stores/_funcs';
+	import { createDefaultUser } from '../../../../utils/defaultCreates';
 
 	import type { Props_MiscPost } from '../types';
 

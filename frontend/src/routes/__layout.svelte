@@ -2,14 +2,18 @@
 	import { authenticate } from '../services/authFetchers';
 	import { onMount } from 'svelte';
 	import Navbar from '../components/Layouts/Navbar.svelte';
-	import { userState } from '../stores/userStore/userStore';
 	import { locationState } from '../stores/locationStore/locationStore';
+	import { toggleDropdowns } from '../utils/generalFuncs';
 
 	onMount(() => {
 		authenticate();
 
 		var observer = new MutationObserver(updateLocationState);
 		observer.observe(document.body, { attributes: true });
+
+		window.addEventListener('click', (e) => {
+			toggleDropdowns(e, 'dropdown-toggler');
+		});
 	});
 
 	function updateLocationState() {

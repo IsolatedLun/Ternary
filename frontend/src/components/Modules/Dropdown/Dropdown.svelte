@@ -3,8 +3,9 @@
 	import FlexyCustom from '../../../components/Divs/FlexyCustom.svelte';
 
 	onMount(() => {
-		// _thisSelect.addEventListener('focusout', (e) => _thisSelect.setAttribute('data-hide', ''));
-		_this.addEventListener('focusin', () => _thisSelect.removeAttribute('data-hide'));
+		_this.addEventListener('focusin', () => {
+			_thisSelect.setAttribute('data-dropdown-state', 'true');
+		});
 	});
 
 	let _this: HTMLElement;
@@ -22,9 +23,10 @@
 		<ul
 			class="[ dropdown__items ] [ card ] [ pos-absolute padding-1 z-index-999 ]"
 			data-variant="difference"
-			data-hide=""
+			id="LOL"
 			role="list"
 			tabindex="-1"
+			data-dropdown-state="false"
 			bind:this={_thisSelect}
 		>
 			<slot name="list" />

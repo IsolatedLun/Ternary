@@ -1,14 +1,11 @@
 from rest_framework import serializers
 from users.models import cUser
+from utils import get_or_none, get_user_by_id
 
 from users.serializers import cUserSerializer
 from . import models
 
 from json import loads as json_loads
-
-
-def get_user_by_id(obj):
-    return cUserSerializer(cUser.objects.get(id=obj.user.id)).data
 
 
 class PostPreviewSerializer(serializers.ModelSerializer):
@@ -46,17 +43,36 @@ class PostSerializer(serializers.ModelSerializer):
     user = serializers.SerializerMethodField(method_name='get_user')
     comments = serializers.SerializerMethodField(method_name='get_comments')
     date_created = serializers.DateTimeField(format="%b %d, %Y")
+    vote_type = serializers.SerializerMethodField(method_name='get_vote_type')
 
     def get_user(self, obj):
         return get_user_by_id(obj)
 
     def get_comments(self, obj):
-        return CommentSerializer(models.Comment.objects.filter(post_id=obj.id), many=True).data
+        user_id = self.context['user_id']
+        post_id = self.context['post_id']
+
+        return CommentSerializer(
+            models.Comment.objects.filter(post_id=obj.id),
+            context={'user_id': user_id, 'post_id': post_id},
+            many=True,
+        ).data
 
     def get_content(self, obj):
         if obj.content_type == 'image':
             return json_loads(obj.content)
         return obj.content
+
+    def get_vote_type(self, obj):
+        user_id = self.context['user_id']
+        post_id = self.context['post_id']
+        voted_post = get_or_none(
+            models.VotedPost, user_id=user_id, post_id=post_id)
+
+        if user_id and voted_post:
+            return voted_post.vote_type
+        else:
+            return 'neutral'
 
     class Meta:
         model = models.Post
@@ -65,9 +81,21 @@ class PostSerializer(serializers.ModelSerializer):
 
 class CommentSerializer(serializers.ModelSerializer):
     user = serializers.SerializerMethodField(method_name='get_user')
+    vote_type = serializers.SerializerMethodField(method_name='get_vote_type')
 
     def get_user(self, obj):
         return get_user_by_id(obj)
+
+    def get_vote_type(self, obj):
+        user_id = self.context['user_id']
+        post_id = self.context['post_id']
+        voted_comment = get_or_none(
+            models.VotedComment, user_id=user_id, post_id=post_id)
+
+        if user_id and voted_comment:
+            return voted_comment.vote_type
+        else:
+            return 'neutral'
 
     class Meta:
         model = models.Comment

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import UserRepr from '../../../../components/Modules/User/UserRepr.svelte';
 	import type { Props_User } from 'src/types';
-	import { createDefaultUser } from '../../../../stores/_funcs';
+	import { createDefaultUser } from '../../../../utils/defaultCreates';
 
 	export let isLogged = false;
 	export let user: Props_User = createDefaultUser();

@@ -37,17 +37,12 @@ class PostView(APIView):
 
     def get(self, req, post_id):
         try:
+            user_id = req.user.id if req.user.is_authenticated else None
+
             post = serializers.PostSerializer(
-                models.Post.objects.get(id=post_id)).data
-
-            if req.user:
-                voted_post = get_or_none(
-                    models.VotedPost, post_id=post_id, user_id=req.user.id)
-
-                if voted_post is not None:
-                    post['vote_type'] = voted_post.vote_type
-            else:
-                post['vote_type'] = 'neutral'
+                models.Post.objects.get(id=post_id),
+                context={'user_id': user_id, 'post_id': post_id}
+            ).data
 
             return Response(data=post, status=OK)
         except Exception as e:
@@ -121,4 +116,22 @@ class VotePostView(APIView):
         voted_post.vote_type = req.data['type']
         voted_post.save()
 
-        return Response(data={'detail': 'Voted'}, status=OK)
+        return Response(status=OK)
+
+
+class VoteCommentView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, req, post_id, comment_id):
+        comment = models.Comment.objects.get(post_id=post_id, id=comment_id)
+
+        comment.votes = req.data['votes']
+        comment.save()
+
+        voted_comment, created = models.VotedComment.objects.get_or_create(
+            comment_id=comment_id, user_id=req.user.id, post_id=post_id)
+
+        voted_comment.vote_type = req.data['type']
+        voted_comment.save()
+
+        return Response(status=OK)

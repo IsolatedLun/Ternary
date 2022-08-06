@@ -3,7 +3,7 @@ import { userState } from '../stores/userStore/userStore';
 import { AUTHENTICATE_URL, LOGIN_URL, SIGNUP_URL } from '../consts';
 import type { Props_Tokens } from './types';
 import { handleError, propOrDef } from './utils';
-import { createDefaultUser } from '../stores/_funcs';
+import { createDefaultUser } from '../utils//defaultCreates';
 import type {
 	Props_LoginData,
 	Props_LoginFetched,
