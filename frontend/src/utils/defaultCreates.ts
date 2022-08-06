@@ -69,13 +69,13 @@ export function createTestPost<CommentT, ContentT>(
 	};
 }
 
-export function createDefaultComment(): Props_PostComment {
+export function createDefaultComment<ReplyT>(replies: ReplyT): Props_PostComment<ReplyT> {
 	return {
 		user: createDefaultUser(),
 
 		id: 0,
 		post: 0,
-		replies: 0,
+		replies: replies,
 		votes: 0,
 
 		text: '',

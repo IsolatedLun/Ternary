@@ -18,9 +18,11 @@ export interface Props_Post<CommentT, ContentT> extends Props_Voteable {
 	content_type: 'text' | 'video' | 'image' | 'link' | 'any';
 }
 
-export interface Props_PostComment extends Props_Voteable {
+export interface Props_PostComment<ReplyT> extends Props_Voteable {
 	post: number;
-	replies: number;
+	replies: ReplyT;
 
 	text: string;
 }
+
+export interface Props_PostReply extends Props_PostComment<number> {}

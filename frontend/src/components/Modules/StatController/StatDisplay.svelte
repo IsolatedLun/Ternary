@@ -13,10 +13,14 @@
 </script>
 
 <FlexyCenter useJustify={false} props={{ gap: 1 }} cubeClass={{ utilClass: 'justify-content-end' }}>
-	<FlexyCenter props={{ gap: 1 }} cubeClass={{ utilClass: 'margin-inline-end-1' }}>
+	<slot name="otherControls" />
+
+	<FlexyCenter props={{ gap: 1 }}>
 		<Icon cubeClass={{ utilClass: 'text-muted' }} ariaLabel="Comments">{ICON_COMMENTS}</Icon>
 		<p>{lenArrOrNum(props.comments)}</p>
 	</FlexyCenter>
+
+	<span class="[ text-muted fs-300 margin-inline-1 ]">|</span>
 
 	<Button
 		ariaLabel="Upvote"

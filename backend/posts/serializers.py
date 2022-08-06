@@ -82,6 +82,7 @@ class PostSerializer(serializers.ModelSerializer):
 class CommentSerializer(serializers.ModelSerializer):
     user = serializers.SerializerMethodField(method_name='get_user')
     vote_type = serializers.SerializerMethodField(method_name='get_vote_type')
+    replies = serializers.SerializerMethodField(method_name='get_replies')
 
     def get_user(self, obj):
         return get_user_by_id(obj)
@@ -96,6 +97,9 @@ class CommentSerializer(serializers.ModelSerializer):
             return voted_comment.vote_type
         else:
             return 'neutral'
+
+    def get_replies(self, obj):
+        return []
 
     class Meta:
         model = models.Comment

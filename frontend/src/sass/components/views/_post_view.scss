@@ -1,0 +1,9 @@
+@use '../../abstracts/' as *;
+
+.comments .comment:not(.reply)::after {
+	@include pseudo-element();
+
+	inset: 0 auto 0 0;
+	background-color: var(--clr-hover-400);
+	width: 2px;
+}

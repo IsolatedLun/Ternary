@@ -8,7 +8,7 @@
 	import PostComment from '../Modules/Post/_Parts/PostComment.svelte';
 	import Button from '../Interactibles/Button.svelte';
 	import TextArea from '../Interactibles/Input/TextArea.svelte';
-	import type { Props_Post, Props_PostComment } from '../Modules/Post/types';
+	import type { Props_Post, Props_PostComment, Props_PostReply } from '../Modules/Post/types';
 	import Miscellaneuos from '../Modules/Miscellaneuos/Miscellaneuos.svelte';
 	import LoadingBar from '../Modules/Bars/LoadingBar.svelte';
 	import { userState } from '../../stores/userStore/userStore';
@@ -29,7 +29,7 @@
 	export let id: number = -1;
 
 	let { isLogged } = $userState;
-	let post: Props_Post<Props_PostComment[], any>;
+	let post: Props_Post<Props_PostComment<Props_PostReply[]>[], any>;
 	let newComment = '';
 </script>
 
@@ -52,15 +52,16 @@
 
 				<Card
 					cubeClass={{
+						blockClass: 'comments',
 						compostClass: 'card',
-						utilClass: 'height-max-content margin-block-2 padding-2'
+						utilClass: 'height-max-content margin-block-2 padding-2 pos-relative'
 					}}
 					variant="difference"
 				>
-					<p class="[ under-border ] [ fs-500 fw-normal ]">{post.comments.length} Comments</p>
+					<p class="[ under-border ] [ fs-500 fw-normal ]">{post.comments.length} Comment(s)</p>
 
 					{#each post.comments as comment}
-						<PostComment {comment} />
+						<PostComment {comment} canVote={isLogged} />
 					{/each}
 				</Card>
 			</section>
