@@ -1,6 +1,10 @@
 import type { Props_Community } from 'src/components/Layouts/Community/types';
 import type { Props_GroupInvite } from 'src/components/Modules/Miscellaneuos/types';
-import type { Props_Post, Props_PostComment } from 'src/components/Modules/Post/types';
+import type {
+	Props_Post,
+	Props_PostComment,
+	Props_PostCommentReply
+} from 'src/components/Modules/Post/types';
 import type { Store_UserState } from 'src/stores/userStore/types';
 import type { Props_User } from 'src/types';
 
@@ -84,12 +88,38 @@ export function createDefaultComment<ReplyT>(replies: ReplyT): Props_PostComment
 	};
 }
 
-export function createDefaultCommuunityInvite(): Props_GroupInvite {
+export function createDefaultCommentReply(): Props_PostCommentReply {
+	return {
+		user: createDefaultUser(),
+
+		id: 0,
+		post: 0,
+		comment: 0,
+		votes: 0,
+
+		text: '',
+		vote_type: 'neutral',
+		to: 'comment',
+		date_created: ''
+	};
+}
+
+export function createDefaultCommunityInvite(): Props_GroupInvite {
 	return {
 		id: 0,
 		members: 0,
 
 		name: '',
+		profile: ''
+	};
+}
+
+export function createDefaultCommunityTestInvite(name: string, members: number): Props_GroupInvite {
+	return {
+		id: 0,
+		members: members,
+
+		name: name,
 		profile: ''
 	};
 }

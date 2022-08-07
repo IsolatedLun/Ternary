@@ -18,7 +18,7 @@ test('Render a post that has a multiple images and go through them', async () =>
 	const content = data.content;
 
 	// Index is 0
-	let imgEl = document.querySelector(`img[src*="${content[0]}"]`)! as HTMLImageElement;
+	let imgEl = document.querySelector(`img[src*=${content[0]}]`)! as HTMLImageElement;
 	expect(imgEl).toBeTruthy();
 
 	const nextBtn = document.querySelector('.button[aria-label="Next Image"]')! as HTMLButtonElement;
@@ -27,6 +27,6 @@ test('Render a post that has a multiple images and go through them', async () =>
 		nextBtn.click(); // Index is 1
 	});
 
-	imgEl = document.querySelector(`img[src*="${content[1]}"]`)! as HTMLImageElement;
+	imgEl = document.querySelector(`img[src*=${content[1]}]`)! as HTMLImageElement;
 	expect(imgEl).toBeTruthy();
 });

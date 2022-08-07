@@ -22,17 +22,23 @@ export interface Props_PostCommentData {
 	postId: number;
 }
 
+export interface Props_PostCommentReplyData extends Props_PostCommentData {
+	commentId: number;
+	type: 'comment' | 'reply';
+}
+
 export interface Props_VotePostData {
 	votes: number;
 	postId: number;
 	type: string;
 }
 
-export interface Props_VoteCommentData {
-	votes: number;
-	postId: number;
+export interface Props_VoteCommentData extends Props_VotePostData {
 	commentId: number;
-	type: string;
+}
+
+export interface Props_VoteCommentReplyData extends Props_VoteCommentData {
+	replyId: number;
 }
 
 export interface Props_Tokens<T> {

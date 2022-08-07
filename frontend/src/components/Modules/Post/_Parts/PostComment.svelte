@@ -1,17 +1,33 @@
 <script lang="ts">
+	import TextArea from '../../../../components/Interactibles/Input/TextArea.svelte';
+	import FlexyCenter from '../../../../components/Divs/FlexyCenter.svelte';
 	import Button from '../../../../components/Interactibles/Button.svelte';
-	import { voteComment } from '../../../../services/postFetchers';
+	import { replyOnComment, voteComment } from '../../../../services/postFetchers';
 	import { createDefaultComment } from '../../../../utils/defaultCreates';
 	import StatController from '../../StatController/StatController.svelte';
 	import StatDisplay from '../../StatController/StatDisplay.svelte';
 	import UserRepr from '../../User/UserRepr.svelte';
-	import type { Props_PostComment, Props_PostReply } from '../types';
+	import type { Props_PostComment, Props_PostCommentReply } from '../types';
 	import PostCommentReply from './PostCommentReply.svelte';
 
-	export let comment: Props_PostComment<Props_PostReply[]> = createDefaultComment([]);
+	async function handleAddReply() {
+		replyOnComment({
+			postId: comment.post,
+			commentId: comment.id,
+			text: replyText,
+			type: 'reply'
+		}).then((reply) => {
+			showReplyInput = false;
+			comment.replies = [...comment.replies, reply as any];
+		});
+	}
+
+	export let comment: Props_PostComment<Props_PostCommentReply[]> = createDefaultComment([]);
 	export let canVote = false;
 
 	let showReplies = false;
+	let showReplyInput = false;
+	let replyText = '';
 </script>
 
 <div class="[ pos-relative padding-2 margin-block-1 flex-direction-column gap-2 ]">
@@ -38,30 +54,61 @@
 					action: comment.vote_type
 				}}
 			>
-				<div slot="otherControls" class="[ margin-inline-1 ]">
-					<Button on:click={() => (showReplies = !showReplies)}>
+				<FlexyCenter
+					slot="otherControls"
+					props={{ gap: 1 }}
+					cubeClass={{ utilClass: 'margin-inline-end-1' }}
+				>
+					<Button
+						on:click={() => (showReplyInput = !showReplyInput)}
+						secondaryVariant={showReplyInput ? 'upvote' : ''}
+					>
+						{#if showReplyInput}
+							Close
+						{:else}
+							Reply
+						{/if}
+					</Button>
+
+					<Button
+						on:click={() => (showReplies = !showReplies)}
+						secondaryVariant={showReplies ? 'upvote' : ''}
+					>
 						{#if showReplies}
 							Hide replies
 						{:else}
 							Show replies
 						{/if}
 					</Button>
-				</div>
+				</FlexyCenter>
 			</StatController>
 		{:else}
 			<StatDisplay props={{ votes: comment.votes, comments: comment.replies.length }}>
 				<div slot="otherControls" class="[ margin-inline-1 ]">
-					<Button on:click={() => (showReplies = !showReplies)}>
-						{#if showReplies}
-							Hide replies
-						{:else}
-							Show replies
-						{/if}
-					</Button>
+					{#if comment.replies.length > 0}
+						<Button on:click={() => (showReplies = !showReplies)}>
+							{#if showReplies}
+								Hide replie(s)
+							{:else}
+								Show {comment.replies.length} replie(s)
+							{/if}
+						</Button>
+					{/if}
 				</div>
 			</StatDisplay>
 		{/if}
 	</div>
+
+	{#if showReplyInput}
+		<FlexyCenter cubeClass={{ utilClass: 'margin-block-start-3' }}>
+			<TextArea placeholder="Reply" bind:value={replyText} />
+			<Button
+				variant="primary"
+				workCondition={replyText.length > 0 && canVote}
+				on:click={handleAddReply}>Reply</Button
+			>
+		</FlexyCenter>
+	{/if}
 
 	<div class="[ replies ]">
 		{#if showReplies}

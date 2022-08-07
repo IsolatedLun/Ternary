@@ -89,6 +89,14 @@ class CreatePostView(APIView):
         return Response(data={'id': post.id}, status=OK)
 
 
+def model_vote(req_data, model, voted_model):
+    model.votes = req_data['votes']
+    voted_model.vote_type = req_data['type']
+
+    model.save()
+    voted_model.save()
+
+
 class CommentOnPostView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -101,21 +109,33 @@ class CommentOnPostView(APIView):
         return Response(data=serializers.CommentSerializer(comment).data, status=OK)
 
 
+class ReplyOnCommentView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, req, post_id, comment_id):
+        text = req.data['text']
+
+        reply = models.CommentReply.objects.create(
+            text=text, post_id=post_id, user_id=req.user.id, comment_id=comment_id)
+
+        serialized_reply = serializers.CommentReplySerializer(
+            reply,
+            context={'user_id': req.user.id,
+                     'post_id': post_id, 'comment_id': comment_id},
+        ).data
+
+        return Response(data=serialized_reply, status=OK)
+
+
 class VotePostView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, req, post_id):
         post = models.Post.objects.get(id=post_id)
-
-        post.votes = req.data['votes']
-        post.save()
-
         voted_post, created = models.VotedPost.objects.get_or_create(
             post_id=post.id, user_id=req.user.id)
 
-        voted_post.vote_type = req.data['type']
-        voted_post.save()
-
+        model_vote(req.data, post, voted_post)
         return Response(status=OK)
 
 
@@ -124,14 +144,22 @@ class VoteCommentView(APIView):
 
     def post(self, req, post_id, comment_id):
         comment = models.Comment.objects.get(post_id=post_id, id=comment_id)
-
-        comment.votes = req.data['votes']
-        comment.save()
-
         voted_comment, created = models.VotedComment.objects.get_or_create(
             comment_id=comment_id, user_id=req.user.id, post_id=post_id)
 
-        voted_comment.vote_type = req.data['type']
-        voted_comment.save()
+        model_vote(req.data, comment, voted_comment)
+        return Response(status=OK)
 
+
+class VoteCommentReplyView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, req, post_id, comment_id, reply_id):
+        comment = models.CommentReply.objects.get(
+            post_id=post_id, comment_id=comment_id, id=reply_id)
+
+        voted_comment, created = models.VotedCommentReply.objects.get_or_create(
+            reply_id=reply_id, comment_id=comment_id, user_id=req.user.id, post_id=post_id)
+
+        model_vote(req.data, comment, voted_comment)
         return Response(status=OK)

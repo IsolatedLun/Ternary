@@ -57,6 +57,19 @@ class Comment(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
 
 
+class CommentReply(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    user = models.ForeignKey(cUser, on_delete=models.CASCADE)
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
+
+    text = models.CharField(max_length=4096)
+    to = models.CharField(max_length=64)
+
+    votes = models.IntegerField(default=0)
+
+    date_created = models.DateTimeField(auto_now_add=True)
+
+
 # =================
 # Voted Models
 # =================
@@ -78,6 +91,16 @@ class VotedComment(models.Model):
     user = models.ForeignKey(cUser, on_delete=models.CASCADE)
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
+
+    vote_type = models.CharField(
+        max_length=16, choices=VOTE_TYPE_CHOICES)
+
+
+class VotedCommentReply(models.Model):
+    user = models.ForeignKey(cUser, on_delete=models.CASCADE)
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    reply = models.ForeignKey(CommentReply, on_delete=models.CASCADE)
 
     vote_type = models.CharField(
         max_length=16, choices=VOTE_TYPE_CHOICES)

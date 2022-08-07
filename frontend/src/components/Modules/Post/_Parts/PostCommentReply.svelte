@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { voteComment } from '../../../../services/postFetchers';
-	import { createDefaultComment } from '../../../../utils/defaultCreates';
+	import { voteComment, voteCommentReply } from '../../../../services/postFetchers';
+	import { createDefaultCommentReply } from '../../../../utils/defaultCreates';
 	import StatController from '../../StatController/StatController.svelte';
 	import UserRepr from '../../User/UserRepr.svelte';
-	import type { Props_PostReply } from '../types';
+	import type { Props_PostCommentReply } from '../types';
 
-	export let reply: Props_PostReply = createDefaultComment(0);
+	export let reply: Props_PostCommentReply = createDefaultCommentReply();
 </script>
 
 <div
@@ -21,13 +21,15 @@
 
 		<StatController
 			on:vote={(e) =>
-				voteComment({
+				voteCommentReply({
 					votes: e.detail.votes,
 					postId: reply.post,
-					commentId: reply.id,
+					commentId: reply.comment,
+					replyId: reply.id,
 					type: e.detail.type
 				})}
 			props={{ votes: reply.votes, comments: 0, action: reply.vote_type }}
+			isReply={true}
 		/>
 	</div>
 </div>

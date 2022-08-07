@@ -7,12 +7,6 @@
 	import Numeric from '../Numeric/Numeric.svelte';
 	import { downvote, lenArrOrNum, upvote } from '../Post/_funcs';
 
-	export let props: import('./types').Props_StatController = {
-		comments: 0,
-		votes: 0,
-		action: 'neutral'
-	};
-
 	function handleUpvote(currAction: string) {
 		const [votes, action] = upvote(props.votes, currAction);
 
@@ -33,16 +27,25 @@
 		dispatch('vote', { votes, type: props.action });
 	}
 
+	export let props: import('./types').Props_StatController = {
+		comments: 0,
+		votes: 0,
+		action: 'neutral'
+	};
+	export let isReply = false;
+
 	const dispatch = createEventDispatcher();
 </script>
 
 <FlexyCenter useJustify={false} props={{ gap: 1 }} cubeClass={{ utilClass: 'justify-content-end' }}>
 	<slot name="otherControls" />
 
-	<FlexyCenter props={{ gap: 1 }}>
-		<Icon cubeClass={{ utilClass: 'text-muted' }} ariaLabel="Comments">{ICON_COMMENTS}</Icon>
-		<p>{lenArrOrNum(props.comments)}</p>
-	</FlexyCenter>
+	{#if !isReply}
+		<FlexyCenter props={{ gap: 1 }}>
+			<Icon cubeClass={{ utilClass: 'text-muted' }} ariaLabel="Comments">{ICON_COMMENTS}</Icon>
+			<p>{lenArrOrNum(props.comments)}</p>
+		</FlexyCenter>
+	{/if}
 
 	<span class="[ text-muted fs-300 margin-inline-1 ]">|</span>
 
