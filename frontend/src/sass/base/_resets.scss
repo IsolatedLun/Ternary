@@ -99,6 +99,10 @@ img[src=''] {
 	outline-offset: 4px;
 }
 
+:target {
+	animation: highlight_element 0.75s ease forwards;
+}
+
 :is(.button, .input, body):focus {
 	outline: 0;
 }

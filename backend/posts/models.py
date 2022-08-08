@@ -63,7 +63,10 @@ class CommentReply(models.Model):
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
 
     text = models.CharField(max_length=4096)
-    to = models.CharField(max_length=64)
+
+    # id="comment-id" || id="comment-id-reply-id"
+    # Used for highlighting in the frontend
+    reply_to = models.CharField(max_length=64, default='')
 
     votes = models.IntegerField(default=0)
 

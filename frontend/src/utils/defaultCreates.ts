@@ -99,7 +99,7 @@ export function createDefaultCommentReply(): Props_PostCommentReply {
 
 		text: '',
 		vote_type: 'neutral',
-		to: 'comment',
+		reply_to: 'comment',
 		date_created: ''
 	};
 }

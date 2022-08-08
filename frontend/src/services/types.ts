@@ -24,6 +24,8 @@ export interface Props_PostCommentData {
 
 export interface Props_PostCommentReplyData extends Props_PostCommentData {
 	commentId: number;
+	reply_to_id: number;
+
 	type: 'comment' | 'reply';
 }
 

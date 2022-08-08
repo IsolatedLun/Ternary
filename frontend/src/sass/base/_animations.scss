@@ -1,0 +1,13 @@
+@use '../abstracts/' as *;
+
+@keyframes highlight_element {
+	from {
+		background-color: $animation-background-color-highlight;
+		border-radius: $border-radius-cubed;
+	}
+
+	to {
+		border-radius: $border-radius-cubed;
+		background-color: transparent;
+	}
+}

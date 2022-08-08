@@ -124,7 +124,6 @@ class CommentReplySerializer(serializers.ModelSerializer):
         return get_user_by_id(obj)
 
     def get_vote_type(self, obj):
-        print(self.context)
         user_id = self.context['user_id']
         post_id = self.context['post_id']
         comment_id = self.context['comment_id']

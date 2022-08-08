@@ -28,7 +28,7 @@ export interface Props_PostComment<ReplyT> extends Props_Voteable {
 export interface Props_PostCommentReply extends Props_Voteable {
 	post: number;
 	comment: number;
-	to: string;
+	reply_to: string;
 
 	text: string;
 }

@@ -15,7 +15,8 @@
 			postId: comment.post,
 			commentId: comment.id,
 			text: replyText,
-			type: 'reply'
+			reply_to_id: comment.id,
+			type: 'comment'
 		}).then((reply) => {
 			showReplyInput = false;
 			comment.replies = [...comment.replies, reply as any];
@@ -31,7 +32,10 @@
 </script>
 
 <div class="[ pos-relative padding-2 margin-block-1 flex-direction-column gap-2 ]">
-	<div class="[ comment ] [  ] [ flex-direction-column ]">
+	<div
+		class="[ comment ] [  ] [ flex-direction-column ]"
+		id={`${comment.user.username}-comment-${comment.id}`}
+	>
 		<div>
 			<UserRepr user={comment.user} />
 			<p class="[ margin-inline-start-2 margin-block-start-2 fs-350 ]">
@@ -90,7 +94,7 @@
 							{#if showReplies}
 								Hide replie(s)
 							{:else}
-								Show {comment.replies.length} replie(s)
+								Show {comment.replies.length} replies
 							{/if}
 						</Button>
 					{/if}
@@ -113,7 +117,7 @@
 	<div class="[ replies ]">
 		{#if showReplies}
 			{#each comment.replies as reply}
-				<PostCommentReply reply={{ ...reply }} />
+				<PostCommentReply reply={{ ...reply }} {canVote} />
 			{/each}
 		{/if}
 	</div>

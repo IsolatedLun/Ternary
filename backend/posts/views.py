@@ -46,7 +46,6 @@ class PostView(APIView):
 
             return Response(data=post, status=OK)
         except Exception as e:
-            print(e)
             return Response(data={'detail': 'Post does not exist.'}, status=ERR)
 
 
@@ -114,9 +113,19 @@ class ReplyOnCommentView(APIView):
 
     def post(self, req, post_id, comment_id):
         text = req.data['text']
+        reply_to = ''
 
         reply = models.CommentReply.objects.create(
-            text=text, post_id=post_id, user_id=req.user.id, comment_id=comment_id)
+            text=text, post_id=post_id, user_id=req.user.id, comment_id=comment_id, reply_to=reply_to)
+
+        if req.data['type'] == 'comment':
+            reply_to = f'{reply.comment.user.username}-comment-{comment_id}'
+        if req.data['type'] == 'reply':
+            reply_to = f'{reply.user.username}-comment-{comment_id}-reply-' + \
+                req.data['to_reply_id']
+
+        reply.reply_to = reply_to
+        reply.save()
 
         serialized_reply = serializers.CommentReplySerializer(
             reply,
