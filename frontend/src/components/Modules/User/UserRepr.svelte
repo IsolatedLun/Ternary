@@ -29,7 +29,7 @@
 		<FlexyCustom useColumn={true} align="center">
 			<div class="[ flex gap-1 ]">
 				<p class="[ fs-300 ]">
-					<a href={`/users/${user.id}`}>u/{user.username}</a>
+					<a href={`/users/${user.id}/${user.username}`}>u/{user.username}</a>
 				</p>
 				<FlexyCenter cubeClass={{ utilClass: 'fs-300' }} props={{ gap: 1 }}>
 					{#if is_owner}

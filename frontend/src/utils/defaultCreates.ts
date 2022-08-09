@@ -40,6 +40,7 @@ export function createDefaultCommunity(): Props_Community<null, number> {
 		members: 0,
 		posts: null,
 		joined: false,
+		showJoin: true,
 
 		banner: '',
 		profile: '',

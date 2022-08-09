@@ -24,6 +24,17 @@ export const ICON_EDIT = '\uf044';
 export const ICON_USER = '\uf007';
 export const ICON_SHIELD = '\uf132';
 
+// =================================================
+// =================================================
+
+// ==============
+// Auth urls
+// ==============
+export const AUTH_URL = API_URL + '/auth';
+export const AUTHENTICATE_URL = AUTH_URL + '/authenticate';
+export const LOGIN_URL = AUTH_URL + '/login';
+export const SIGNUP_URL = AUTH_URL + '/signup';
+
 // ==============
 // Backend urls
 // ==============
@@ -55,12 +66,9 @@ export const TOP_COMMUNITY_MEMBERS_URL = (id: number) => COMMUNITIES_URL + `/${i
 export const JOIN_COMMUNITY_URL = (id: number) => COMMUNITIES_URL + `/${id}/join`;
 
 // ==============
-// Auth urls
+// User urls
 // ==============
-export const AUTH_URL = API_URL + '/auth';
-export const AUTHENTICATE_URL = AUTH_URL + '/authenticate';
-export const LOGIN_URL = AUTH_URL + '/login';
-export const SIGNUP_URL = AUTH_URL + '/signup';
+export const USER_URL = (id: number) => AUTH_URL + `/users/${id}`;
 
 // ========================================================================
 // ========================================================================

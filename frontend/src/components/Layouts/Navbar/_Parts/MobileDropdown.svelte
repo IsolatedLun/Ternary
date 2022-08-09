@@ -13,7 +13,7 @@
 	{/if}
 	<li class="[ width-100 ]">
 		<a
-			href="/"
+			href={`/users/${user.id}`}
 			class="[ hoverable ] [ width-100 padding-block-1 padding-inline-2 fw-500 border-radius-100vw ]"
 			data-variant="">My profile</a
 		>

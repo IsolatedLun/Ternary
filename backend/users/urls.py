@@ -10,4 +10,6 @@ urlpatterns = [
 
     path('login', views.JWTLoginView.as_view(), name='auth-login'),
     path('signup', views.RegisterView.as_view(), name='auth-signup'),
+
+    path('users/<int:user_id>', views.UserView.as_view(), name='user-view'),
 ]

@@ -30,7 +30,7 @@
 					<a href={`/communities/${community.id}/${community.name}`}>g/{community.name}</a>
 					<span class="[ long-bar ]" />
 				{/if}
-				<a href="/users">u/{user.username}</a>
+				<a href={`/users/${user.id}/${user.username}`}>u/{user.username}</a>
 			</p>
 
 			<FlexyCenter cubeClass={{ utilClass: 'fs-300' }} props={{ gap: 1 }}>

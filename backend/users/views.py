@@ -1,6 +1,7 @@
 from responses import OK, ERR
 from . import models
 from . import serializers
+
 from rest_framework.views import APIView, Response
 from django.contrib.auth.hashers import make_password, check_password
 from rest_framework.permissions import AllowAny, IsAuthenticated
@@ -72,12 +73,13 @@ class JWTAuthenticateView(APIView):
         return Response(data=user, status=OK)
 
 
-class GetUserById(APIView):
+class UserView(APIView):
     def get(self, req, user_id):
         try:
             user = models.cUser.objects.get(id=user_id)
-            serializer = serializers.cUserSerializer(user).data
+            serializer = serializers.cUserViewSerializer(user).data
 
             return Response(data=serializer, status=OK)
-        except:
-            return Response({'detail': 'User does not exist.'}, status=OK)
+        except Exception as e:
+            print(e)
+            return Response({'detail': 'User does not exist.'}, status=ERR)

@@ -14,6 +14,8 @@ export interface Props_Community<PostT, MemberT> {
 	joined: boolean;
 
 	date_created: string;
+
+	showJoin: boolean;
 }
 
 export interface Props_CommunityUser {

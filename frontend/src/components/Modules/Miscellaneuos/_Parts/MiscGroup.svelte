@@ -35,18 +35,20 @@
 	</FlexyCenter>
 	<FlexyCenter>
 		<p class="[ group__members ] [ fs-300 text-muted ]"><Numeric num={props.members} /> members</p>
-		<Button
-			cubeClass={{ utilClass: 'flex align-items-center border-radius-100vw' }}
-			variant={hasJoined ? 'primary' : 'primary-difference'}
-			secondaryVariant="join"
-			on:click={handleJoin}
-		>
-			{#if hasJoined}
-				Joined
-			{:else}
-				<Icon cubeClass={{ utilClass: 'margin-inline-end-1' }}>{ICON_PLUS}</Icon>
-				Join
-			{/if}
-		</Button>
+		{#if props.showJoin}
+			<Button
+				cubeClass={{ utilClass: 'flex align-items-center border-radius-100vw' }}
+				variant={hasJoined ? 'primary' : 'primary-difference'}
+				secondaryVariant="join"
+				on:click={handleJoin}
+			>
+				{#if hasJoined}
+					Joined
+				{:else}
+					<Icon cubeClass={{ utilClass: 'margin-inline-end-1' }}>{ICON_PLUS}</Icon>
+					Join
+				{/if}
+			</Button>
+		{/if}
 	</FlexyCenter>
 </div>

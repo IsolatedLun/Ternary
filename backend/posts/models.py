@@ -2,7 +2,6 @@ from django.db import models
 from django.core.validators import FileExtensionValidator
 from django.contrib.contenttypes.fields import GenericForeignKey
 from communities.models import Community
-from users.models import cUser
 
 CONTENT_TYPE_CHOICES = [
     ('text', 'Text'),
@@ -22,7 +21,7 @@ class Post(models.Model):
     votes = models.IntegerField(default=0)
     comments = models.IntegerField(default=0)
 
-    user = models.ForeignKey(cUser, on_delete=models.CASCADE)
+    user = models.ForeignKey('users.cUser', on_delete=models.CASCADE)
     community = models.ForeignKey(
         Community, on_delete=models.CASCADE, null=True, blank=True)
 
@@ -47,7 +46,7 @@ class PostVideo(models.Model):
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    user = models.ForeignKey(cUser, on_delete=models.CASCADE)
+    user = models.ForeignKey('users.cUser', on_delete=models.CASCADE)
 
     text = models.CharField(max_length=4096)
 
@@ -59,7 +58,7 @@ class Comment(models.Model):
 
 class CommentReply(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    user = models.ForeignKey(cUser, on_delete=models.CASCADE)
+    user = models.ForeignKey('users.cUser', on_delete=models.CASCADE)
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
 
     text = models.CharField(max_length=4096)
@@ -84,14 +83,14 @@ VOTE_TYPE_CHOICES = [
 
 
 class VotedPost(models.Model):
-    user = models.ForeignKey(cUser, on_delete=models.CASCADE)
+    user = models.ForeignKey('users.cUser', on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     vote_type = models.CharField(
         max_length=16, choices=VOTE_TYPE_CHOICES)
 
 
 class VotedComment(models.Model):
-    user = models.ForeignKey(cUser, on_delete=models.CASCADE)
+    user = models.ForeignKey('users.cUser', on_delete=models.CASCADE)
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
 
@@ -100,7 +99,7 @@ class VotedComment(models.Model):
 
 
 class VotedCommentReply(models.Model):
-    user = models.ForeignKey(cUser, on_delete=models.CASCADE)
+    user = models.ForeignKey('users.cUser', on_delete=models.CASCADE)
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     reply = models.ForeignKey(CommentReply, on_delete=models.CASCADE)

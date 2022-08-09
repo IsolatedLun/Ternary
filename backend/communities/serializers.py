@@ -1,15 +1,10 @@
 from curses import A_ALTCHARSET
 from rest_framework import serializers
-from users.models import cUser
-from users.serializers import cUserSerializer
 
 from . import models
+from utils import get_user_by_id
 
 from json import loads as json_loads
-
-
-def get_user_by_id(obj):
-    return cUserSerializer(cUser.objects.get(id=obj.user.id)).data
 
 
 class CommunitySerializer(serializers.ModelSerializer):

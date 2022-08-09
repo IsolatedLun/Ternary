@@ -1,5 +1,5 @@
 from communities.models import CommunityMember
-from utils import get_or_none
+from utils import get_or_none, model_vote
 from . import models
 from . import serializers
 
@@ -88,14 +88,9 @@ class CreatePostView(APIView):
         return Response(data={'id': post.id}, status=OK)
 
 
-def model_vote(req_data, model, voted_model):
-    model.votes = req_data['votes']
-    voted_model.vote_type = req_data['type']
-
-    model.save()
-    voted_model.save()
-
-
+# ===================================
+# Comment views
+# ===================================
 class CommentOnPostView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -136,6 +131,9 @@ class ReplyOnCommentView(APIView):
         return Response(data=serialized_reply, status=OK)
 
 
+# ===================================
+# Vote views
+# ===================================
 class VotePostView(APIView):
     permission_classes = [IsAuthenticated]
 

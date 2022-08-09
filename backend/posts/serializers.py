@@ -1,8 +1,6 @@
 from rest_framework import serializers
-from users.models import cUser
 from utils import get_or_none, get_user_by_id
 
-from users.serializers import cUserSerializer
 from . import models
 
 from json import loads as json_loads

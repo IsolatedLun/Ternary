@@ -8,7 +8,11 @@
 	import PostComment from '../Modules/Post/_Parts/PostComment.svelte';
 	import Button from '../Interactibles/Button.svelte';
 	import TextArea from '../Interactibles/Input/TextArea.svelte';
-	import type { Props_Post, Props_PostComment, Props_PostReply } from '../Modules/Post/types';
+	import type {
+		Props_Post,
+		Props_PostComment,
+		Props_PostCommentReply
+	} from '../Modules/Post/types';
 	import Miscellaneuos from '../Modules/Miscellaneuos/Miscellaneuos.svelte';
 	import LoadingBar from '../Modules/Bars/LoadingBar.svelte';
 	import { userState } from '../../stores/userStore/userStore';
@@ -29,7 +33,7 @@
 	export let id: number = -1;
 
 	let { isLogged } = $userState;
-	let post: Props_Post<Props_PostComment<Props_PostReply[]>[], any>;
+	let post: Props_Post<Props_PostComment<Props_PostCommentReply[]>[], any>;
 	let newComment = '';
 </script>
 

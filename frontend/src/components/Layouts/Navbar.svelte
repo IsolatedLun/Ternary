@@ -60,7 +60,9 @@
 						<NavbarUserRepr {user} />
 					</div>
 					<svelte:fragment slot="list">
-						<DropdownItem variant="inline"><a href="/" data-variant="">My profile</a></DropdownItem>
+						<DropdownItem variant="inline"
+							><a href={`/users/${user.id}`} data-variant="">My profile</a></DropdownItem
+						>
 						<DropdownItem
 							variant="inline"
 							useHover={false}

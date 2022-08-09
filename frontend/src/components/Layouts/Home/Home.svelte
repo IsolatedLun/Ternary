@@ -43,6 +43,7 @@
 					<ComponentMap
 						_this={MiscGroup}
 						items={communities}
+						otherProps={{ showJoin: true }}
 						fallbackText="No relevant communities found."
 					/>
 				{/await}

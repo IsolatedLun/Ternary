@@ -1,2 +1,4 @@
-- Ability to join community.
-- AUTHENTICATION...
+- User view
+- Award system
+- Refactor voting logic eg. combine Voteable class
+- Ability to create a community 

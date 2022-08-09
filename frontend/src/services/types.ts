@@ -1,3 +1,7 @@
+import type { Props_Community } from 'src/components/Layouts/Community/types';
+import type { Props_Post } from '../components/Modules/Post/types';
+import type { Props_User } from '../types';
+
 export interface ErrorResponse {
 	response: {
 		data: {
@@ -51,4 +55,9 @@ export interface Props_Tokens<T> {
 export interface Props_CreateHeaderOptions {
 	auth?: boolean | null;
 	formData?: boolean | null;
+}
+
+export interface Props_UserViewData extends Props_User {
+	posts: Props_Post<number, any>[];
+	communities: Props_Community<null, number>[];
 }
