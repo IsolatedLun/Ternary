@@ -10,13 +10,13 @@
 	import type { Props_PostComment, Props_PostCommentReply } from '../types';
 	import PostCommentReply from './PostCommentReply.svelte';
 
-	async function handleAddReply() {
+	async function handleAddReply(type: 'comment' | 'reply', replyToId: number, text: string) {
 		replyOnComment({
 			postId: comment.post,
 			commentId: comment.id,
-			text: replyText,
-			reply_to_id: comment.id,
-			type: 'comment'
+			text,
+			reply_to_id: replyToId,
+			type
 		}).then((reply) => {
 			showReplyInput = false;
 			comment.replies = [...comment.replies, reply as any];
@@ -105,11 +105,11 @@
 
 	{#if showReplyInput}
 		<FlexyCenter cubeClass={{ utilClass: 'margin-block-start-3' }}>
-			<TextArea placeholder="Reply" bind:value={replyText} />
+			<TextArea placeholder={`Reply to @${comment.user.username}`} bind:value={replyText} />
 			<Button
 				variant="primary"
 				workCondition={replyText.length > 0 && canVote}
-				on:click={handleAddReply}>Reply</Button
+				on:click={() => handleAddReply('comment', comment.id, replyText)}>Reply</Button
 			>
 		</FlexyCenter>
 	{/if}
@@ -117,7 +117,11 @@
 	<div class="[ replies ]">
 		{#if showReplies}
 			{#each comment.replies as reply}
-				<PostCommentReply reply={{ ...reply }} {canVote} />
+				<PostCommentReply
+					reply={{ ...reply }}
+					{canVote}
+					on:reply={(e) => handleAddReply('reply', e.detail.id, e.detail.text)}
+				/>
 			{/each}
 		{/if}
 	</div>

@@ -120,9 +120,9 @@ class ReplyOnCommentView(APIView):
 
         if req.data['type'] == 'comment':
             reply_to = f'{reply.comment.user.username}-comment-{comment_id}'
-        if req.data['type'] == 'reply':
+        elif req.data['type'] == 'reply':
             reply_to = f'{reply.user.username}-comment-{comment_id}-reply-' + \
-                req.data['to_reply_id']
+                str(req.data['reply_to_id'])
 
         reply.reply_to = reply_to
         reply.save()
