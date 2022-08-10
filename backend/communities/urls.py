@@ -2,6 +2,9 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    path('create', views.CreateCommunityView.as_view(),
+         name='create-community'),
+
     path('relevant', views.RelevantCommunitiesView.as_view(),
          name='relevant-communities'),
 

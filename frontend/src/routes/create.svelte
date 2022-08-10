@@ -14,11 +14,14 @@
 	import VideoInput from '../components/Interactibles/Input/VideoInput.svelte';
 	import { POST_CREATION_RULES } from '../consts';
 	import { goto } from '$app/navigation';
+	import NumberedListCard from '../components/Modules/Card/NumberedListCard.svelte';
 
 	function handleCreatePost() {
 		let toSend = data;
 
 		if (type === 'media' && mediaType === 'image') {
+			if (data.content.length === 0) return;
+
 			toSend = { ...data, content: [...data.content], content_type: 'image' };
 		} else if (type === 'media' && mediaType === 'video') {
 			toSend = { ...data, content_type: 'video' };
@@ -57,7 +60,12 @@
 		bind:this={_thisForm}
 		on:submit|preventDefault={handleForm}
 	>
-		<CreateHeader on:typeChange={(_type) => (type = _type.detail.data)} />
+		<CreateHeader
+			on:typeChange={(_type) => {
+				data.content = null;
+				type = _type.detail.data;
+			}}
+		/>
 
 		<Card variant="difference" cubeClass={{ utilClass: 'flex-direction-column gap-2 padding-2' }}>
 			<TextInput
@@ -103,18 +111,6 @@
 	</form>
 
 	<Miscellaneuos>
-		<Card cubeClass={{ utilClass: 'padding-inline-3 padding-block-1' }} variant="difference">
-			<p class="[ under-border ] [ fs-500 ]">How to make a post</p>
-
-			<!-- svelte-ignore a11y-no-redundant-roles -->
-			<ul role="list" class="[ margin-block-start-1 ] [ flow ]">
-				{#each POST_CREATION_RULES as info, i}
-					<li class="[ card ] [ padding-1 ]" data-variant="dark">
-						<span class="[ fw-bold fs-400 ]">{i + 1}.</span>
-						{info}
-					</li>
-				{/each}
-			</ul>
-		</Card>
+		<NumberedListCard items={POST_CREATION_RULES} title="How to make a post" />
 	</Miscellaneuos>
 </section>

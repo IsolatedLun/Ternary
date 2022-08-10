@@ -61,3 +61,11 @@ export interface Props_UserViewData extends Props_User {
 	posts: Props_Post<number, any>[];
 	communities: Props_Community<null, number>[];
 }
+
+export interface Props_CreateCommunityData {
+	name: string;
+	about: string;
+
+	profile: File | null;
+	banner: File | null;
+}

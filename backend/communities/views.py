@@ -23,6 +23,7 @@ class RelevantCommunitiesView(APIView):
                     communities.append(community)
                 if i > MAX_RELEVANT_COMMUNITIES:
                     break
+                i += 1
 
             serialized_data = serializers.CommunityPreviewSerializer(
                 communities, many=True).data
@@ -65,6 +66,27 @@ class CommunityView(APIView):
             return Response(data={'detail': 'Community does not exist.'}, status=ERR)
 
 
+class CreateCommunityView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, req):
+        community = models.Community.objects.create(
+            name=req.data['name'],
+            about=req.data['about'],
+            profile=req.FILES['profile'],
+            banner=req.FILES['banner']
+        )
+
+        owner = models.CommunityMember.objects.create(
+            community_id=community.id,
+            user_id=req.user.id,
+            is_owner=True,
+            is_moderator=True
+        )
+
+        return Response(data={'id': community.id}, status=OK)
+
+
 class JoinCommunityView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -75,8 +97,11 @@ class JoinCommunityView(APIView):
 
         # If already created
         if not created:
+            joined_member.community.members -= 1
             joined_member.delete()
         else:
+            joined_member.community.members += 1
             joined = True
 
+        joined_member.community.save()
         return Response(data=joined, status=OK)

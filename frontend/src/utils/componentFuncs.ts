@@ -18,3 +18,11 @@ export function defCubeClass(): Props_CubeCSS {
 		utilClass: ''
 	};
 }
+
+export function combineCubeClasses(self: Props_CubeCSS, other: Props_CubeCSS): Props_CubeCSS {
+	return {
+		blockClass: propOrDefault(self.blockClass, '') + propOrDefault(other.blockClass, ''),
+		compostClass: propOrDefault(self.compostClass, '') + propOrDefault(other.compostClass, ''),
+		utilClass: propOrDefault(self.utilClass, '') + propOrDefault(other.utilClass, '')
+	};
+}

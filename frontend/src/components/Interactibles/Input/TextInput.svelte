@@ -9,17 +9,10 @@
 	onMount(() => {
 		_this.addEventListener('input', (e) => {
 			errors = runValidators(e.target as HTMLInputElement, validators);
-			handleErrors(errors);
 		});
 
 		errors = runValidators(_this, validators);
-		handleErrors(errors);
 	});
-
-	function handleErrors(errors: string[]) {
-		if (errors.length > 0) dispatch('error', { amount: errors.length });
-		else dispatch('error', { amount: -validators.length });
-	}
 
 	function setType(node: HTMLInputElement) {
 		node.type = type;

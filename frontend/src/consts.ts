@@ -23,6 +23,7 @@ export const ICON_VIDEO = '\uf03d';
 export const ICON_EDIT = '\uf044';
 export const ICON_USER = '\uf007';
 export const ICON_SHIELD = '\uf132';
+export const COMMUNITY_ICON = '\uf500';
 
 // =================================================
 // =================================================
@@ -62,6 +63,7 @@ export const VOTE_COMMENT_REPLY_URL = (postId: number, commentId: number, replyI
 export const COMMUNITIES_URL = API_URL + '/communities';
 export const RELEVANT_COMMUNITIES_URL = COMMUNITIES_URL + '/relevant';
 export const COMMUNITY_URL = (id: number) => COMMUNITIES_URL + `/${id}`;
+export const CREATE_COMMUNITY_URL = COMMUNITIES_URL + '/create';
 export const TOP_COMMUNITY_MEMBERS_URL = (id: number) => COMMUNITIES_URL + `/${id}/top/members`;
 export const JOIN_COMMUNITY_URL = (id: number) => COMMUNITIES_URL + `/${id}/join`;
 
@@ -86,9 +88,15 @@ export let emailRegex =
 // ==============
 export const VIDEO_PAUSE_THRESHOLD = 0.5;
 export const POST_CREATION_RULES = [
-	'Post must be clear and conscise.',
 	"Don't be a twat.",
-	'Have fun.'
+	'No bullying/discrimination',
+	'Have fun shitposting'
+];
+
+export const COMMUNITY_CREATION_RULES = [
+	"Don't introduce shitty mods.",
+	'No inappropriate content.',
+	'Must be a place where people interact peacefully.'
 ];
 
 export const POST_SELECT_VALUES = ['Top', 'Controversial', 'Hot', 'New'];

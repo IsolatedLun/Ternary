@@ -33,4 +33,7 @@
 	>
 		<Icon>{ICON_LINK}</Icon>
 	</LinkButton>
+
+	<!-- For other custom links -->
+	<slot />
 </Card>

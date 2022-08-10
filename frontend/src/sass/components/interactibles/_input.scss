@@ -21,6 +21,15 @@
 	aspect-ratio: 1;
 }
 
+.input:where([data-secondary-variant='image-banner']) {
+	width: 100%;
+
+	height: $image-banner-width;
+	max-height: $image-banner-width;
+
+	aspect-ratio: 16 / 9;
+}
+
 .input:where([data-variant='media-video']) {
 	@include createInput(
 		$background-color: var(--clr-background-300),

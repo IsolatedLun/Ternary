@@ -3,6 +3,7 @@ from django.db import models
 
 class Community(models.Model):
     name = models.CharField(max_length=64)
+    about = models.TextField(default='')
 
     profile = models.ImageField(upload_to='communities/profiles')
     banner = models.ImageField(upload_to='communities/banners')

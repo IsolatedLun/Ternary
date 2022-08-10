@@ -30,7 +30,7 @@
 					props={{ src: API_URL + userView.profile, alt: userView.username + "'s profile" }}
 					cubeClass={{ utilClass: 'fs-800' }}
 				/>
-				<p class="[ fs-500 ]">Isolated</p>
+				<p class="[ fs-500 ]">{userView.username}</p>
 			</FlexyCenter>
 
 			<FlexyCenter>
@@ -57,7 +57,7 @@
 					cubeClass={{ utilClass: 'padding-1' }}
 					variant="difference"
 				>
-					<div class="[ flow ]">
+					<div class="[ flex-direction-column gap-2 ]">
 						<ComponentMap
 							_this={MiscGroup}
 							items={userView.communities}
