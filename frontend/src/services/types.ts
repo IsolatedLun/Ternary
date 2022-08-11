@@ -69,3 +69,8 @@ export interface Props_CreateCommunityData {
 	profile: File | null;
 	banner: File | null;
 }
+
+export interface Props_HandledError {
+	detail: string;
+	toMark?: string;
+}

@@ -7,7 +7,7 @@ export interface Props_Community<PostT, MemberT> {
 	posts: PostT;
 
 	name: string;
-
+	about: string;
 	profile: string;
 	banner: string;
 

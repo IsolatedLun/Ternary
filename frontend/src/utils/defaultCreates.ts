@@ -45,6 +45,7 @@ export function createDefaultCommunity(): Props_Community<null, number> {
 		banner: '',
 		profile: '',
 		name: '',
+		about: '',
 		date_created: ''
 	};
 }

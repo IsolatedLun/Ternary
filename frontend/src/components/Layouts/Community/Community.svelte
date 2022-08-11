@@ -46,7 +46,7 @@
 	<LoadingBar />
 {:then _}
 	<section class="[ community ]">
-		<header class="[ community__header ] [ card ] [ [ padding-1 ]" data-variant="difference">
+		<header class="[ community__header ] [ card ] [ [  ]" data-variant="difference">
 			<div class="[ community__banner ]">
 				<Image
 					cubeClass={{ utilClass: 'border-radius-cubed' }}
@@ -56,8 +56,11 @@
 			<div class="[ margin-block-start-2 margin-block-end-1 margin-inline-5 ]">
 				<FlexyCustom align="center" justify="space-between">
 					<FlexyCustom align="center" gap={2}>
-						<Profile props={{ src: API_URL + community.profile, alt: '' }} />
-						<h2 class="[ fw-normal ]">{community.name}</h2>
+						<Profile
+							cubeClass={{ utilClass: 'fs-800' }}
+							props={{ src: API_URL + community.profile, alt: '' }}
+						/>
+						<h2 class="[ fw-normal fs-350 ]">{community.name}</h2>
 					</FlexyCustom>
 					<FlexyCenter>
 						<p class="[ text-muted fs-300 ]"><Numeric num={community.members} /> members</p>
@@ -69,6 +72,10 @@
 					</FlexyCenter>
 				</FlexyCustom>
 			</div>
+
+			<p class="[ margin-block-1 text-center fs-300 text-muted ]">
+				{community.about}
+			</p>
 		</header>
 
 		<div class="[ feed ] [ grid margin-block-start-2 ]" data-grid-collapse>

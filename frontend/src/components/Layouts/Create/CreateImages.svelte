@@ -31,7 +31,9 @@
 
 <div class="[ flex flex-wrap align-items-center gap-1 ]">
 	{#each { length: inputs } as _, i}
-		<ImageInput on:input={addImage} on:_remove={removeImage} deleteable={true} />
+		<span>
+			<ImageInput on:input={addImage} on:_remove={removeImage} deleteable={true} />
+		</span>
 	{/each}
 	<Button variant="primary" on:click={() => inputs++}>Add image</Button>
 </div>

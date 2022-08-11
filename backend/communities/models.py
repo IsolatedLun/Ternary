@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Community(models.Model):
-    name = models.CharField(max_length=64)
+    name = models.CharField(max_length=64, unique=True)
     about = models.TextField(default='')
 
     profile = models.ImageField(upload_to='communities/profiles')

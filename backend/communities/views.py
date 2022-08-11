@@ -6,6 +6,7 @@ from utils import get_or_none
 from rest_framework.views import APIView, Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import generics
+from django.db.utils import IntegrityError
 
 from responses import OK, ERR
 
@@ -62,7 +63,6 @@ class CommunityView(APIView):
 
             return Response(data=community, status=OK)
         except Exception as e:
-            print(e)
             return Response(data={'detail': 'Community does not exist.'}, status=ERR)
 
 
@@ -70,21 +70,28 @@ class CreateCommunityView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, req):
-        community = models.Community.objects.create(
-            name=req.data['name'],
-            about=req.data['about'],
-            profile=req.FILES['profile'],
-            banner=req.FILES['banner']
-        )
+        try:
+            community = models.Community.objects.create(
+                name=req.data['name'],
+                about=req.data['about'],
+                profile=req.FILES['profile'],
+                banner=req.FILES['banner'],
+                members=1
+            )
 
-        owner = models.CommunityMember.objects.create(
-            community_id=community.id,
-            user_id=req.user.id,
-            is_owner=True,
-            is_moderator=True
-        )
+            owner = models.CommunityMember.objects.create(
+                community_id=community.id,
+                user_id=req.user.id,
+                is_owner=True,
+                is_moderator=True
+            )
 
-        return Response(data={'id': community.id}, status=OK)
+            return Response(data={'id': community.id}, status=OK)
+
+        except IntegrityError as e:  # Unique constraint error
+            return Response(data={'detail': str(e)}, status=ERR)
+        except Exception:
+            return Response(status=ERR)
 
 
 class JoinCommunityView(APIView):

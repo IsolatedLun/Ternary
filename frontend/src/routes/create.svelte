@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { minLenValidator, urlValidator, validInputs } from '../utils/inputValidators';
+	import { minLenValidator, urlValidator, useForm, validInputs } from '../utils/inputValidators';
 	import Button from '../components/Interactibles/Button.svelte';
 	import TextArea from '../components/Interactibles/Input/TextArea.svelte';
 	import TextInput from '../components/Interactibles/Input/TextInput.svelte';
@@ -15,6 +15,12 @@
 	import { POST_CREATION_RULES } from '../consts';
 	import { goto } from '$app/navigation';
 	import NumberedListCard from '../components/Modules/Card/NumberedListCard.svelte';
+	import { onMount } from 'svelte';
+	import type { Props_FormHook } from '../utils/types';
+
+	onMount(() => {
+		form = useForm(_thisForm);
+	});
 
 	function handleCreatePost() {
 		let toSend = data;
@@ -39,7 +45,7 @@
 	}
 
 	function handleForm(e: SubmitEvent) {
-		if (validInputs(_thisForm) && data.content) handleCreatePost();
+		if (form.validateForm() && data.content) handleCreatePost();
 	}
 
 	let type = $page.url.searchParams.get('type') ? $page.url.searchParams.get('type') : 'text';
@@ -52,6 +58,8 @@
 
 	let mediaType = 'image';
 	let _thisForm: HTMLFormElement;
+
+	let form: Props_FormHook;
 </script>
 
 <section class="[ feed ] [ grid ]" data-grid-collapse>

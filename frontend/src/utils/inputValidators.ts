@@ -1,5 +1,5 @@
 import { emailRegex, urlRegex } from '../consts';
-import type { Props_InputValidator } from './types';
+import type { Props_FormHook, Props_InputValidator } from './types';
 
 export function minLenValidator(n: number): Props_InputValidator {
 	return {
@@ -75,8 +75,33 @@ export function validInputs(formEl: HTMLFormElement) {
 	const inputs = formEl.querySelectorAll('.input, [data-custom-input]');
 
 	for (let i = 0; i < inputs.length; i++) {
-		if (inputs[i].getAttribute('data-input-valid') === 'false') return false;
+		if (inputs[i].getAttribute('data-input-valid') === 'false') {
+			inputs[i].setAttribute('data-error-state', 'true');
+
+			return false;
+		}
 	}
 
 	return true;
+}
+
+export function useForm(formEl: HTMLFormElement): Props_FormHook {
+	function markInput(inputName: string) {
+		const input = document.getElementById(inputName);
+
+		input?.setAttribute('data-error-state', 'true');
+		input?.focus();
+	}
+
+	return {
+		validateForm: () => {
+			// Removes input error highlights
+			document.querySelectorAll('[data-error-state]').forEach((input) => {
+				input.setAttribute('data-error-state', 'false');
+			});
+
+			validInputs(formEl);
+		},
+		markInput
+	};
 }

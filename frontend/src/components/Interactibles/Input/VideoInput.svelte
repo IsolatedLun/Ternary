@@ -11,6 +11,8 @@
 
 	onMount(() => {
 		_thisInput.addEventListener('input', handleInput);
+
+		_thisLabel.setAttribute('data-input-valid', 'false');
 	});
 
 	function handleInput(e: Event) {
@@ -18,9 +20,12 @@
 
 		if (target.files && isVideo(target.files[0])) {
 			previewUrl = URL.createObjectURL(target.files[0]);
+			_thisLabel.setAttribute('data-input-valid', 'true');
+
 			dispatch('input', { video: target.files[0] });
 		} else {
 			previewUrl = '';
+			_thisLabel.setAttribute('data-input-valid', 'false');
 		}
 	}
 
@@ -41,13 +46,15 @@
 	let errors: string[] = [];
 	let id = 'video-input-' + rand(1000);
 	let previewUrl: string = '';
+
 	let _this: HTMLElement;
+	let _thisLabel: HTMLElement;
 	let _thisInput: HTMLInputElement;
 </script>
 
 <div class="input-container" bind:this={_this}>
 	<div class="[ flex gap-1 align-items-start ]">
-		<label for={id} class={_class} data-variant="media-video">
+		<label bind:this={_thisLabel} for={id} class={_class} data-variant="media-video">
 			{#if previewUrl.length === 0}
 				<Icon cubeClass={{ utilClass: 'pos-absolute' }}>{ICON_VIDEO}</Icon>
 			{:else}

@@ -48,3 +48,10 @@
 	min-height: $input-textarea-height;
 	white-space: pre-wrap;
 }
+
+// ===========
+// Misc
+// ===========
+.input:is([data-error-state='true']) {
+	border: 1px solid var(--clr-downvote-500);
+}
